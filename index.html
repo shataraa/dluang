@@ -1629,6 +1629,7 @@ async function doLogin(){
     localStorage.setItem('dluang_token', SESSION_TOKEN);
     CU = data.user;
     applyUserToState(CU);
+    await new Promise(r => setTimeout(r, 500));
     await loadUserData();
     hideAuthScreen();
     renderHome(); renderChips(); animateHome();
@@ -1671,6 +1672,7 @@ async function doRegister(){
       localStorage.removeItem('dluang_v1');
     }
 
+    await new Promise(r => setTimeout(r, 500)); // wait for session to propagate
     await loadUserData();
     hideAuthScreen();
     renderHome(); renderChips(); animateHome();

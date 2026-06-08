@@ -1070,7 +1070,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
     <div class="chat-area" id="chatArea" style="flex:1;overflow-y:auto;">
     </div>
     <div class="typing-wrap"><div class="typing" id="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-    <div class="chat-footer">
+    <div class="chat-footer" id="chatFooter">
       <div id="attachPreview" style="display:none;padding:6px 14px 0;">
         <div class="attach-chip">
           <i class="ti ti-file-text" aria-hidden="true"></i>
@@ -1079,9 +1079,10 @@ body.dark-mode #authScreen{ background:#0e1312; }
         </div>
       </div>
       <div class="chat-input-row">
-        <button class="chat-attach" onclick="triggerFakeAttach()" title="Attach file">
-          <i class="ti ti-paperclip" aria-hidden="true"></i>
+        <button class="chat-attach" onclick="document.getElementById('chatImageInput').click()" title="Attach file">
+          <i class="ti ti-photo" aria-hidden="true"></i>
         </button>
+        <input type="file" id="chatImageInput" accept="image/*" style="display:none;" onchange="handleChatImage(event)">
         <textarea class="chat-input" id="chatInput" data-tp="typeMsg" placeholder="Type a message..." rows="1"></textarea>
         <button class="chat-send" onclick="chatSend()"><i class="ti ti-send" aria-hidden="true"></i></button>
       </div>
@@ -2338,7 +2339,7 @@ function applyBg(){
 // ══════════════════════════════════════════
 
 const GROQ_KEY='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';
-const GROQ_MODEL='llama-3.3-70b-versatile';
+const GROQ_MODEL='meta-llama/llama-4-scout-17b-16e-instruct';
 
 function buildHistory(){
   const bubbles=document.querySelectorAll('#chatArea .bwrap');
@@ -2412,6 +2413,22 @@ async function chatSend(){
   try{
     const history=buildHistory();
     const userContext=buildUserContext();
+
+    // Build user message — with image if attached
+    let userMsg;
+    if(chatImageBase64){
+      userMsg = {
+        role:'user',
+        content:[
+          { type:'text', text: msg || 'What do you see in this image?' },
+          { type:'image_url', image_url:{ url: `data:${chatImageMediaType};base64,${chatImageBase64}` } }
+        ]
+      };
+      clearChatImage();
+    } else {
+      userMsg = { role:'user', content: msg };
+    }
+
     const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
@@ -2423,7 +2440,7 @@ async function chatSend(){
 
 ${userContext}`},
           ...history,
-          {role:'user',content:msg}
+          userMsg
         ]
       })
     });
@@ -3179,6 +3196,32 @@ function animateAI(){
     const ca = document.getElementById('chatArea');
     if(ca) ca.scrollTop = ca.scrollHeight;
   }, 100);
+}
+
+// ── Chat Image ──────────────────────────
+let chatImageBase64 = null;
+let chatImageMediaType = 'image/jpeg';
+
+function handleChatImage(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  chatImageMediaType = file.type || 'image/jpeg';
+  const reader = new FileReader();
+  reader.onload = ev => {
+    chatImageBase64 = ev.target.result.split(',')[1];
+    const preview = document.getElementById('imgPreview');
+    const wrap = document.getElementById('imgPreviewWrap');
+    if(preview) preview.src = ev.target.result;
+    if(wrap) wrap.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+function clearChatImage(){
+  chatImageBase64 = null;
+  const wrap = document.getElementById('imgPreviewWrap');
+  if(wrap) wrap.style.display = 'none';
 }
 
 function renderAIWelcome(){

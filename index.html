@@ -1028,7 +1028,14 @@ body.dark-mode #authScreen{ background:#0e1312; }
       <div class="sec-title"><span data-t="savingsGoals">Savings Goals</span> <a onclick="goPage('goals')"><span data-t="seeAll">See all</span></a></div>
       <div class="card-wrap" id="homeGoals"></div>
       <!-- Transactions -->
-      <div class="sec-title"><span data-t="recentTx">Recent Transactions</span> <a onclick="goPage('home');setTimeout(()=>showAllTx(),100)"><span data-t="seeAll">See all</span></a></div>
+      <div class="sec-title" style="display:flex;align-items:center;justify-content:space-between;">
+        <span data-t="recentTx">Recent Transactions</span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div onclick="prevMonth()" style="width:24px;height:24px;border-radius:50%;background:var(--paper-dark);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;">‹</div>
+          <span id="monthLabel" style="font-size:12px;font-weight:500;color:var(--earth);min-width:72px;text-align:center;"></span>
+          <div onclick="nextMonth()" id="nextMonthBtn" style="width:24px;height:24px;border-radius:50%;background:var(--paper-dark);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;">›</div>
+        </div>
+      </div>
       <div class="card-wrap" id="homeTx"></div>
       <!-- Stocks widget -->
       <div class="sec-title" style="margin-top:14px;">
@@ -1063,20 +1070,27 @@ body.dark-mode #authScreen{ background:#0e1312; }
 
   <!-- ════════════════ PAGE: AI CHAT ════════════════ -->
   <div class="page pages" id="page-ai" style="background:var(--paper);padding-bottom:0;display:flex;flex-direction:column;height:calc(100vh - 64px);overflow:hidden;">
-    <div class="chat-header">
-      <div class="chat-title" data-t="aiCoachTitle">Dluang AI Coach</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;"><div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div><div style="display:flex;align-items:center;gap:8px;"><span id="aiChatBadge" style="font-size:11px;color:rgba(200,169,110,0.7);display:none;"></span><div onclick="openModal('shopModal')" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ti ti-shopping-cart" style="font-size:16px;color:var(--gold-light);" aria-hidden="true"></i></div></div></div>
+    <div class="chat-header" style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;min-height:0;">
+      <!-- Burger menu → recent chats -->
+      <div onclick="openModal('recentChatsModal')" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+        <i class="ti ti-menu-2" style="font-size:18px;color:rgba(200,169,110,0.8);" aria-hidden="true"></i>
+      </div>
+      <span id="aiChatBadge" style="display:none;"></span>
+      <!-- Cart → shop -->
+      <div onclick="openModal('shopModal')" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+        <i class="ti ti-shopping-cart" style="font-size:16px;color:var(--gold-light);" aria-hidden="true"></i>
+      </div>
     </div>
     <div class="chat-area" id="chatArea" style="flex:1;overflow-y:auto;">
     </div>
     <div class="typing-wrap"><div class="typing" id="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
     <div class="chat-footer" id="chatFooter">
       <div id="attachPreview" style="display:none;padding:6px 14px 0;">
-        <div class="attach-chip">
-          <i class="ti ti-file-text" aria-hidden="true"></i>
-          <span id="attachName">file.pdf</span>
-          <i class="ti ti-x" style="cursor:pointer;margin-left:4px;" onclick="removeAttach()" aria-hidden="true"></i>
+        <div style="position:relative;display:inline-block;">
+          <img id="imgPreview" style="height:60px;border-radius:10px;object-fit:cover;border:1.5px solid var(--paper-dark);" />
+          <div onclick="clearChatImage()" style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:#fff;line-height:1;">✕</div>
         </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;padding-left:2px;">5 chats · tap ✕ to remove</div>
       </div>
       <div class="chat-input-row">
         <button class="chat-attach" onclick="document.getElementById('chatImageInput').click()" title="Attach file">
@@ -1502,6 +1516,19 @@ body.dark-mode #authScreen{ background:#0e1312; }
     </div>
   </div>
 
+  <!-- Recent Chats Modal -->
+  <div class="modal-backdrop" id="recentChatsModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div class="modal-title" style="margin-bottom:0;">Recent Chats</div>
+        <div onclick="clearRecentChats()" style="font-size:11px;color:var(--muted);cursor:pointer;padding:4px 8px;border-radius:8px;border:1px solid var(--paper-dark);">Clear all</div>
+      </div>
+      <div id="recentChatsList" style="display:flex;flex-direction:column;gap:8px;max-height:60vh;overflow-y:auto;"></div>
+      <button class="btn-primary btn-outline" style="margin-top:12px;" onclick="closeModal('recentChatsModal')">Close</button>
+    </div>
+  </div>
+
   <!-- Trakteer Instruction Modal -->
   <div class="modal-backdrop" id="trakteerModal">
     <div class="modal">
@@ -1907,6 +1934,10 @@ const PAGE_ORDER=['home','goals','ai','profile'];
 let curPage='home';
 
 function goPage(p){
+  // Save chat history when leaving AI tab
+  if(document.getElementById('page-ai')?.classList.contains('active') && p !== 'ai'){
+    saveCurrentChat();
+  }
   if(p===curPage) return;
   const oldPage=document.getElementById('page-'+curPage);
   const newPage=document.getElementById('page-'+p);
@@ -1970,6 +2001,7 @@ function openModal(id){
   if(id==='plansModal'){ renderPlansModal(); syncBillingToggles(); }
   if(id==='connectModal'){ renderConnectList(); }
   if(id==='shopModal'){ renderShopPage(); }
+  if(id==='recentChatsModal'){ renderRecentChatsList(); }
   const el = document.getElementById(id);
   if(el) el.classList.add('show');
 }
@@ -2155,6 +2187,75 @@ function estimateDays(g){
 // ══════════════════════════════════════════
 // HOME RENDER
 // ══════════════════════════════════════════
+// ── Monthly View ─────────────────────────
+let viewMonth = new Date().getMonth();
+let viewYear = new Date().getFullYear();
+
+function getViewMonthTx(){
+  return S.transactions.filter(t => {
+    const d = new Date(t.date);
+    return d.getMonth() === viewMonth && d.getFullYear() === viewYear;
+  });
+}
+
+function updateMonthLabel(){
+  const now = new Date();
+  const isCurrentMonth = viewMonth === now.getMonth() && viewYear === now.getFullYear();
+  const label = new Date(viewYear, viewMonth, 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  const el = document.getElementById('monthLabel');
+  if(el) el.textContent = label;
+  // Hide next button if already at current month
+  const nextBtn = document.getElementById('nextMonthBtn');
+  if(nextBtn) nextBtn.style.opacity = isCurrentMonth ? '0.3' : '1';
+}
+
+function prevMonth(){
+  viewMonth--;
+  if(viewMonth < 0){ viewMonth = 11; viewYear--; }
+  updateMonthLabel();
+  renderMonthTx();
+}
+
+function nextMonth(){
+  const now = new Date();
+  if(viewYear === now.getFullYear() && viewMonth === now.getMonth()) return;
+  viewMonth++;
+  if(viewMonth > 11){ viewMonth = 0; viewYear++; }
+  updateMonthLabel();
+  renderMonthTx();
+}
+
+function renderMonthTx(){
+  const container = document.getElementById('homeTx');
+  if(!container) return;
+  const txs = getViewMonthTx();
+  if(!txs.length){
+    container.innerHTML = '<div class="empty-state"><i class="ti ti-receipt-off"></i>No transactions this month</div>';
+    return;
+  }
+  // Show last 5 for the selected month
+  renderTxListFromData(container, txs.slice(0, 5));
+}
+
+function renderTxListFromData(container, txs){
+  if(!txs.length){ container.innerHTML='<div class="empty-state"><i class="ti ti-receipt-off"></i>'+t('noTx')+'</div>'; return; }
+  container.innerHTML = txs.map((tx,idx)=>{
+    const cat = tx.category || tx.cat || 'Others';
+    const dateStr = tx.date ? new Date(tx.date).toLocaleDateString('id-ID',{day:'numeric',month:'short'}) : '';
+    return `<div class="tx-item stagger-in" style="animation-delay:${idx*0.06}s">
+      <div class="tx-icon ${tx.type}"><i class="ti ${CAT_ICONS[cat]||'ti-coin'}" aria-hidden="true"></i></div>
+      <div class="tx-info">
+        <div class="tx-name">${tx.note}</div>
+        <div class="tx-cat">${cat}</div>
+      </div>
+      <div class="tx-right">
+        <div class="tx-amt ${tx.type}">${tx.type==='inc'?'+':'-'}${fmt(tx.amount)}</div>
+        <div class="tx-date">${dateStr}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
 function renderHome(){
   const hour=new Date().getHours();
   const greet=hour<11?'Good morning':hour<15?'Good afternoon':hour<18?'Good afternoon':'Good evening';
@@ -2168,7 +2269,8 @@ function renderHome(){
   renderAvatar();
   renderBarChart();
   renderInsight(inc,exp);
-  renderTxList(document.getElementById('homeTx'),5);
+  updateMonthLabel();
+  renderMonthTx();
   // Goals preview
   const hg=document.getElementById('homeGoals');
   if(!S.goals.length){ hg.innerHTML='<div class="empty-state"><i class="ti ti-target-off"></i>'+t('noGoals')+'. <span onclick="openModal(\'goalModal\')" style="color:var(--kraft);cursor:pointer;">'+t('newGoal')+' →</span></div>'; }
@@ -2399,11 +2501,11 @@ async function chatSend(){
   const msg=box.value.trim(); if(!msg) return;
 
   // Check AI chat balance — image costs 9 chats, text costs 1
-  const chatCost = chatImageBase64 ? 9 : 1;
+  const chatCost = chatImageBase64 ? 5 : 1;
   const fiState = getChatState();
   if(fiState.chatsLeft < chatCost){
     appendBubble('ai', chatImageBase64
-      ? `Image analysis costs 9 chats. You only have ${fiState.chatsLeft} left. Buy Fiorino to continue.`
+      ? `Image analysis costs 5 chats. You only have ${fiState.chatsLeft} left. Buy Fiorino to continue.`
       : "You're out of AI chats. Buy Fiorino to get more, or upgrade your plan for unlimited access."
     );
     setTimeout(()=>openModal('shopModal'), 1200);
@@ -3215,6 +3317,10 @@ function animateProfilee(){
   }, 80);
 }
 
+function onLeaveAI(){
+  saveCurrentChat();
+}
+
 function animateAI(){
   animateHeader('page-ai');
   updateAIChatBadge();
@@ -3223,6 +3329,71 @@ function animateAI(){
     const ca = document.getElementById('chatArea');
     if(ca) ca.scrollTop = ca.scrollHeight;
   }, 100);
+}
+
+// ── Recent Chats ─────────────────────────
+const MAX_RECENT_CHATS = 2;
+
+function getRecentChats(){
+  try { return JSON.parse(localStorage.getItem('dluang_recent_chats') || '[]'); }
+  catch(e){ return []; }
+}
+
+function saveCurrentChat(){
+  const area = document.getElementById('chatArea');
+  if(!area) return;
+  const bubbles = area.querySelectorAll('.bwrap');
+  if(bubbles.length === 0) return;
+
+  // Build chat snapshot
+  const msgs = [];
+  bubbles.forEach(b => {
+    const isUser = b.classList.contains('user');
+    const text = b.querySelector('.bubble')?.innerText || '';
+    if(text) msgs.push({ role: isUser ? 'user' : 'ai', text });
+  });
+  if(!msgs.length) return;
+
+  const chats = getRecentChats();
+  const preview = msgs.find(m => m.role === 'user')?.text?.slice(0, 40) || 'Chat';
+  chats.unshift({ id: Date.now(), preview, msgs, date: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}) });
+
+  // Keep only last MAX_RECENT_CHATS
+  chats.splice(MAX_RECENT_CHATS);
+  localStorage.setItem('dluang_recent_chats', JSON.stringify(chats));
+}
+
+function loadRecentChat(id){
+  const chats = getRecentChats();
+  const chat = chats.find(c => c.id === id);
+  if(!chat) return;
+
+  const area = document.getElementById('chatArea');
+  area.innerHTML = '';
+  chat.msgs.forEach(m => appendBubble(m.role === 'user' ? 'user' : 'ai', m.text));
+  closeModal('recentChatsModal');
+}
+
+function clearRecentChats(){
+  localStorage.removeItem('dluang_recent_chats');
+  renderRecentChatsList();
+  toast('Recent chats cleared');
+}
+
+function renderRecentChatsList(){
+  const list = document.getElementById('recentChatsList');
+  if(!list) return;
+  const chats = getRecentChats();
+  if(!chats.length){
+    list.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:13px;padding:20px;">No recent chats</div>';
+    return;
+  }
+  list.innerHTML = chats.map(c => `
+    <div onclick="loadRecentChat(${c.id})" style="padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--earth)'" onmouseout="this.style.borderColor='var(--paper-dark)'">
+      <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px;">${c.preview}${c.preview.length >= 40 ? '...' : ''}</div>
+      <div style="font-size:11px;color:var(--muted);">${c.date} · ${c.msgs.length} messages</div>
+    </div>
+  `).join('');
 }
 
 // ── Chat Image ──────────────────────────
@@ -3237,7 +3408,7 @@ function handleChatImage(e){
   reader.onload = ev => {
     chatImageBase64 = ev.target.result.split(',')[1];
     const preview = document.getElementById('imgPreview');
-    const wrap = document.getElementById('imgPreviewWrap');
+    const wrap = document.getElementById('attachPreview');
     if(preview) preview.src = ev.target.result;
     if(wrap) wrap.style.display = 'block';
   };
@@ -3247,8 +3418,10 @@ function handleChatImage(e){
 
 function clearChatImage(){
   chatImageBase64 = null;
-  const wrap = document.getElementById('imgPreviewWrap');
+  const wrap = document.getElementById('attachPreview');
   if(wrap) wrap.style.display = 'none';
+  const preview = document.getElementById('imgPreview');
+  if(preview) preview.src = '';
 }
 
 function renderAIWelcome(){

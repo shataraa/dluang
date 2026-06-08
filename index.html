@@ -968,7 +968,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   <div class="page pages" id="page-ai" style="background:var(--paper);">
     <div class="chat-header">
       <div class="chat-title" data-t="aiCoachTitle">Dluang AI Coach</div>
-      <div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;"><div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div><div style="display:flex;align-items:center;gap:8px;"><span id="aiChatBadge" style="font-size:11px;color:rgba(200,169,110,0.7);">20 chats left</span><div onclick="openModal('shopModal')" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ti ti-shopping-cart" style="font-size:16px;color:var(--gold-light);" aria-hidden="true"></i></div></div></div>
     </div>
     <div class="chat-area" id="chatArea">
     </div>
@@ -1050,6 +1050,12 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
             <div class="settings-icon" style="background:var(--red-bg);color:var(--red)"><i class="ti ti-trash" aria-hidden="true"></i></div>
             <div class="settings-label" style="color:var(--red)" data-t="resetData">Reset Data</div>
             <div class="settings-val"></div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="openModal('shopModal')">
+            <div class="settings-icon" style="background:rgba(212,160,23,0.15);color:var(--gold)"><i class="ti ti-coin" aria-hidden="true"></i></div>
+            <div class="settings-label">Fiorino Balance</div>
+            <div class="settings-val" id="profileFiorinoVal" style="color:var(--gold);font-weight:600;">0 <span style="font-weight:400;color:var(--muted);">Fiorino</span></div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="openLangModal()">
@@ -1198,7 +1204,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
   <!-- ════════════════ BOTTOM NAV ════════════════ -->
   <div class="bottom-nav">
-    <div class="nav-item active" id="nav-home" onclick="goPage('home')"><i class="ti ti-home" aria-hidden="true"></i><span data-t="income">Home</span></div>
+    <div class="nav-item active" id="nav-home" onclick="goPage('home')"><i class="ti ti-home" aria-hidden="true"></i>Home</div>
     <div class="nav-item" id="nav-goals" onclick="goPage('goals')"><i class="ti ti-target" aria-hidden="true"></i>Goals</div>
     <div class="nav-item" id="nav-ai" onclick="goPage('ai')"><i class="ti ti-sparkles" aria-hidden="true"></i>AI Coach</div>
     <div class="nav-item" id="nav-profile" onclick="goPage('profile')"><i class="ti ti-user" aria-hidden="true"></i>Profile</div>
@@ -1354,6 +1360,35 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
         </div>
       </div>
       <button class="btn-primary btn-outline" onclick="closeModal('langModal')" data-t="close">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Shop Modal -->
+  <div class="modal-backdrop" id="shopModal">
+    <div class="modal" style="max-height:88vh;overflow-y:auto;">
+      <div class="modal-handle"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div class="modal-title" style="margin-bottom:0;">Buy Fiorino</div>
+        <div style="display:flex;align-items:center;gap:6px;background:rgba(212,160,23,0.12);border:1px solid rgba(212,160,23,0.3);border-radius:20px;padding:4px 10px;">
+          <i class="ti ti-coin" style="color:var(--gold);font-size:14px;"></i>
+          <span id="shopModalFiorino" style="font-size:13px;font-weight:600;color:var(--gold);">0</span>
+        </div>
+      </div>
+      <div style="background:var(--paper-dark);border-radius:14px;padding:12px 14px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">AI Chats Left</div>
+          <div style="font-size:22px;font-weight:700;color:var(--earth);" id="shopModalChats">0</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Daily Refill</div>
+          <div style="font-size:12px;color:var(--kraft);font-weight:500;">+2 Fiorino/day</div>
+        </div>
+      </div>
+      <div id="shopModalPackages" style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px;"></div>
+      <div style="font-size:11px;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:4px;">
+        Payment integration coming soon.
+      </div>
+      <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('shopModal')">Close</button>
     </div>
   </div>
 
@@ -1754,6 +1789,7 @@ function openModal(id){
   if(id==='compareModal'){ renderCompare(); }
   if(id==='plansModal'){ renderPlansModal(); syncBillingToggles(); }
   if(id==='connectModal'){ renderConnectList(); }
+  if(id==='shopModal'){ renderShopPage(); }
   document.getElementById(id).classList.add('show');
 }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
@@ -2020,6 +2056,11 @@ function renderProfile(){
   if(suEl && CU) suEl.textContent = '@' + CU.username;
   const langEl = document.getElementById('langSettingsVal');
   if(langEl) langEl.textContent = LANG_LABELS[AI_LANG] || 'Indonesia';
+  const fiEl = document.getElementById('profileFiorinoVal');
+  if(fiEl){
+    const fs = getFiorinoState();
+    fiEl.innerHTML = '<span style="color:var(--gold);font-weight:600;">'+fs.fiorino+'</span> <span style="font-weight:400;color:var(--muted);">Fiorino · '+fs.chatsLeft+' chats</span>';
+  }
   const planNames={'free':'Free','student':'Student','worker':'Worker','business':'Business'};
   const planIcons={'free':'','student':'🎓','worker':'💼','business':'🏢'};
   const cp=S.plan||'free';
@@ -2161,6 +2202,15 @@ Gunakan data ini untuk memberikan saran yang personal dan spesifik. Jika user ta
 async function chatSend(){
   const box=document.getElementById('chatInput');
   const msg=box.value.trim(); if(!msg) return;
+
+  // Check AI chat balance
+  if(!useAIChat()){
+    appendBubble('ai', "You're out of AI chats. Buy Fiorino to continue.");
+    setTimeout(()=>openModal('shopModal'), 1200);
+    return;
+  }
+  updateAIChatBadge();
+
   appendBubble('user',msg);
   box.value=''; box.style.height='auto';
   const typing=document.getElementById('typing');
@@ -2902,10 +2952,112 @@ function animateProfilee(){
 
 function animateAI(){
   animateHeader('page-ai');
+  updateAIChatBadge();
   setTimeout(function(){
     const ca = document.getElementById('chatArea');
     if(ca) ca.scrollTop = ca.scrollHeight;
   }, 100);
+}
+
+// ══════════════════════════════════════════
+// FIORINO & AI CHAT LIMIT
+// ══════════════════════════════════════════
+const FIORINO_DAILY = 2;
+const CHATS_PER_FIORINO = 10;
+
+function getFiorinoState(){
+  const raw = localStorage.getItem('dluang_fiorino');
+  if(raw) return JSON.parse(raw);
+  return { fiorino: 2, chatsLeft: 20, lastRefill: null };
+}
+
+function saveFiorinoState(state){
+  localStorage.setItem('dluang_fiorino', JSON.stringify(state));
+}
+
+function checkDailyRefill(){
+  const state = getFiorinoState();
+  const today = new Date().toISOString().split('T')[0];
+  if(state.lastRefill !== today){
+    state.fiorino = (state.fiorino || 0) + FIORINO_DAILY;
+    state.chatsLeft = (state.chatsLeft || 0) + (FIORINO_DAILY * CHATS_PER_FIORINO);
+    state.lastRefill = today;
+    saveFiorinoState(state);
+  }
+  return state;
+}
+
+function useAIChat(){
+  const state = getFiorinoState();
+  if(state.chatsLeft <= 0) return false;
+  state.chatsLeft -= 1;
+  // Auto-consume Fiorino when chats from current batch run out
+  saveFiorinoState(state);
+  return true;
+}
+
+function getFiorinoBalance(){ return getFiorinoState().fiorino; }
+function getChatsLeft(){ return getFiorinoState().chatsLeft; }
+
+function renderShopPage(){
+  const state = checkDailyRefill();
+  // Update modal elements
+  const el = document.getElementById('shopModalFiorino');
+  if(el) el.textContent = state.fiorino;
+  const cl = document.getElementById('shopModalChats');
+  if(cl) cl.textContent = state.chatsLeft;
+
+  const pkgs = document.getElementById('shopModalPackages');
+  if(!pkgs) return;
+
+  const PACKAGES = [
+    { id:'f10',  fiorino:10,  chats:100,  price:'Rp 5.000',   label:'Starter',   color:'var(--kraft)',      popular:false },
+    { id:'f30',  fiorino:30,  chats:300,  price:'Rp 12.000',  label:'Popular',   color:'var(--earth)',      popular:true  },
+    { id:'f100', fiorino:100, chats:1000, price:'Rp 35.000',  label:'Best Value',color:'var(--gold)',       popular:false },
+    { id:'f300', fiorino:300, chats:3000, price:'Rp 89.000',  label:'Pro',       color:'var(--earth-light)',popular:false },
+  ];
+
+  pkgs.innerHTML = PACKAGES.map(p => `
+    <div style="background:var(--paper);border:${p.popular?'2px solid var(--earth)':'1px solid var(--paper-dark)'};border-radius:16px;padding:16px;position:relative;${p.popular?'box-shadow:0 4px 16px rgba(15,84,78,0.15);':''}">
+      ${p.popular ? '<div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--earth);color:var(--paper);font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:1px;">POPULAR</div>' : ''}
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">${p.label}</div>
+          <div style="display:flex;align-items:baseline;gap:5px;">
+            <span style="font-size:28px;font-weight:700;color:${p.color};">${p.fiorino}</span>
+            <span style="font-size:13px;color:var(--muted);">Fiorino</span>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:20px;font-weight:700;color:var(--earth);">${p.price}</div>
+          <div style="font-size:11px;color:var(--muted);">${p.chats} AI chats</div>
+        </div>
+      </div>
+      <button onclick="buyPackage('${p.id}',${p.fiorino},${p.chats},'${p.price}')" style="width:100%;padding:11px;border-radius:12px;border:none;background:${p.popular?'var(--earth)':'var(--paper-dark)'};color:${p.popular?'var(--paper)':'var(--ink)'};font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        Buy Now
+      </button>
+    </div>
+  `).join('');
+}
+
+function buyPackage(id, fiorino, chats, price){
+  // Dummy — payment not integrated yet
+  toast('Payment coming soon! (Preview: +'+fiorino+' Fiorino)');
+}
+
+function animateShop(){
+  animateHeader('page-shop');
+  renderShopPage();
+}
+
+// Show AI chat count in AI Coach header
+function updateAIChatBadge(){
+  const state = checkDailyRefill();
+  const badge = document.getElementById('aiChatBadge');
+  if(badge){
+    badge.textContent = state.chatsLeft + ' chats left';
+    badge.style.color = state.chatsLeft <= 5 ? 'var(--red)' : 'rgba(200,169,110,0.7)';
+  }
 }
 
 // ══════════════════════════════════════════
@@ -3083,6 +3235,7 @@ UI_LANG = localStorage.getItem('dluang_ui_lang') || 'id';
 applyBg();
 
 // Start with auth check — app only loads after successful session
+checkDailyRefill();
 tryRestoreSession().then(()=>{
   if(document.getElementById('authScreen').classList.contains('hidden')){
     applyUILang();

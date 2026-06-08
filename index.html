@@ -1065,7 +1065,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
   <div class="page pages" id="page-ai" style="background:var(--paper);padding-bottom:0;display:flex;flex-direction:column;height:calc(100vh - 64px);overflow:hidden;">
     <div class="chat-header">
       <div class="chat-title" data-t="aiCoachTitle">Dluang AI Coach</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;"><div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div><div style="display:flex;align-items:center;gap:8px;"><span id="aiChatBadge" style="font-size:11px;color:rgba(200,169,110,0.7);">20 chats left</span><div onclick="openModal('shopModal')" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ti ti-shopping-cart" style="font-size:16px;color:var(--gold-light);" aria-hidden="true"></i></div></div></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;"><div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div><div style="display:flex;align-items:center;gap:8px;"><span id="aiChatBadge" style="font-size:11px;color:rgba(200,169,110,0.7);display:none;"></span><div onclick="openModal('shopModal')" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ti ti-shopping-cart" style="font-size:16px;color:var(--gold-light);" aria-hidden="true"></i></div></div></div>
     </div>
     <div class="chat-area" id="chatArea" style="flex:1;overflow-y:auto;">
     </div>
@@ -1491,7 +1491,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
         </div>
         <div style="text-align:right;">
           <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Daily Refill</div>
-          <div style="font-size:12px;color:var(--kraft);font-weight:500;">+1 Fiorino/day</div>
+          <div style="font-size:12px;color:var(--kraft);font-weight:500;">+10 chats/day (max 30)</div>
         </div>
       </div>
       <div id="shopModalPackages" style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px;"></div>
@@ -1742,11 +1742,15 @@ function applyUserToState(user){
   S.lastStreakDate = user.last_streak_date || null;
   S.joinDate = user.join_date ? new Date(user.join_date).toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'}) : S.joinDate;
   // Sync Fiorino from DB
-  if(user.fiorino !== undefined || user.ai_chats !== undefined){
-    const state = getFiorinoState();
-    state.fiorino = user.fiorino ?? state.fiorino;
-    state.chatsLeft = user.ai_chats ?? state.chatsLeft;
-    saveFiorinoState(state);
+  if(user.fiorino !== undefined){
+    const fs = getFiorinoState();
+    fs.fiorino = user.fiorino ?? fs.fiorino;
+    saveFiorinoState(fs);
+  }
+  if(user.ai_chats !== undefined){
+    const cs = getChatState();
+    cs.chatsLeft = user.ai_chats ?? cs.chatsLeft;
+    saveChatState(cs);
   }
 }
 
@@ -2249,7 +2253,8 @@ function renderProfile(){
   const fiEl = document.getElementById('profileFiorinoVal');
   if(fiEl){
     const fs = getFiorinoState();
-    fiEl.innerHTML = '<span style="color:var(--gold);font-weight:600;">'+fs.fiorino+'</span> <span style="font-weight:400;color:var(--muted);">Fiorino · '+fs.chatsLeft+' chats</span>';
+    const cs = getChatState();
+    fiEl.innerHTML = '<span style="color:var(--gold);font-weight:600;">'+fs.fiorino+'</span> <span style="font-weight:400;color:var(--muted);">Fiorino · '+cs.chatsLeft+' chats left</span>';
   }
   const planNames={'free':'Free','student':'Student','worker':'Worker','business':'Business'};
   const planIcons={'free':'','student':'🎓','worker':'💼','business':'🏢'};
@@ -2393,12 +2398,18 @@ async function chatSend(){
   const box=document.getElementById('chatInput');
   const msg=box.value.trim(); if(!msg) return;
 
-  // Check AI chat balance
-  if(!useAIChat()){
-    appendBubble('ai', "You're out of AI chats. Buy Fiorino to continue.");
+  // Check AI chat balance — image costs 9 chats, text costs 1
+  const chatCost = chatImageBase64 ? 9 : 1;
+  const fiState = getChatState();
+  if(fiState.chatsLeft < chatCost){
+    appendBubble('ai', chatImageBase64
+      ? `Image analysis costs 9 chats. You only have ${fiState.chatsLeft} left. Buy Fiorino to continue.`
+      : "You're out of AI chats. Buy Fiorino to get more, or upgrade your plan for unlimited access."
+    );
     setTimeout(()=>openModal('shopModal'), 1200);
     return;
   }
+  for(let i=0;i<chatCost;i++) useAIChat();
   updateAIChatBadge();
 
   // Clear welcome screen on first message
@@ -3315,13 +3326,24 @@ async function saveUsername(){
 // ══════════════════════════════════════════
 // FIORINO & AI CHAT LIMIT
 // ══════════════════════════════════════════
-const FIORINO_DAILY = 1;
+const DAILY_CHATS = 10;
+const MAX_CHATS = 30;
 const CHATS_PER_FIORINO = 10;
+
+function getChatState(){
+  const raw = localStorage.getItem('dluang_chats');
+  if(raw) return JSON.parse(raw);
+  return { chatsLeft: DAILY_CHATS, lastRefill: null };
+}
+
+function saveChatState(state){
+  localStorage.setItem('dluang_chats', JSON.stringify(state));
+}
 
 function getFiorinoState(){
   const raw = localStorage.getItem('dluang_fiorino');
   if(raw) return JSON.parse(raw);
-  return { fiorino: 2, chatsLeft: 20, lastRefill: null };
+  return { fiorino: 0 };
 }
 
 function saveFiorinoState(state){
@@ -3329,39 +3351,47 @@ function saveFiorinoState(state){
 }
 
 function checkDailyRefill(){
-  const state = getFiorinoState();
+  const state = getChatState();
   const today = new Date().toISOString().split('T')[0];
   if(state.lastRefill !== today){
-    state.fiorino = (state.fiorino || 0) + FIORINO_DAILY;
-    state.chatsLeft = (state.chatsLeft || 0) + (FIORINO_DAILY * CHATS_PER_FIORINO);
+    state.chatsLeft = Math.min((state.chatsLeft || 0) + DAILY_CHATS, MAX_CHATS);
     state.lastRefill = today;
-    saveFiorinoState(state);
+    saveChatState(state);
+    // Reset notification flags for new day
+    sessionStorage.removeItem('notif60');
+    sessionStorage.removeItem('notif90');
   }
   return state;
 }
 
-function useAIChat(){
-  const state = getFiorinoState();
-  if(state.chatsLeft <= 0) return false;
-  state.chatsLeft -= 1;
-  saveFiorinoState(state);
-  // Sync to Supabase in background
+function useAIChat(cost=1){
+  const state = getChatState();
+  if(state.chatsLeft < cost) return false;
+  state.chatsLeft -= cost;
+  saveChatState(state);
   if(SESSION_TOKEN){
     apiFetch('data', { action: 'update_user', ai_chats: state.chatsLeft }).catch(()=>{});
   }
   return true;
 }
 
+function addChatsFromFiorino(fiorino){
+  const state = getChatState();
+  state.chatsLeft = Math.min(state.chatsLeft + (fiorino * CHATS_PER_FIORINO), MAX_CHATS);
+  saveChatState(state);
+}
+
 function getFiorinoBalance(){ return getFiorinoState().fiorino; }
-function getChatsLeft(){ return getFiorinoState().chatsLeft; }
+function getChatsLeft(){ return getChatState().chatsLeft; }
 
 function renderShopPage(){
-  const state = checkDailyRefill();
-  // Update modal elements
+  checkDailyRefill();
+  const chatState = getChatState();
+  const fiorState = getFiorinoState();
   const el = document.getElementById('shopModalFiorino');
-  if(el) el.textContent = state.fiorino;
+  if(el) el.textContent = fiorState.fiorino;
   const cl = document.getElementById('shopModalChats');
-  if(cl) cl.textContent = state.chatsLeft;
+  if(cl) cl.textContent = chatState.chatsLeft;
 
   const pkgs = document.getElementById('shopModalPackages');
   if(!pkgs) return;
@@ -3416,12 +3446,22 @@ function animateShop(){
 
 // Show AI chat count in AI Coach header
 function updateAIChatBadge(){
-  const state = checkDailyRefill();
-  const badge = document.getElementById('aiChatBadge');
-  if(badge){
-    badge.textContent = state.chatsLeft + ' chats left';
-    badge.style.color = state.chatsLeft <= 5 ? 'var(--red)' : 'rgba(200,169,110,0.7)';
+  const state = getChatState();
+  const used = MAX_CHATS - state.chatsLeft;
+  const pct = Math.round((used / MAX_CHATS) * 100);
+
+  // Show toast notification at 60% and 90%
+  if(pct >= 90 && !sessionStorage.getItem('notif90')){
+    sessionStorage.setItem('notif90', '1');
+    toast('You have used 90% of your chat credit. Buy Fiorino for more.');
+  } else if(pct >= 60 && !sessionStorage.getItem('notif60')){
+    sessionStorage.setItem('notif60', '1');
+    toast('You have used 60% of your chat credit.');
   }
+
+  // Badge hidden — no display
+  const badge = document.getElementById('aiChatBadge');
+  if(badge) badge.style.display = 'none';
 }
 
 // ══════════════════════════════════════════

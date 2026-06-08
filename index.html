@@ -2568,7 +2568,7 @@ ${userContext}`},
 }
 
 
-const MAX_CHAT_PAIRS = 2; // FIFO: keep only last 2 conversation pairs
+const MAX_CHAT_PAIRS = 10; // keep last 10 pairs in DOM
 
 function appendBubble(type,text){
   const area=document.getElementById('chatArea');

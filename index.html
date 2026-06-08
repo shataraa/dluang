@@ -336,10 +336,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .dot{width:5px;height:5px;border-radius:50%;background:var(--muted);animation:blink 1.2s infinite;}
 .dot:nth-child(2){animation-delay:0.2s;}.dot:nth-child(3){animation-delay:0.4s;}
 @keyframes blink{0%,80%,100%{opacity:0.25}40%{opacity:1}}
-.chip-row{display:flex;gap:6px;overflow-x:auto;padding:6px 14px;flex-shrink:0;}
-.chip-row::-webkit-scrollbar{height:0;}
-.chip{flex-shrink:0;padding:6px 11px;background:var(--paper);border:1px solid var(--paper-dark);border-radius:20px;font-size:11px;color:var(--earth-light);cursor:pointer;font-weight:500;white-space:nowrap;transition:all 0.15s;}
-.chip:hover,.chip.sel{background:var(--earth);color:var(--kraft);border-color:var(--earth);}
+
 .chat-input-row{display:flex;gap:8px;padding:8px 14px 14px;flex-shrink:0;background:var(--paper);}
 .chat-input{flex:1;background:var(--paper-dark);border:1px solid rgba(139,105,20,0.2);border-radius:20px;padding:9px 14px;font-size:13px;color:var(--ink);font-family:'Poppins',sans-serif;outline:none;resize:none;max-height:72px;line-height:1.4;}
 .chat-input:focus{border-color:var(--kraft);}
@@ -1374,17 +1371,6 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
     </div>
   </div>
 
-  <!-- AI Template Edit -->
-  <div class="modal-backdrop" id="aiModal">
-    <div class="modal">
-      <div class="modal-handle"></div>
-      <div class="modal-title">Edit AI Templates</div>
-      <div id="aiEditList"></div>
-      <button class="btn-primary" onclick="saveAITemplates()">Save All</button>
-      <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('aiModal')">Cancel</button>
-    </div>
-  </div>
-
   <!-- Language Modal -->
   <div class="modal-backdrop" id="langModal">
     <div class="modal">
@@ -1679,7 +1665,7 @@ async function doLogin(){
     await loadUserData();
     hideAuthScreen();
     applyUILang();
-    renderHome(); renderChips(); animateHome();
+    renderHome(); animateHome();
     setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
     toast('Selamat datang, ' + S.name + '! 👋');
   } catch(e) {
@@ -1723,7 +1709,7 @@ async function doRegister(){
     await loadUserData();
     hideAuthScreen();
     applyUILang();
-    renderHome(); renderChips(); animateHome();
+    renderHome(); animateHome();
     setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
     toast('Akun berhasil dibuat! 🎉');
   } catch(e) {
@@ -1802,7 +1788,7 @@ function goPage(p){
     if(p==='goals'){ renderGoalsPage(); animateGoals(); }
     if(p==='profile'){ renderProfile();
  animateProfilee(); }
-    if(p==='ai'){ renderChips(); animateAI(); }
+    if(p==='ai'){ animateAI(); }
     if(p==='sub'){ renderPlans(); animateSub(); }
     if(p==='pricing'){
       renderPlans();
@@ -1818,7 +1804,6 @@ function openModal(id){
   if(id==='txModal'){ txType='inc'; setType('inc'); document.getElementById('txAmount').value=''; document.getElementById('txNote').value=''; }
   if(id==='goalModal'){ document.getElementById('goalName').value=''; document.getElementById('goalTarget').value=''; }
   if(id==='nameModal'){ document.getElementById('nameInput').value=S.name; }
-  if(id==='aiModal'){ renderAIEditList(); }
   if(id==='bgModal'){ renderBgGrid(); }
   if(id==='compareModal'){ renderCompare(); }
   if(id==='plansModal'){ renderPlansModal(); syncBillingToggles(); }
@@ -2175,33 +2160,6 @@ function applyBg(){
 // ══════════════════════════════════════════
 // AI CHAT
 // ══════════════════════════════════════════
-const DEFAULT_TEMPLATES=[
-  {key:'boros',chip:'Why am I overspending?',user:'Why do I keep overspending?',reply:'From your spending data, I can see <em>62% keluar di category makanan & hiburan</em>. Biasanya ini terjadi karena pengeluaran kecil yang sering — boba, jajan, top-up — yang ga kerasa tapi numpuk. Coba set batas daysan <strong>Rp 30.000</strong> for this category! 💡'},
-  {key:'nabung',chip:'Effective saving tips',user:'How can I save more money?',reply:'The most effective tip: use the <em>Pay Yourself First</em> — immediately set aside <strong>20% from every income</strong> before spending. With your current pattern, you could save an extra <strong>Rp 600.000 ekstra</strong> dalam sebulan! 🎯'},
-  {key:'goal',chip:'Goal progress',user:'Goals nabungku kapan tercapai?',reply:'Based on your saving average, your goal can be reached faster if you stay consistent! Cutting dining out 2x a week could speed it up by <em>30%</em> ⚡'},
-  {key:'streak',chip:'Streak info',user:'How long is my saving streak?',reply:'You\'re on fire! 🔥 Your saving streak is in the top <em>15% of Dluang users</em> your age. Hit <strong>30 days</strong>, you\'ll unlock the <em>Golden Discipline</em> badge and <strong>50 Fiorino points</strong>!'},
-  {key:'analisis',chip:'Monthly analysis',user:'How are my finances this month?',reply:'This month you are <strong>doing better than last month</strong>! 📈 Your financial health score: <em>78/100</em> — category <strong>Fairly Healthy</strong>. Almost at Prime health! ✨'},
-  {key:'custom',chip:'✏️ Custom...',user:'',reply:''},
-];
-
-let templates=JSON.parse(localStorage.getItem('dluang_aitpl')||'null')||DEFAULT_TEMPLATES;
-let activeChip=null;
-
-function saveTemplatesLocal(){ localStorage.setItem('dluang_aitpl',JSON.stringify(templates)); }
-
-function renderChips(){
-  const row=document.getElementById('chipRow');
-  if(!row) return;
-  row.innerHTML=templates.map((t,i)=>`<div class="chip" onclick="selectChip(${i},this)">${t.chip}</div>`).join('');
-}
-
-function selectChip(i,el){
-  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel'); activeChip=i;
-  const t=templates[i];
-  if(t.key!=='custom') document.getElementById('chatInput').value=t.user;
-  else { document.getElementById('chatInput').value=''; document.getElementById('chatInput').focus(); }
-}
 
 const GROQ_KEY='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';
 const GROQ_MODEL='llama-3.1-8b-instant';
@@ -2288,7 +2246,6 @@ ${userContext}`},
     typing.classList.remove('show');
     appendBubble('ai','Koneksi bermasalah, coba lagi ya! 😅');
   }
-  activeChip=null;
 }
 
 
@@ -2305,23 +2262,6 @@ function appendBubble(type,text){
   setTimeout(()=>{ meta.style.transition='opacity 0.3s'; meta.style.opacity='1'; }, 220);
 }
 
-function renderAIEditList(){
-  const list=document.getElementById('aiEditList');
-  list.innerHTML=templates.filter(t=>t.key!=='custom').map((t,i)=>`
-    <div class="form-group">
-      <label class="form-label">${t.chip}</label>
-      <textarea class="form-input" data-idx="${i}" style="resize:none;height:72px;line-height:1.5">${t.reply.replace(/<[^>]*>/g,'')}</textarea>
-    </div>
-  `).join('');
-}
-
-function saveAITemplates(){
-  document.querySelectorAll('#aiEditList textarea').forEach(ta=>{
-    const i=parseInt(ta.dataset.idx);
-    templates[i].reply=ta.value;
-  });
-  saveTemplatesLocal(); closeModal('aiModal'); toast('AI templates saved!');
-}
 
 // ══════════════════════════════════════════
 // RESET
@@ -2333,8 +2273,6 @@ function resetAll(){
       ? new Date(CU.join_date).toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'})
       : new Date().toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'})
   };
-  templates = [...DEFAULT_TEMPLATES];
-  localStorage.removeItem('dluang_aitpl');
   closeModal('resetModal'); goPage('home'); toast('Data reset!');
 }
 
@@ -3202,7 +3140,7 @@ applyBg();
 tryRestoreSession().then(()=>{
   if(document.getElementById('authScreen').classList.contains('hidden')){
     applyUILang();
-    renderHome(); renderChips();
+    renderHome();
     setTimeout(function(){ animateHome(); }, 200);
     setTimeout(function(){ if(!stocksFetched) fetchAllStocks(); }, 600);
   }

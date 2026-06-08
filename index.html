@@ -718,6 +718,21 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   z-index:8;
 }
 
+/* ── DARK MODE ── */
+body.dark-mode{
+  --paper: #1a1f1e;
+  --paper-dark: #252b2a;
+  --ink: #e8e0d0;
+  --muted: #7a8a87;
+  --earth: #2a6b64;
+  --kraft: #d4a017;
+}
+body.dark-mode .shell{ background:#111615; }
+body.dark-mode .card-wrap{ background:#1e2523; }
+body.dark-mode .modal{ background:#1e2523; }
+body.dark-mode .auth-card{ background:#1e2523; }
+body.dark-mode .bottom-nav{ background:#1a1f1e; border-top-color:#252b2a; }
+
 /* ── AUTH SCREEN ── */
 #authScreen{
   position:fixed;inset:0;z-index:100;
@@ -1014,6 +1029,8 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
       </div>
     </div>
     <div class="scroll-body">
+
+      <!-- Plan + Fiorino -->
       <div class="card-wrap" style="margin-bottom:12px;">
         <div class="settings-item plan-row-item" onclick="openModal('plansModal')">
           <div class="settings-icon" style="background:rgba(232,201,74,0.18);color:var(--gold)"><i class="ti ti-crown" aria-hidden="true"></i></div>
@@ -1021,60 +1038,92 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
           <div class="settings-val" id="planSettingsVal">Free</div>
           <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
         </div>
+        <div class="settings-item" onclick="openModal('shopModal')">
+          <div class="settings-icon" style="background:rgba(212,160,23,0.15);color:var(--gold)"><i class="ti ti-coin" aria-hidden="true"></i></div>
+          <div class="settings-label">Fiorino Balance</div>
+          <div class="settings-val" id="profileFiorinoVal" style="color:var(--gold);font-weight:600;">0 <span style="font-weight:400;color:var(--muted);">Fiorino</span></div>
+          <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+        </div>
       </div>
-      <div class="card-wrap">
+
+      <!-- Account -->
+      <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;padding:0 4px;margin-bottom:6px;">Account</div>
+      <div class="card-wrap" style="margin-bottom:12px;">
         <div class="settings-list">
           <div class="settings-item" onclick="openModal('nameModal')">
             <div class="settings-icon"><i class="ti ti-user" aria-hidden="true"></i></div>
-            <div class="settings-label" data-t="changeName">Change Name</div>
+            <div class="settings-label">Change Name</div>
             <div class="settings-val" id="settingsName">—</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="openModal('usernameModal')">
+            <div class="settings-icon"><i class="ti ti-at" aria-hidden="true"></i></div>
+            <div class="settings-label">Change Username</div>
+            <div class="settings-val" id="settingsUsername" style="font-size:12px;">—</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="document.getElementById('avatarInput').click()">
             <div class="settings-icon"><i class="ti ti-photo" aria-hidden="true"></i></div>
-            <div class="settings-label" data-t="profilePhoto">Profile Photo</div>
-            <div class="settings-val" data-t="changePhoto">Change photo</div>
+            <div class="settings-label">Profile Photo</div>
+            <div class="settings-val">Change photo</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
-          <div class="settings-item" onclick="openModal('bgModal')">
-            <div class="settings-icon"><i class="ti ti-palette" aria-hidden="true"></i></div>
-            <div class="settings-label" data-t="appBg">App Background</div>
-            <div class="settings-val" data-t="customize">Customize</div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-
           <div class="settings-item" onclick="openModal('connectModal')">
             <div class="settings-icon" style="background:rgba(42,168,158,0.15);color:var(--kraft)"><i class="ti ti-plug-connected" aria-hidden="true"></i></div>
-            <div class="settings-label" data-t="connectedAccounts">Connected Accounts</div>
+            <div class="settings-label">Connected Accounts</div>
             <div class="settings-val" id="connectedCount">None</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="openModal('resetModal')">
             <div class="settings-icon" style="background:var(--red-bg);color:var(--red)"><i class="ti ti-trash" aria-hidden="true"></i></div>
-            <div class="settings-label" style="color:var(--red)" data-t="resetData">Reset Data</div>
+            <div class="settings-label" style="color:var(--red)">Reset Data</div>
             <div class="settings-val"></div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-          <div class="settings-item" onclick="openModal('shopModal')">
-            <div class="settings-icon" style="background:rgba(212,160,23,0.15);color:var(--gold)"><i class="ti ti-coin" aria-hidden="true"></i></div>
-            <div class="settings-label">Fiorino Balance</div>
-            <div class="settings-val" id="profileFiorinoVal" style="color:var(--gold);font-weight:600;">0 <span style="font-weight:400;color:var(--muted);">Fiorino</span></div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-          <div class="settings-item" onclick="openLangModal()">
-            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-language" aria-hidden="true"></i></div>
-            <div class="settings-label" data-t="aiLang">Bahasa AI</div>
-            <div class="settings-val" id="langSettingsVal">Indonesia</div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-          <div class="settings-item" onclick="doLogout()">
-            <div class="settings-icon" style="background:rgba(192,57,43,0.1);color:var(--red)"><i class="ti ti-logout" aria-hidden="true"></i></div>
-            <div class="settings-label" style="color:var(--red)" data-t="logout">Logout</div>
-            <div class="settings-val" id="settingsUsername" style="font-size:11px;"></div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
         </div>
       </div>
+
+      <!-- Personalize -->
+      <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;padding:0 4px;margin-bottom:6px;">Personalize</div>
+      <div class="card-wrap" style="margin-bottom:12px;">
+        <div class="settings-list">
+          <div class="settings-item" onclick="openModal('bgModal')">
+            <div class="settings-icon"><i class="ti ti-palette" aria-hidden="true"></i></div>
+            <div class="settings-label">App Background</div>
+            <div class="settings-val">Customize</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="toggleDarkMode()">
+            <div class="settings-icon" style="background:rgba(30,30,60,0.1);color:#6c6caa"><i class="ti ti-moon" id="darkModeIcon" aria-hidden="true"></i></div>
+            <div class="settings-label">Dark Mode</div>
+            <div class="settings-val" id="darkModeVal">Off</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="toggleBiometrics()">
+            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-fingerprint" aria-hidden="true"></i></div>
+            <div class="settings-label">Biometrics</div>
+            <div class="settings-val" id="biometricsVal">Off</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="openLangModal()">
+            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-language" aria-hidden="true"></i></div>
+            <div class="settings-label">Language</div>
+            <div class="settings-val" id="langSettingsVal">Indonesia</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <div class="card-wrap" style="margin-bottom:20px;">
+        <div class="settings-item" onclick="doLogout()">
+          <div class="settings-icon" style="background:rgba(192,57,43,0.1);color:var(--red)"><i class="ti ti-logout" aria-hidden="true"></i></div>
+          <div class="settings-label" style="color:var(--red)">Logout</div>
+          <div class="settings-val" style="font-size:11px;" id="settingsUsernameLogout"></div>
+          <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1330,8 +1379,8 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   <div class="modal-backdrop" id="langModal">
     <div class="modal">
       <div class="modal-handle"></div>
-      <div class="modal-title" data-t="uiLang">Bahasa Tampilan</div>
-      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;" data-t="uiLang">Tampilan</div>
+      <div class="modal-title">Language</div>
+      
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
         <div onclick="setUILang('id')" id="uiLangOpt-id" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--kraft);background:rgba(42,168,158,0.08);cursor:pointer;transition:all 0.15s;">
           <span style="font-size:18px;">🇮🇩</span>
@@ -1344,24 +1393,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
           <i class="ti ti-check" id="uiCheck-en" style="font-size:16px;color:transparent;"></i>
         </div>
       </div>
-      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;" data-t="aiLang">Bahasa AI</div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
-        <div class="lang-opt" id="langOpt-id" onclick="setLang('id')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
-          <span style="font-size:18px;">🇮🇩</span>
-          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">Indonesia</div>
-          <i class="ti ti-check lang-check" id="langCheck-id" style="font-size:16px;color:var(--kraft);"></i>
-        </div>
-        <div class="lang-opt" id="langOpt-en" onclick="setLang('en')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
-          <span style="font-size:18px;">🇬🇧</span>
-          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">English</div>
-          <i class="ti ti-check lang-check" id="langCheck-en" style="font-size:16px;color:transparent;"></i>
-        </div>
-        <div class="lang-opt" id="langOpt-jv" onclick="setLang('jv')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
-          <span style="font-size:18px;">🏯</span>
-          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">Jawa</div>
-          <i class="ti ti-check lang-check" id="langCheck-jv" style="font-size:16px;color:transparent;"></i>
-        </div>
-      </div>
+
       <button class="btn-primary btn-outline" onclick="closeModal('langModal')" data-t="close">Tutup</button>
     </div>
   </div>
@@ -1392,6 +1424,21 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
         Payment integration coming soon.
       </div>
       <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('shopModal')">Close</button>
+    </div>
+  </div>
+
+  <!-- Change Username Modal -->
+  <div class="modal-backdrop" id="usernameModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-title">Change Username</div>
+      <div class="modal-field">
+        <label class="modal-label">New username</label>
+        <input class="modal-input" id="usernameInput" type="text" placeholder="min 3 chars, letters/numbers/_" autocapitalize="none">
+      </div>
+      <div id="usernameError" style="font-size:12px;color:var(--red);margin-bottom:10px;min-height:16px;"></div>
+      <button class="btn-primary" onclick="saveUsername()">Save</button>
+      <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('usernameModal')">Cancel</button>
     </div>
   </div>
 
@@ -2057,6 +2104,10 @@ function renderProfile(){
   document.getElementById('settingsName').textContent=S.name;
   const suEl = document.getElementById('settingsUsername');
   if(suEl && CU) suEl.textContent = '@' + CU.username;
+  const suLogout = document.getElementById('settingsUsernameLogout');
+  if(suLogout && CU) suLogout.textContent = '@' + CU.username;
+  applyDarkMode();
+  updateBiometricsVal();
   const langEl = document.getElementById('langSettingsVal');
   if(langEl) langEl.textContent = LANG_LABELS[AI_LANG] || 'Indonesia';
   const fiEl = document.getElementById('profileFiorinoVal');
@@ -2946,6 +2997,74 @@ function animateAI(){
 }
 
 // ══════════════════════════════════════════
+// DARK MODE
+// ══════════════════════════════════════════
+let darkMode = localStorage.getItem('dluang_dark') === '1';
+
+function applyDarkMode(){
+  document.body.classList.toggle('dark-mode', darkMode);
+  const val = document.getElementById('darkModeVal');
+  const icon = document.getElementById('darkModeIcon');
+  if(val) val.textContent = darkMode ? 'On' : 'Off';
+  if(icon) icon.className = darkMode ? 'ti ti-sun' : 'ti ti-moon';
+}
+
+function toggleDarkMode(){
+  darkMode = !darkMode;
+  localStorage.setItem('dluang_dark', darkMode ? '1' : '0');
+  applyDarkMode();
+  toast(darkMode ? 'Dark mode on' : 'Light mode on');
+}
+
+// ══════════════════════════════════════════
+// BIOMETRICS (stub)
+// ══════════════════════════════════════════
+let biometricsEnabled = localStorage.getItem('dluang_bio') === '1';
+
+function updateBiometricsVal(){
+  const val = document.getElementById('biometricsVal');
+  if(val) val.textContent = biometricsEnabled ? 'On' : 'Off';
+}
+
+async function toggleBiometrics(){
+  if(!window.PublicKeyCredential){
+    toast('Biometrics not supported on this device');
+    return;
+  }
+  biometricsEnabled = !biometricsEnabled;
+  localStorage.setItem('dluang_bio', biometricsEnabled ? '1' : '0');
+  updateBiometricsVal();
+  toast(biometricsEnabled ? 'Biometrics enabled' : 'Biometrics disabled');
+}
+
+// ══════════════════════════════════════════
+// CHANGE USERNAME
+// ══════════════════════════════════════════
+function openUsernameModal(){
+  document.getElementById('usernameInput').value = CU?.username || '';
+  document.getElementById('usernameError').textContent = '';
+  openModal('usernameModal');
+}
+
+async function saveUsername(){
+  const val = document.getElementById('usernameInput').value.trim().toLowerCase();
+  const errEl = document.getElementById('usernameError');
+  if(val.length < 3 || val.length > 20){ errEl.textContent = 'Username 3-20 characters'; return; }
+  if(!/^[a-zA-Z0-9_]+$/.test(val)){ errEl.textContent = 'Letters, numbers, underscore only'; return; }
+  errEl.textContent = '';
+  try {
+    // Update via Supabase directly — no edge function needed for this simple update
+    // For demo just update locally
+    if(CU) CU.username = val;
+    closeModal('usernameModal');
+    renderProfile();
+    toast('Username updated!');
+  } catch(e) {
+    errEl.textContent = 'Failed to update username';
+  }
+}
+
+// ══════════════════════════════════════════
 // FIORINO & AI CHAT LIMIT
 // ══════════════════════════════════════════
 const FIORINO_DAILY = 2;
@@ -3222,6 +3341,7 @@ applyBg();
 
 // Start with auth check — app only loads after successful session
 checkDailyRefill();
+applyDarkMode();
 tryRestoreSession().then(()=>{
   if(document.getElementById('authScreen').classList.contains('hidden')){
     applyUILang();

@@ -1965,7 +1965,7 @@ async function showAllTx(){
   if(txList) renderTxList(txList);
 }
 
-function loadUserStreak(){
+async function loadUserStreak(){
   try {
     const d = await apiFetch('data', { action: 'get_user' });
     if(d.user){ S.streak = d.user.streak || 0; renderHome(); }

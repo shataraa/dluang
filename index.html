@@ -718,6 +718,18 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   z-index:8;
 }
 
+/* ── WELCOME SCREEN ── */
+#welcomeScreen.hidden{ display:none !important; }
+@keyframes pulse{
+  0%,100%{ transform:scale(1); opacity:1; }
+  50%{ transform:scale(1.4); opacity:0.5; }
+}
+@keyframes fadeOut{
+  0%{ opacity:1; }
+  100%{ opacity:0; }
+}
+.welcome-fadeout{ animation: fadeOut 0.5s ease forwards; }
+
 /* ── DARK MODE ── */
 body.dark-mode{
   --paper: #151a19;
@@ -953,6 +965,17 @@ body.dark-mode #authScreen{ background:#0e1312; }
       </div>
       <button class="btn-primary" style="margin-top:14px;" onclick="doRegister()" data-t="register">Daftar</button>
       <div class="auth-hint">Sudah punya akun? <span onclick="switchAuthTab('login')">Masuk</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ WELCOME SCREEN ════════════════ -->
+<div id="welcomeScreen" class="hidden" style="position:fixed;inset:0;z-index:99;background:#071f1d;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;">
+  <div style="text-align:center;padding:32px 24px;max-width:320px;">
+    <div style="font-family:'AkiraExtended','Poppins',sans-serif;font-size:28px;font-weight:800;color:var(--kraft);letter-spacing:3px;margin-bottom:4px;">Dl<span style="color:var(--gold-light);">u</span>ang</div>
+    <div id="welcomeMsg" style="font-size:16px;color:rgba(200,169,110,0.8);margin-bottom:32px;line-height:1.5;">How the bill goin'?</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--kraft);margin:0 auto;animation:pulse 1s ease-in-out infinite;"></div>
     </div>
   </div>
 </div>
@@ -1686,6 +1709,30 @@ async function tryRestoreSession(){
   }
 }
 
+function showWelcomeScreen(name){
+  const el = document.getElementById('welcomeScreen');
+  const msg = document.getElementById('welcomeMsg');
+  if(!el || !msg) return;
+
+  const greetings = [
+    `How the bill goin', ${name}?`,
+    `Ready to fix your uang, ${name}?`,
+    `Welcome back, ${name}. Let's check the damage.`,
+    `Hey ${name}, your wallet missed you.`,
+    `${name}. Numbers don't lie.`,
+  ];
+  msg.textContent = greetings[Math.floor(Math.random() * greetings.length)];
+  el.classList.remove('hidden');
+  el.style.display = 'flex';
+
+  setTimeout(()=>{
+    el.classList.add('welcome-fadeout');
+    setTimeout(()=>{
+      el.style.display = 'none';
+    }, 500);
+  }, 1800);
+}
+
 function applyUserToState(user){
   S.name = user.name || 'User';
   S.avatar = user.avatar_url || null;
@@ -1693,6 +1740,13 @@ function applyUserToState(user){
   S.streak = user.streak || 0;
   S.lastStreakDate = user.last_streak_date || null;
   S.joinDate = user.join_date ? new Date(user.join_date).toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'}) : S.joinDate;
+  // Sync Fiorino from DB
+  if(user.fiorino !== undefined || user.ai_chats !== undefined){
+    const state = getFiorinoState();
+    state.fiorino = user.fiorino ?? state.fiorino;
+    state.chatsLeft = user.ai_chats ?? state.chatsLeft;
+    saveFiorinoState(state);
+  }
 }
 
 function clearSession(){
@@ -1767,6 +1821,7 @@ async function doLogin(){
     applyUILang();
     renderHome(); animateHome();
     setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
+    showWelcomeScreen(S.name);
     toast('Selamat datang, ' + S.name + '! 👋');
   } catch(e) {
     setAuthError(e.message || 'Login gagal');
@@ -1811,6 +1866,7 @@ async function doRegister(){
     applyUILang();
     renderHome(); animateHome();
     setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
+    showWelcomeScreen(S.name);
     toast('Akun berhasil dibuat! 🎉');
   } catch(e) {
     setAuthError(e.message || 'Registrasi gagal');
@@ -2344,6 +2400,10 @@ async function chatSend(){
   }
   updateAIChatBadge();
 
+  // Clear welcome screen on first message
+  const ca = document.getElementById('chatArea');
+  if(ca && ca.querySelector('.ai-welcome')){ ca.innerHTML = ''; }
+  else if(ca && ca.children.length === 1 && ca.children[0].style.textAlign === 'center'){ ca.innerHTML = ''; }
   appendBubble('user',msg);
   box.value=''; box.style.height='auto';
   const typing=document.getElementById('typing');
@@ -3114,10 +3174,31 @@ function animateProfilee(){
 function animateAI(){
   animateHeader('page-ai');
   updateAIChatBadge();
+  renderAIWelcome();
   setTimeout(function(){
     const ca = document.getElementById('chatArea');
     if(ca) ca.scrollTop = ca.scrollHeight;
   }, 100);
+}
+
+function renderAIWelcome(){
+  const ca = document.getElementById('chatArea');
+  if(!ca || ca.children.length > 0) return; // already has messages
+  const name = S.name || 'there';
+  const greetings = [
+    `How the bill goin', ${name}?`,
+    `Hey ${name}, ready to fix your uang?`,
+    `${name}. Let's talk money.`,
+    `What's on your mind, ${name}?`,
+    `Hey ${name}, your wallet called.`,
+  ];
+  const msg = greetings[Math.floor(Math.random() * greetings.length)];
+  ca.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;padding:40px 24px;text-align:center;">
+      <div style="font-size:15px;font-weight:600;color:var(--ink);">${msg}</div>
+      <div style="font-size:12px;color:var(--muted);">Start chatting ↓</div>
+    </div>
+  `;
 }
 
 // ══════════════════════════════════════════
@@ -3220,8 +3301,11 @@ function useAIChat(){
   const state = getFiorinoState();
   if(state.chatsLeft <= 0) return false;
   state.chatsLeft -= 1;
-  // Auto-consume Fiorino when chats from current batch run out
   saveFiorinoState(state);
+  // Sync to Supabase in background
+  if(SESSION_TOKEN){
+    apiFetch('data', { action: 'update_user', ai_chats: state.chatsLeft }).catch(()=>{});
+  }
   return true;
 }
 

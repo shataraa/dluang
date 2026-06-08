@@ -1474,10 +1474,27 @@ function save(){
   }).catch(()=>{});
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ── Supabase API helpers ──────────────────
 async function apiFetch(fn, body){
-  const headers = { 'Content-Type': 'application/json' };
-  if(SESSION_TOKEN) headers['Authorization'] = 'Bearer ' + SESSION_TOKEN;
+  const headers = {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_ANON,
+    'Authorization': SESSION_TOKEN ? 'Bearer ' + SESSION_TOKEN : 'Bearer ' + SUPABASE_ANON,
+  };
   const res = await fetch(`${FN_BASE}/${fn}`, {
     method: 'POST',
     headers,

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Dluang — Financemu, Beres.</title>
+<title>Dluang — Dluang fixes your uang.</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -873,7 +873,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
 <div id="authScreen">
   <div class="auth-card">
     <div class="auth-logo">Dl<span>u</span>ang</div>
-    <div class="auth-tagline" data-t="tagline">Financemu, Beres.</div>
+    <div class="auth-tagline" data-t="tagline">Dluang fixes your uang.</div>
 
     <div class="auth-tabs">
       <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')" data-t="login">Login</button>
@@ -1475,6 +1475,24 @@ body.dark-mode #authScreen{ background:#0e1312; }
         Payment integration coming soon.
       </div>
       <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('shopModal')">Close</button>
+    </div>
+  </div>
+
+  <!-- Trakteer Instruction Modal -->
+  <div class="modal-backdrop" id="trakteerModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div style="text-align:center;margin-bottom:16px;">
+        <div style="font-size:32px;margin-bottom:8px;">☕</div>
+        <div class="modal-title" style="margin-bottom:4px;">Redirecting to Trakteer</div>
+        <div style="font-size:13px;color:var(--muted);">Complete your payment there</div>
+      </div>
+      <div style="background:var(--paper-dark);border-radius:14px;padding:14px;margin-bottom:16px;">
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">⚠️ Important — tulis di kolom pesan/catatan:</div>
+        <div id="trakteerNote" style="font-size:18px;font-weight:700;color:var(--earth);text-align:center;padding:8px;background:var(--paper);border-radius:10px;letter-spacing:1px;">username:f10</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;">Fiorino akan otomatis ditambahkan setelah pembayaran</div>
+      </div>
+      <button class="btn-primary btn-outline" onclick="closeModal('trakteerModal')">Got it</button>
     </div>
   </div>
 
@@ -3251,9 +3269,17 @@ function renderShopPage(){
   `).join('');
 }
 
+const TRAKTEER_URL = 'https://trakteer.id/shatara_shatara?quantity=1';
+
 function buyPackage(id, fiorino, chats, price){
-  // Dummy — payment not integrated yet
-  toast('Payment coming soon! (Preview: +'+fiorino+' Fiorino)');
+  const username = CU?.username || '';
+  const note = username ? username+':'+id : id;
+  const url = TRAKTEER_URL + '&note=' + encodeURIComponent(note);
+  closeModal('shopModal');
+  // Show instruction modal
+  document.getElementById('trakteerNote').textContent = note;
+  openModal('trakteerModal');
+  setTimeout(()=>{ window.open(url, '_blank'); }, 600);
 }
 
 function animateShop(){
@@ -3287,7 +3313,7 @@ const LANG_PROMPTS = {
 
 const T = {
   id: {
-    tagline: 'Financemu, Beres.',
+    tagline: 'Dluang fixes your uang.',
     login: 'Masuk', register: 'Daftar',
     username: 'Username', displayName: 'Nama tampilan',
     createPin: 'Buat PIN (6 angka)', pinLabel: 'PIN (6 angka)',
@@ -3325,7 +3351,7 @@ const T = {
     aiCoachSub: 'Asisten keuangan pintarmu',
   },
   en: {
-    tagline: 'Your Finance, Sorted.',
+    tagline: 'Dluang fixes your uang.',
     login: 'Login', register: 'Register',
     username: 'Username', displayName: 'Display name',
     createPin: 'Create PIN (6 digits)', pinLabel: 'PIN (6 digits)',

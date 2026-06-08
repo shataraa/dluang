@@ -971,60 +971,6 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
       <div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div>
     </div>
     <div class="chat-area" id="chatArea">
-      <div class="bwrap ai">
-        <div class="bubble ai">Hey! I'm <strong>Dluang AI</strong> — your finance coach. Ask me anything about your finances! 💬</div>
-        <div class="bmeta">Dluang AI • 09:01</div>
-      </div>
-
-      <div class="bwrap user">
-        <div class="bubble user">hii, bisa bantu aku ga?</div>
-        <div class="bmeta">You • 09:02</div>
-      </div>
-
-      <div class="bwrap ai">
-        <div class="bubble ai">Tentu! Aku di sini buat bantu kamu manage keuangan lebih baik. Mau tanya soal apa? Pengeluaran, tabungan, atau goals kamu? 😊</div>
-        <div class="bmeta">Dluang AI • 09:02</div>
-      </div>
-
-      <div class="bwrap user">
-        <div class="bubble user">aku ngerasa boros banget belakangan ini tapi ga tau kemana uangnya</div>
-        <div class="bmeta">You • 09:04</div>
-      </div>
-
-      <div class="bwrap ai">
-        <div class="bubble ai">Itu hal yang sering terjadi! Dari data pengeluaranmu, aku lihat <em>62% keluar di kategori makanan & hiburan</em> — biasanya dari pembelian kecil yang sering, kayak kopi, snack, atau top-up yang ga kerasa tapi numpuk.<br><br>Coba set batas harian <strong>Rp 50.000</strong> untuk kategori ini, aku bisa bantu pantau tiap hari! 💡</div>
-        <div class="bmeta">Dluang AI • 09:04</div>
-      </div>
-
-      <div class="bwrap user">
-        <div class="bubble user">oh iya bener banget, aku emang sering jajan ga kira2 😭</div>
-        <div class="bmeta">You • 09:05</div>
-      </div>
-
-      <div class="bwrap ai">
-        <div class="bubble ai">Haha tenang, itu normal kok! Yang penting sekarang kamu udah sadar. Coba mulai dengan catat semua pengeluaran hari ini, sekecil apapun. Biasanya setelah 3 hari udah mulai kelihatan polanya. 📊<br><br>Mau aku buatin target penghematan bulan ini?</div>
-        <div class="bmeta">Dluang AI • 09:05</div>
-      </div>
-
-      <div class="bwrap user">
-        <div class="bubble user">mau dong! targetnya berapa ya kira2?</div>
-        <div class="bmeta">You • 09:07</div>
-      </div>
-
-      <div class="bwrap ai">
-        <div class="bubble ai">Berdasarkan rata-rata pemasukanmu, aku rekomendasiin pakai rumus <strong>50/30/20</strong>:<br><br>• <em>50%</em> untuk kebutuhan pokok<br>• <em>30%</em> untuk keinginan & hiburan<br>• <em>20%</em> langsung ditabung<br><br>Dengan pola ini, kamu bisa hemat sekitar <strong>Rp 200.000–300.000</strong> per bulan. Mau aku set goalnya sekarang? 🎯</div>
-        <div class="bmeta">Dluang AI • 09:07</div>
-      </div>
-
-      <div class="bwrap user">
-        <div class="bubble user">wow oke banget, set aja rp 250rb dulu</div>
-        <div class="bmeta">You • 09:08</div>
-      </div>
-
-      <div class="bwrap ai">
-        <div class="bubble ai">Done! 🎉 Goal penghematan <strong>Rp 250.000</strong> bulan ini sudah aku set. Aku akan kasih notif tiap kali kamu mendekati batas. <br><br>Streak nabungmu udah <strong>12 hari</strong> lho — tinggal 18 hari lagi buat unlock badge <em>Disiplin Emas</em>! 🔥 Keep it up!</div>
-        <div class="bmeta">Dluang AI • 09:08</div>
-      </div>
     </div>
     <div class="typing-wrap"><div class="typing" id="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
     <div class="chat-footer">
@@ -2162,7 +2108,7 @@ function applyBg(){
 // ══════════════════════════════════════════
 
 const GROQ_KEY='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';
-const GROQ_MODEL='llama-3.1-8b-instant';
+const GROQ_MODEL='llama-3.3-70b-versatile';
 
 function buildHistory(){
   const bubbles=document.querySelectorAll('#chatArea .bwrap');

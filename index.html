@@ -1984,8 +1984,9 @@ function renderBarChart(){
   const weeks=[[],[],[],[]];
   const now=Date.now();
   S.transactions.forEach(tx=>{
-    const age=(now-tx.id)/(1000*60*60*24*7);
-    const wi=Math.min(3,Math.floor(age));
+    const txTime = tx.date ? new Date(tx.date).getTime() : now;
+    const age=(now-txTime)/(1000*60*60*24*7);
+    const wi=Math.min(3,Math.max(0,Math.floor(age)));
     weeks[3-wi].push(tx);
   });
   const maxInc=Math.max(1,...weeks.map(w=>w.filter(t=>t.type==='inc').reduce((a,t)=>a+t.amount,0)));

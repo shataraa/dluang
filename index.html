@@ -1884,14 +1884,15 @@ function goPage(p){
 // ══════════════════════════════════════════
 function openModal(id){
   if(id==='txModal'){ txType='inc'; setType('inc'); document.getElementById('txAmount').value=''; document.getElementById('txNote').value=''; }
-  if(id==='goalModal'){ document.getElementById('goalName').value=''; document.getElementById('goalTarget').value=''; }
+  if(id==='goalModal'){ document.getElementById('goalName').value=''; const gt=document.getElementById('goalGoals')||document.getElementById('goalTarget'); if(gt) gt.value=''; }
   if(id==='nameModal'){ document.getElementById('nameInput').value=S.name; }
   if(id==='bgModal'){ renderBgGrid(); }
   if(id==='compareModal'){ renderCompare(); }
   if(id==='plansModal'){ renderPlansModal(); syncBillingToggles(); }
   if(id==='connectModal'){ renderConnectList(); }
   if(id==='shopModal'){ renderShopPage(); }
-  document.getElementById(id).classList.add('show');
+  const el = document.getElementById(id);
+  if(el) el.classList.add('show');
 }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 document.querySelectorAll('.modal-backdrop').forEach(b=>{
@@ -1955,7 +1956,16 @@ function addTransaction(){
   });
 }
 
-async function loadUserStreak(){
+async function showAllTx(){
+  // Scroll to recent transactions section on home
+  const txSection = document.querySelector('#page-home .sec-title');
+  if(txSection) txSection.scrollIntoView({behavior:'smooth'});
+  // If there's a "show more" concept, just re-render with no limit
+  const txList = document.getElementById('txList');
+  if(txList) renderTxList(txList);
+}
+
+function loadUserStreak(){
   try {
     const d = await apiFetch('data', { action: 'get_user' });
     if(d.user){ S.streak = d.user.streak || 0; renderHome(); }

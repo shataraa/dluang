@@ -2575,6 +2575,15 @@ function filterStocks(val){
   renderStockList();
 }
 
+function setStockPeriod(el, period, ticker){
+  // Update active state
+  el.closest('.chart-period-row').querySelectorAll('.cperiod').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  // Re-fetch chart data for this period (just visual for now — same data)
+  // Could extend to fetch different ranges from Yahoo Finance
+  toast(ticker + ' • ' + period);
+}
+
 function openStockDetail(ticker){
   const s=WATCHLIST.find(x=>x.ticker===ticker);
   const q=stockCache[ticker];
@@ -2609,11 +2618,11 @@ function openStockDetail(ticker){
     </div>
     <div class="chart-area">
       <div class="chart-period-row">
-        <div class="cperiod active">1H</div>
-        <div class="cperiod">1D</div>
-        <div class="cperiod">1W</div>
-        <div class="cperiod">1M</div>
-        <div class="cperiod">1Y</div>
+        <div class="cperiod active" onclick="setStockPeriod(this,'1H','${s.ticker}')">1H</div>
+        <div class="cperiod" onclick="setStockPeriod(this,'1D','${s.ticker}')">1D</div>
+        <div class="cperiod" onclick="setStockPeriod(this,'1W','${s.ticker}')">1W</div>
+        <div class="cperiod" onclick="setStockPeriod(this,'1M','${s.ticker}')">1M</div>
+        <div class="cperiod" onclick="setStockPeriod(this,'1Y','${s.ticker}')">1Y</div>
       </div>
       <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
         <defs>

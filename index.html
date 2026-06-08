@@ -4,9 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Dluang — Financemu, Beres.</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
+@font-face {
+  font-family: 'AkiraExtended';
+  src: url('https://db.onlinewebfonts.com/t/0a9b74a98ce2dee3f4daecc8de2e1b4a.woff2') format('woff2'),
+       url('https://db.onlinewebfonts.com/t/0a9b74a98ce2dee3f4daecc8de2e1b4a.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --cream:#e4f5f3;--kraft:#2aa89e;--kraft-dark:#1d7a72;
@@ -18,7 +26,7 @@
   --blue:#2A5C8B;--blue-bg:#E8F0FA;
 }
 html,body{height:100%;overflow:hidden;}
-body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-content:center;align-items:flex-start;}
+body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-content:center;align-items:flex-start;}
 
 /* ── Shell ── */
 .shell{
@@ -69,10 +77,10 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
   content:'';position:absolute;bottom:-1px;left:0;right:0;
   height:16px;background:var(--paper);border-radius:16px 16px 0 0;
 }
-.hblob{position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:rgba(200,169,110,0.12);}
-.hblob2{position:absolute;top:15px;right:25px;width:70px;height:70px;border-radius:50%;background:rgba(200,169,110,0.08);}
-.top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--kraft);letter-spacing:1px;}
+.hblob{position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:rgba(200,169,110,0.12);pointer-events:none;}
+.hblob2{position:absolute;top:15px;right:25px;width:70px;height:70px;border-radius:50%;background:rgba(200,169,110,0.08);pointer-events:none;}
+.top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;position:relative;z-index:2;}
+.logo{font-family:'AkiraExtended','Poppins',sans-serif;font-size:18px;font-weight:800;color:var(--kraft);letter-spacing:2px;}
 .logo span{color:var(--gold-light);}
 .avatar-btn{
   width:38px;height:38px;border-radius:50%;background:var(--kraft);
@@ -83,7 +91,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 }
 .avatar-btn img{width:100%;height:100%;object-fit:cover;}
 .balance-label{font-size:11px;color:rgba(200,169,110,0.6);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;}
-.balance-amount{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:#fff;line-height:1;}
+.balance-amount{font-family:'Poppins',sans-serif;font-size:34px;font-weight:700;color:#fff;line-height:1;}
 .balance-amount .cur{font-size:16px;color:var(--kraft);font-weight:400;margin-right:2px;}
 .greeting{font-size:13px;color:rgba(200,169,110,0.75);margin-bottom:8px;font-weight:300;}
 .streak-badge{
@@ -103,7 +111,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .stat-card{background:var(--paper);border:1px solid var(--paper-dark);border-radius:14px;padding:13px;}
 .stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:flex;align-items:center;gap:4px;}
 .stat-label i{font-size:13px;}
-.stat-val{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;}
+.stat-val{font-family:'Poppins',sans-serif;font-size:17px;font-weight:600;}
 .stat-val.inc{color:var(--green);}
 .stat-val.exp{color:var(--red);}
 
@@ -123,7 +131,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .tx-name{font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tx-cat{font-size:11px;color:var(--muted);margin-top:1px;}
 .tx-right{text-align:right;flex-shrink:0;}
-.tx-amt{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;}
+.tx-amt{font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;}
 .tx-amt.inc{color:var(--green);}
 .tx-amt.exp{color:var(--red);}
 .tx-date{font-size:10px;color:var(--muted);margin-top:2px;}
@@ -134,14 +142,14 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .goal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .goal-name-row{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--ink);}
 .goal-name-row i{font-size:15px;color:var(--kraft);}
-.goal-pct{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--earth);}
+.goal-pct{font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:var(--earth);}
 .track{height:5px;background:var(--paper-dark);border-radius:3px;overflow:hidden;margin-bottom:5px;}
 .fill{height:100%;border-radius:3px;background:var(--kraft);transition:width 0.8s ease;}
 .goal-sub{font-size:10px;color:var(--muted);display:flex;justify-content:space-between;}
 
 /* ── AI Insight ── */
 .insight-card{background:var(--earth);border-radius:14px;padding:15px;margin-bottom:12px;position:relative;overflow:hidden;}
-.insight-card::before{content:'"';font-family:'Playfair Display',serif;font-size:80px;color:rgba(255,255,255,0.05);position:absolute;top:-10px;left:8px;line-height:1;}
+.insight-card::before{content:'"';font-family:'Poppins',sans-serif;font-size:80px;color:rgba(255,255,255,0.05);position:absolute;top:-10px;left:8px;line-height:1;}
 .insight-chip{font-size:10px;color:var(--kraft);text-transform:uppercase;letter-spacing:2px;margin-bottom:7px;display:flex;align-items:center;gap:5px;}
 .insight-text{font-size:13px;color:rgba(255,255,255,0.82);line-height:1.6;font-weight:300;}
 .insight-text strong{color:var(--gold-light);font-weight:600;}
@@ -196,7 +204,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
   max-height:90vh;overflow-y:auto;
 }
 .modal-handle{width:40px;height:4px;background:var(--paper-dark);border-radius:2px;margin:0 auto 18px;}
-.modal-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--earth);margin-bottom:18px;}
+.modal-title{font-family:'Poppins',sans-serif;font-size:18px;font-weight:600;color:var(--earth);margin-bottom:18px;}
 
 /* ── Form ── */
 .form-group{margin-bottom:14px;}
@@ -204,7 +212,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .form-input{
   width:100%;padding:11px 14px;border:1px solid var(--paper-dark);
   border-radius:12px;font-size:14px;color:var(--ink);
-  background:var(--paper);font-family:'DM Sans',sans-serif;outline:none;
+  background:var(--paper);font-family:'Poppins',sans-serif;outline:none;
   transition:border 0.15s;
 }
 .form-input:focus{border-color:var(--kraft);}
@@ -212,7 +220,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
 .type-btn{
   padding:10px;border-radius:12px;border:1.5px solid var(--paper-dark);
-  font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;cursor:pointer;font-family:'Poppins',sans-serif;
   background:var(--paper);color:var(--muted);transition:all 0.15s;text-align:center;
 }
 .type-btn.inc.sel{background:var(--green-bg);border-color:var(--green);color:var(--green);}
@@ -220,7 +228,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .btn-primary{
   width:100%;padding:13px;border-radius:14px;border:none;
   background:var(--earth);color:var(--kraft);font-size:14px;font-weight:600;
-  cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;
+  cursor:pointer;font-family:'Poppins',sans-serif;margin-top:6px;
   transition:opacity 0.15s;
 }
 .btn-primary:hover{opacity:0.88;}
@@ -228,30 +236,50 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .btn-outline{background:transparent;border:1.5px solid var(--paper-dark);color:var(--muted);}
 
 /* ── Profilee page ── */
+
+/* ── Profile header redesign ── */
 .profile-header{
-  background:var(--earth);padding:28px 20px 40px;
-  text-align:center;position:relative;overflow:hidden;flex-shrink:0;
+  background:var(--earth);padding:20px 20px 30px;
+  position:relative;overflow:hidden;flex-shrink:0;
 }
 .profile-header::after{
   content:'';position:absolute;bottom:-1px;left:0;right:0;
   height:20px;background:var(--paper);border-radius:20px 20px 0 0;
 }
+.profile-top-row{
+  display:flex;align-items:center;gap:14px;
+  position:relative;z-index:1;
+}
 .profile-avatar{
-  width:72px;height:72px;border-radius:50%;margin:0 auto 10px;
+  width:58px;height:58px;border-radius:50%;
   background:var(--kraft);display:flex;align-items:center;justify-content:center;
-  font-size:26px;font-weight:700;color:var(--earth);
-  border:3px solid rgba(240,192,64,0.5);overflow:hidden;position:relative;
+  font-size:20px;font-weight:700;color:var(--earth);
+  border:2.5px solid rgba(240,192,64,0.45);overflow:hidden;
+  position:relative;flex-shrink:0;
 }
 .profile-avatar img{width:100%;height:100%;object-fit:cover;}
 .profile-avatar .cam-overlay{
-  position:absolute;inset:0;background:rgba(0,0,0,0.35);
+  position:absolute;inset:0;background:rgba(0,0,0,0.38);
   display:flex;align-items:center;justify-content:center;
   opacity:0;transition:opacity 0.2s;cursor:pointer;
-  font-size:20px;color:#fff;border-radius:50%;
+  font-size:18px;color:#fff;border-radius:50%;
 }
 .profile-avatar:hover .cam-overlay{opacity:1;}
-.profile-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:3px;}
-.profile-sub{font-size:12px;color:rgba(200,169,110,0.7);}
+.profile-meta{flex:1;min-width:0;}
+.profile-name{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:2px;}
+.profile-sub{font-size:11px;color:rgba(42,168,158,0.8);}
+.profile-plan-badge{
+  display:flex;flex-direction:column;align-items:center;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(42,168,158,0.35);
+  border-radius:12px;padding:8px 12px;cursor:pointer;flex-shrink:0;
+  transition:background 0.15s;
+}
+.profile-plan-badge:hover{background:rgba(255,255,255,0.18);}
+.ppb-plan{font-size:13px;font-weight:700;color:var(--gold-light);font-family:'Poppins',sans-serif;}
+.ppb-label{font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-top:1px;}
+.plan-row-item .settings-icon{transition:transform 0.2s;}
+.plan-row-item:hover .settings-icon{transform:scale(1.1);}
+
 
 .settings-list{display:flex;flex-direction:column;gap:0;}
 .settings-item{
@@ -279,7 +307,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .goal-act-btn{
   flex:1;padding:8px;border-radius:10px;border:1px solid var(--paper-dark);
   font-size:11px;font-weight:500;cursor:pointer;
-  background:var(--paper);color:var(--muted);font-family:'DM Sans',sans-serif;
+  background:var(--paper);color:var(--muted);font-family:'Poppins',sans-serif;
   text-align:center;transition:all 0.15s;
 }
 .goal-act-btn.add{color:var(--green);border-color:rgba(74,124,89,0.3);}
@@ -289,9 +317,9 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 /* ── AI Chat ── */
 .chat-header{background:var(--earth);padding:14px 16px 22px;flex-shrink:0;position:relative;}
 .chat-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:14px;background:var(--paper);border-radius:14px 14px 0 0;}
-.chat-title{font-family:'Playfair Display',serif;font-size:17px;color:#fff;font-weight:600;}
+.chat-title{font-family:'Poppins',sans-serif;font-size:17px;color:#fff;font-weight:600;}
 .chat-sub{font-size:11px;color:rgba(200,169,110,0.7);margin-top:2px;}
-.chat-area{flex:1;overflow-y:auto;padding:12px 14px 8px;display:flex;flex-direction:column;gap:10px;}
+.chat-area{flex:1;overflow-y:auto;padding:12px 14px 8px;display:flex;flex-direction:column;gap:10px;min-height:0;padding-bottom:16px;}
 .chat-area::-webkit-scrollbar{width:3px;}
 .bwrap{display:flex;flex-direction:column;gap:2px;}
 .bwrap.user{align-items:flex-end;}
@@ -312,8 +340,8 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .chip-row::-webkit-scrollbar{height:0;}
 .chip{flex-shrink:0;padding:6px 11px;background:var(--paper);border:1px solid var(--paper-dark);border-radius:20px;font-size:11px;color:var(--earth-light);cursor:pointer;font-weight:500;white-space:nowrap;transition:all 0.15s;}
 .chip:hover,.chip.sel{background:var(--earth);color:var(--kraft);border-color:var(--earth);}
-.chat-input-row{display:flex;gap:8px;padding:8px 14px 14px;flex-shrink:0;}
-.chat-input{flex:1;background:var(--paper-dark);border:1px solid rgba(139,105,20,0.2);border-radius:20px;padding:9px 14px;font-size:13px;color:var(--ink);font-family:'DM Sans',sans-serif;outline:none;resize:none;max-height:72px;line-height:1.4;}
+.chat-input-row{display:flex;gap:8px;padding:8px 14px 14px;flex-shrink:0;background:var(--paper);}
+.chat-input{flex:1;background:var(--paper-dark);border:1px solid rgba(139,105,20,0.2);border-radius:20px;padding:9px 14px;font-size:13px;color:var(--ink);font-family:'Poppins',sans-serif;outline:none;resize:none;max-height:72px;line-height:1.4;}
 .chat-input:focus{border-color:var(--kraft);}
 .chat-send{width:36px;height:36px;border-radius:50%;background:var(--earth);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--kraft);font-size:16px;flex-shrink:0;}
 
@@ -394,7 +422,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
   border-radius:12px;padding:9px 13px;margin-top:12px;
 }
 .stock-search i{color:rgba(42,168,158,0.7);font-size:16px;flex-shrink:0;}
-.stock-search input{background:none;border:none;outline:none;font-size:13px;color:#fff;font-family:'DM Sans',sans-serif;flex:1;width:0;}
+.stock-search input{background:none;border:none;outline:none;font-size:13px;color:#fff;font-family:'Poppins',sans-serif;flex:1;width:0;}
 .stock-search input::placeholder{color:rgba(255,255,255,0.35);}
 
 .watchlist-tabs{display:flex;gap:0;padding:12px 14px 4px;flex-shrink:0;overflow-x:auto;}
@@ -414,13 +442,13 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
   width:40px;height:40px;border-radius:12px;
   display:flex;align-items:center;justify-content:center;
   font-size:13px;font-weight:700;color:#fff;flex-shrink:0;
-  font-family:'Playfair Display',serif;
+  font-family:'Poppins',sans-serif;
 }
 .stock-info{flex:1;min-width:0;}
 .stock-ticker{font-size:14px;font-weight:600;color:var(--ink);}
 .stock-name{font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .stock-right{text-align:right;flex-shrink:0;}
-.stock-price{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--ink);}
+.stock-price{font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:var(--ink);}
 .stock-change{font-size:11px;font-weight:500;margin-top:2px;display:flex;align-items:center;justify-content:flex-end;gap:3px;}
 .stock-change.up{color:#2e8b57;}
 .stock-change.down{color:#c0392b;}
@@ -433,12 +461,12 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 
 .stock-detail-modal .modal{max-height:85vh;}
 .detail-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
-.detail-logo{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;font-family:'Playfair Display',serif;}
+.detail-logo{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;font-family:'Poppins',sans-serif;}
 .detail-ticker-block{flex:1;}
 .detail-ticker{font-size:18px;font-weight:700;color:var(--ink);}
 .detail-name{font-size:12px;color:var(--muted);}
 .detail-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;}
-.detail-price{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--ink);}
+.detail-price{font-family:'Poppins',sans-serif;font-size:32px;font-weight:700;color:var(--ink);}
 .detail-change-badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;}
 .detail-change-badge.up{background:var(--green-bg);color:var(--green);}
 .detail-change-badge.down{background:var(--red-bg);color:var(--red);}
@@ -457,9 +485,407 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 .skeleton{background:linear-gradient(90deg,var(--paper-dark) 25%,var(--paper) 50%,var(--paper-dark) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .skel-row{height:56px;border-radius:12px;margin-bottom:8px;}
+
+/* ══ PRICING PAGE ════════════════════════════════ */
+.pricing-header{background:var(--earth);padding:16px 20px 28px;position:relative;overflow:hidden;flex-shrink:0;}
+.pricing-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:16px;background:var(--paper);border-radius:16px 16px 0 0;}
+.billing-toggle{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;}
+.billing-opt{font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);cursor:pointer;transition:color 0.2s;}
+.billing-opt.active{color:#fff;}
+.toggle-switch{width:44px;height:24px;border-radius:12px;background:rgba(255,255,255,0.2);position:relative;cursor:pointer;flex-shrink:0;transition:background 0.25s;}
+.toggle-switch.annual{background:var(--kraft);}
+.toggle-knob{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform 0.25s cubic-bezier(0.34,1.4,0.64,1);}
+.toggle-switch.annual .toggle-knob{transform:translateX(20px);}
+.save-badge{background:var(--gold);color:var(--ink);font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:4px;text-transform:uppercase;letter-spacing:.5px;}
+
+.plan-scroll{display:flex;flex-direction:column;gap:14px;padding:14px 14px 90px;}
+
+.plan-card{
+  background:var(--paper);border:1.5px solid var(--paper-dark);
+  border-radius:20px;padding:20px;position:relative;overflow:hidden;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.plan-card.popular{border-color:var(--earth);box-shadow:0 4px 24px rgba(15,84,78,0.18);}
+.plan-card:active{transform:scale(0.98);}
+
+.popular-badge{
+  position:absolute;top:0;right:24px;
+  background:var(--earth);color:var(--paper);
+  font-size:10px;font-weight:700;padding:4px 12px;
+  border-radius:0 0 10px 10px;letter-spacing:.5px;text-transform:uppercase;
+}
+.plan-icon-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.plan-icon{
+  width:46px;height:46px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:21px;flex-shrink:0;
+}
+.plan-name{font-family:'Poppins',sans-serif;font-size:19px;font-weight:700;color:var(--ink);}
+.plan-tagline{font-size:11px;color:var(--muted);margin-top:1px;}
+
+.plan-price-row{display:flex;align-items:baseline;gap:4px;margin-bottom:4px;}
+.plan-price{font-family:'Poppins',sans-serif;font-size:30px;font-weight:700;color:var(--earth);}
+.plan-price.free-price{font-size:26px;}
+.plan-per{font-size:12px;color:var(--muted);}
+.plan-annual-note{font-size:10px;color:var(--muted);margin-bottom:14px;}
+.plan-orig{text-decoration:line-through;color:var(--muted);font-size:11px;margin-left:4px;}
+
+.plan-divider{height:1px;background:var(--paper-dark);margin:14px 0;}
+
+.feature-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.feature-item{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--ink);line-height:1.4;}
+.feature-item i{font-size:15px;flex-shrink:0;margin-top:1px;}
+.feature-item.yes i{color:var(--green);}
+.feature-item.no i{color:var(--paper-dark);}
+.feature-item.no span{color:var(--muted);}
+
+.plan-cta{
+  width:100%;padding:12px;border-radius:14px;border:none;
+  font-size:14px;font-weight:600;cursor:pointer;
+  font-family:'Poppins',sans-serif;transition:opacity 0.15s,transform 0.15s;
+}
+.plan-cta:hover{opacity:0.88;transform:translateY(-1px);}
+.plan-cta.cta-primary{background:var(--earth);color:var(--paper);}
+.plan-cta.cta-outline{background:transparent;border:1.5px solid var(--paper-dark);color:var(--muted);}
+.plan-cta.cta-popular{background:linear-gradient(135deg,var(--earth),var(--earth-light));color:var(--paper);}
+
+.compare-note{text-align:center;font-size:11px;color:var(--muted);padding:0 14px 8px;cursor:pointer;}
+.compare-note span{color:var(--kraft);text-decoration:underline;}
+
+/* plan detail modal */
+.plan-detail-features{display:flex;flex-direction:column;gap:9px;margin:14px 0 20px;}
+
+/* ══ SUBSCRIPTION PAGE ══════════════════════════════ */
+.sub-header{background:var(--earth);padding:16px 20px 28px;position:relative;overflow:hidden;flex-shrink:0;}
+.sub-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:16px;background:var(--paper);border-radius:16px 16px 0 0;}
+
+.billing-toggle{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:14px 0 4px;font-size:12px;color:var(--muted);
+}
+.toggle-track{
+  width:44px;height:24px;border-radius:12px;background:var(--paper-dark);
+  position:relative;cursor:pointer;transition:background 0.25s;flex-shrink:0;
+}
+.toggle-track.on{background:var(--earth);}
+.toggle-thumb{
+  width:18px;height:18px;border-radius:50%;background:#fff;
+  position:absolute;top:3px;left:3px;transition:transform 0.25s;
+  box-shadow:0 1px 4px rgba(0,0,0,0.2);
+}
+.toggle-track.on .toggle-thumb{transform:translateX(20px);}
+.billing-label{font-size:12px;font-weight:500;}
+.billing-label.active{color:var(--earth);}
+.save-badge{
+  background:var(--gold);color:var(--ink);
+  font-size:9px;font-weight:700;padding:2px 6px;
+  border-radius:10px;margin-left:4px;letter-spacing:0.5px;
+}
+
+.plan-cards{display:flex;flex-direction:column;gap:14px;padding:14px;}
+
+.plan-card{
+  border-radius:18px;overflow:hidden;
+  border:1.5px solid var(--paper-dark);
+  background:var(--paper);
+  transition:transform 0.2s, box-shadow 0.2s;
+  position:relative;
+}
+.plan-card.popular{
+  border-color:var(--earth);
+  box-shadow:0 4px 20px rgba(15,84,78,0.15);
+}
+.popular-banner{
+  background:var(--earth);color:var(--paper);
+  font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-align:center;padding:5px;text-transform:uppercase;
+}
+
+.plan-top{padding:16px 16px 12px;}
+.plan-icon{
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:10px;
+}
+.plan-name{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:var(--ink);}
+.plan-tagline{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4;}
+.plan-price-row{display:flex;align-items:baseline;gap:4px;margin:12px 0 0;}
+.plan-price{font-family:'Poppins',sans-serif;font-size:28px;font-weight:700;color:var(--earth);}
+.plan-price.free-price{color:var(--green);}
+.plan-period{font-size:12px;color:var(--muted);}
+.plan-orig{font-size:11px;color:var(--muted);text-decoration:line-through;margin-left:4px;}
+
+.plan-divider{height:1px;background:var(--paper-dark);margin:0 16px;}
+
+.plan-features{padding:14px 16px;}
+.feat-item{
+  display:flex;align-items:flex-start;gap:9px;
+  font-size:12px;color:var(--ink);margin-bottom:9px;line-height:1.4;
+}
+.feat-item:last-child{margin-bottom:0;}
+.feat-icon{
+  width:18px;height:18px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;flex-shrink:0;margin-top:1px;
+}
+.feat-icon.yes{background:var(--green-bg);color:var(--green);}
+.feat-icon.no{background:var(--red-bg);color:var(--red);}
+.feat-icon.star{background:rgba(232,201,74,0.2);color:var(--gold);}
+
+.plan-btn{
+  margin:0 16px 16px;padding:12px;border-radius:12px;
+  border:none;font-size:13px;font-weight:600;
+  cursor:pointer;font-family:'Poppins',sans-serif;
+  width:calc(100% - 32px);transition:opacity 0.15s;text-align:center;
+}
+.plan-btn.primary{background:var(--earth);color:var(--paper);}
+.plan-btn.outline{background:transparent;border:1.5px solid var(--paper-dark);color:var(--muted);}
+.plan-btn.current{background:var(--green-bg);color:var(--green);border:1.5px solid rgba(46,139,87,0.3);}
+.plan-btn:hover{opacity:0.85;}
+
+.compare-note{
+  text-align:center;font-size:11px;color:var(--muted);
+  padding:0 20px 24px;line-height:1.6;
+}
+.compare-note a{color:var(--kraft);text-decoration:none;font-weight:500;}
+
+/* Selected plan toast style */
+.plan-confirm-modal .modal{padding-bottom:24px;}
+.confirm-icon{
+  width:56px;height:56px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 14px;
+}
+.confirm-title{font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;color:var(--earth);text-align:center;margin-bottom:6px;}
+.confirm-sub{font-size:13px;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:20px;}
+.confirm-price-block{
+  background:var(--paper-dark);border-radius:14px;
+  padding:14px;text-align:center;margin-bottom:18px;
+}
+.confirm-price-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.confirm-price-val{font-family:'Poppins',sans-serif;font-size:26px;font-weight:700;color:var(--earth);}
+.confirm-period{font-size:12px;color:var(--muted);margin-top:2px;}
+
+/* ══ CONNECT ACCOUNTS ═══════════════════════ */
+.connect-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;cursor:pointer;transition:background 0.12s;
+}
+.connect-item.has-border{border-bottom:1px solid var(--paper-dark);}
+.connect-item:hover{background:var(--paper-dark);}
+.connect-logo{
+  width:38px;height:38px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.connect-info{flex:1;min-width:0;}
+.connect-name{font-size:13px;font-weight:500;color:var(--ink);}
+.connect-status{font-size:11px;color:var(--muted);margin-top:1px;transition:color 0.2s;}
+.connect-status.on{color:var(--green);font-weight:500;}
+.connect-toggle{
+  width:40px;height:22px;border-radius:11px;
+  background:var(--paper-dark);position:relative;
+  flex-shrink:0;transition:background 0.25s;
+}
+.connect-toggle.on{background:var(--earth);}
+.connect-thumb{
+  width:16px;height:16px;border-radius:50%;background:#fff;
+  position:absolute;top:3px;left:3px;
+  transition:transform 0.25s;
+  box-shadow:0 1px 3px rgba(0,0,0,0.2);
+}
+.connect-toggle.on .connect-thumb{transform:translateX(18px);}
+
+.chat-attach{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--paper-dark);border:1px solid rgba(42,168,158,0.2);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:17px;flex-shrink:0;transition:all 0.15s;
+}
+.chat-attach:hover{background:var(--earth);color:var(--kraft);border-color:var(--earth);}
+.attach-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--paper-dark);border:1px solid var(--paper-dark);
+  border-radius:20px;padding:5px 12px;font-size:12px;color:var(--ink);
+  border:1px solid rgba(42,168,158,0.25);
+}
+.attach-chip i:first-child{color:var(--kraft);font-size:13px;}
+
+.chat-footer{
+  flex-shrink:0;
+  background:var(--paper);
+  border-top:1px solid var(--paper-dark);
+  padding-bottom:64px;
+}
+
+/* ── AUTH SCREEN ── */
+#authScreen{
+  position:fixed;inset:0;z-index:100;
+  background:#071f1d;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Poppins',sans-serif;
+}
+#authScreen.hidden{display:none;}
+.auth-card{
+  width:100%;max-width:360px;
+  background:var(--paper);border-radius:24px;
+  padding:28px 24px 32px;margin:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.35);
+}
+.auth-logo{
+  font-family:'AkiraExtended','Poppins',sans-serif;
+  font-size:22px;font-weight:800;
+  color:var(--kraft);letter-spacing:2px;
+  text-align:center;margin-bottom:6px;
+}
+.auth-logo span{color:var(--gold-light);}
+.auth-tagline{font-size:12px;color:var(--muted);text-align:center;margin-bottom:24px;}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1.5px solid var(--paper-dark);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+.auth-tab{padding:10px;text-align:center;font-size:13px;font-weight:500;
+  color:var(--muted);cursor:pointer;background:transparent;border:none;
+  font-family:'Poppins',sans-serif;transition:all 0.15s;}
+.auth-tab.active{background:var(--earth);color:var(--kraft);}
+
+/* PIN pad */
+.pin-display{
+  display:flex;justify-content:center;gap:12px;margin:16px 0;
+}
+.pin-dot{
+  width:14px;height:14px;border-radius:50%;
+  border:2px solid var(--paper-dark);
+  background:transparent;transition:all 0.15s;
+}
+.pin-dot.filled{background:var(--earth);border-color:var(--earth);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
+.pin-key{
+  padding:14px 10px;border-radius:14px;border:1.5px solid var(--paper-dark);
+  font-size:20px;font-weight:500;color:var(--ink);
+  background:var(--paper);cursor:pointer;
+  font-family:'Poppins',sans-serif;text-align:center;
+  transition:all 0.1s;user-select:none;
+}
+.pin-key:active,.pin-key:hover{background:var(--earth);color:var(--kraft);border-color:var(--earth);}
+.pin-key.del{font-size:16px;}
+.pin-key.empty{border:none;background:transparent;cursor:default;}
+.pin-key.empty:hover{background:transparent;}
+.auth-field{margin-bottom:12px;}
+.auth-label{font-size:11px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:5px;display:block;}
+.auth-input{
+  width:100%;padding:11px 14px;border:1.5px solid var(--paper-dark);
+  border-radius:12px;font-size:14px;color:var(--ink);
+  background:var(--paper);font-family:'Poppins',sans-serif;outline:none;
+  transition:border 0.15s;
+}
+.auth-input:focus{border-color:var(--kraft);}
+.auth-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;}
+.auth-hint span{color:var(--kraft);cursor:pointer;font-weight:500;}
+.auth-error{
+  font-size:12px;color:var(--red);text-align:center;
+  margin-bottom:10px;min-height:18px;
+}
+.auth-loading{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:13px;color:var(--muted);padding:10px 0;
+}
+.auth-spinner{
+  width:16px;height:16px;border:2px solid var(--paper-dark);
+  border-top-color:var(--kraft);border-radius:50%;
+  animation:spin 0.6s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
+<!-- ════════════════ AUTH SCREEN ════════════════ -->
+<div id="authScreen">
+  <div class="auth-card">
+    <div class="auth-logo">Dl<span>u</span>ang</div>
+    <div class="auth-tagline">Financemu, Beres.</div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Login</button>
+      <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Daftar</button>
+    </div>
+
+    <div id="authError" class="auth-error"></div>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <div class="auth-field">
+        <label class="auth-label">Username</label>
+        <input class="auth-input" id="loginUsername" type="text" placeholder="username kamu" autocomplete="username" autocapitalize="none">
+      </div>
+      <div class="auth-field" style="margin-bottom:4px;">
+        <label class="auth-label">PIN (6 angka)</label>
+        <div class="pin-display" id="loginPinDisplay">
+          <div class="pin-dot" id="lpd0"></div><div class="pin-dot" id="lpd1"></div>
+          <div class="pin-dot" id="lpd2"></div><div class="pin-dot" id="lpd3"></div>
+          <div class="pin-dot" id="lpd4"></div><div class="pin-dot" id="lpd5"></div>
+        </div>
+      </div>
+      <div class="pin-pad" id="loginPinPad">
+        <div class="pin-key" onclick="pinKey('login',1)">1</div>
+        <div class="pin-key" onclick="pinKey('login',2)">2</div>
+        <div class="pin-key" onclick="pinKey('login',3)">3</div>
+        <div class="pin-key" onclick="pinKey('login',4)">4</div>
+        <div class="pin-key" onclick="pinKey('login',5)">5</div>
+        <div class="pin-key" onclick="pinKey('login',6)">6</div>
+        <div class="pin-key" onclick="pinKey('login',7)">7</div>
+        <div class="pin-key" onclick="pinKey('login',8)">8</div>
+        <div class="pin-key" onclick="pinKey('login',9)">9</div>
+        <div class="pin-key empty"></div>
+        <div class="pin-key" onclick="pinKey('login',0)">0</div>
+        <div class="pin-key del" onclick="pinBackspace('login')">⌫</div>
+      </div>
+      <div id="loginLoading" class="auth-loading" style="display:none;">
+        <div class="auth-spinner"></div> Masuk...
+      </div>
+      <button class="btn-primary" style="margin-top:14px;" onclick="doLogin()">Masuk</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerForm" style="display:none;">
+      <div class="auth-field">
+        <label class="auth-label">Username</label>
+        <input class="auth-input" id="regUsername" type="text" placeholder="min 3 karakter, huruf/angka/_" autocomplete="username" autocapitalize="none">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label">Nama tampilan</label>
+        <input class="auth-input" id="regName" type="text" placeholder="nama kamu">
+      </div>
+      <div class="auth-field" style="margin-bottom:4px;">
+        <label class="auth-label">Buat PIN (6 angka)</label>
+        <div class="pin-display" id="regPinDisplay">
+          <div class="pin-dot" id="rpd0"></div><div class="pin-dot" id="rpd1"></div>
+          <div class="pin-dot" id="rpd2"></div><div class="pin-dot" id="rpd3"></div>
+          <div class="pin-dot" id="rpd4"></div><div class="pin-dot" id="rpd5"></div>
+        </div>
+      </div>
+      <div class="pin-pad" id="regPinPad">
+        <div class="pin-key" onclick="pinKey('reg',1)">1</div>
+        <div class="pin-key" onclick="pinKey('reg',2)">2</div>
+        <div class="pin-key" onclick="pinKey('reg',3)">3</div>
+        <div class="pin-key" onclick="pinKey('reg',4)">4</div>
+        <div class="pin-key" onclick="pinKey('reg',5)">5</div>
+        <div class="pin-key" onclick="pinKey('reg',6)">6</div>
+        <div class="pin-key" onclick="pinKey('reg',7)">7</div>
+        <div class="pin-key" onclick="pinKey('reg',8)">8</div>
+        <div class="pin-key" onclick="pinKey('reg',9)">9</div>
+        <div class="pin-key empty"></div>
+        <div class="pin-key" onclick="pinKey('reg',0)">0</div>
+        <div class="pin-key del" onclick="pinBackspace('reg')">⌫</div>
+      </div>
+      <div id="regLoading" class="auth-loading" style="display:none;">
+        <div class="auth-spinner"></div> Mendaftar...
+      </div>
+      <button class="btn-primary" style="margin-top:14px;" onclick="doRegister()">Daftar</button>
+      <div class="auth-hint">Sudah punya akun? <span onclick="switchAuthTab('login')">Masuk</span></div>
+    </div>
+  </div>
+</div>
+
 <div class="shell" id="shell">
   <div class="bg-layer" id="bgLayer"></div>
   <div class="bg-overlay" id="bgOverlay"></div>
@@ -510,6 +936,21 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
       <!-- Transactions -->
       <div class="sec-title">Recent Transactions <a onclick="goPage('home');setTimeout(()=>showAllTx(),100)">See all</a></div>
       <div class="card-wrap" id="homeTx"></div>
+      <!-- Stocks widget -->
+      <div class="sec-title" style="margin-top:14px;">
+        Market Watch
+        <span class="market-status" style="margin:0;"><div class="market-dot"></div>Live</span>
+      </div>
+      <div class="card-wrap" id="homeStocksWrap">
+        <div class="stock-list" id="homeStockList">
+          <div style="padding:12px 14px;">
+            <div class="skeleton skel-row" style="height:44px;margin-bottom:6px;"></div>
+            <div class="skeleton skel-row" style="height:44px;margin-bottom:6px;"></div>
+            <div class="skeleton skel-row" style="height:44px;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;">Alpha Vantage • Delayed 15–20 min</div>
     </div>
   </div>
 
@@ -535,17 +976,75 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
     <div class="chat-area" id="chatArea">
       <div class="bwrap ai">
         <div class="bubble ai">Hey! I'm <strong>Dluang AI</strong> — your finance coach. Ask me anything about your finances! 💬</div>
-        <div class="bmeta">Dluang AI • just now</div>
+        <div class="bmeta">Dluang AI • 09:01</div>
+      </div>
+
+      <div class="bwrap user">
+        <div class="bubble user">hii, bisa bantu aku ga?</div>
+        <div class="bmeta">You • 09:02</div>
+      </div>
+
+      <div class="bwrap ai">
+        <div class="bubble ai">Tentu! Aku di sini buat bantu kamu manage keuangan lebih baik. Mau tanya soal apa? Pengeluaran, tabungan, atau goals kamu? 😊</div>
+        <div class="bmeta">Dluang AI • 09:02</div>
+      </div>
+
+      <div class="bwrap user">
+        <div class="bubble user">aku ngerasa boros banget belakangan ini tapi ga tau kemana uangnya</div>
+        <div class="bmeta">You • 09:04</div>
+      </div>
+
+      <div class="bwrap ai">
+        <div class="bubble ai">Itu hal yang sering terjadi! Dari data pengeluaranmu, aku lihat <em>62% keluar di kategori makanan & hiburan</em> — biasanya dari pembelian kecil yang sering, kayak kopi, snack, atau top-up yang ga kerasa tapi numpuk.<br><br>Coba set batas harian <strong>Rp 50.000</strong> untuk kategori ini, aku bisa bantu pantau tiap hari! 💡</div>
+        <div class="bmeta">Dluang AI • 09:04</div>
+      </div>
+
+      <div class="bwrap user">
+        <div class="bubble user">oh iya bener banget, aku emang sering jajan ga kira2 😭</div>
+        <div class="bmeta">You • 09:05</div>
+      </div>
+
+      <div class="bwrap ai">
+        <div class="bubble ai">Haha tenang, itu normal kok! Yang penting sekarang kamu udah sadar. Coba mulai dengan catat semua pengeluaran hari ini, sekecil apapun. Biasanya setelah 3 hari udah mulai kelihatan polanya. 📊<br><br>Mau aku buatin target penghematan bulan ini?</div>
+        <div class="bmeta">Dluang AI • 09:05</div>
+      </div>
+
+      <div class="bwrap user">
+        <div class="bubble user">mau dong! targetnya berapa ya kira2?</div>
+        <div class="bmeta">You • 09:07</div>
+      </div>
+
+      <div class="bwrap ai">
+        <div class="bubble ai">Berdasarkan rata-rata pemasukanmu, aku rekomendasiin pakai rumus <strong>50/30/20</strong>:<br><br>• <em>50%</em> untuk kebutuhan pokok<br>• <em>30%</em> untuk keinginan & hiburan<br>• <em>20%</em> langsung ditabung<br><br>Dengan pola ini, kamu bisa hemat sekitar <strong>Rp 200.000–300.000</strong> per bulan. Mau aku set goalnya sekarang? 🎯</div>
+        <div class="bmeta">Dluang AI • 09:07</div>
+      </div>
+
+      <div class="bwrap user">
+        <div class="bubble user">wow oke banget, set aja rp 250rb dulu</div>
+        <div class="bmeta">You • 09:08</div>
+      </div>
+
+      <div class="bwrap ai">
+        <div class="bubble ai">Done! 🎉 Goal penghematan <strong>Rp 250.000</strong> bulan ini sudah aku set. Aku akan kasih notif tiap kali kamu mendekati batas. <br><br>Streak nabungmu udah <strong>12 hari</strong> lho — tinggal 18 hari lagi buat unlock badge <em>Disiplin Emas</em>! 🔥 Keep it up!</div>
+        <div class="bmeta">Dluang AI • 09:08</div>
       </div>
     </div>
     <div class="typing-wrap"><div class="typing" id="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-    <div class="chip-row" id="chipRow"></div>
-    <div style="padding:4px 14px 2px;flex-shrink:0;">
-      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Or pick a filming scenario:</div>
-    </div>
-    <div class="chat-input-row">
-      <textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1"></textarea>
-      <button class="chat-send" onclick="chatSend()"><i class="ti ti-send" aria-hidden="true"></i></button>
+    <div class="chat-footer">
+      <div id="attachPreview" style="display:none;padding:6px 14px 0;">
+        <div class="attach-chip">
+          <i class="ti ti-file-text" aria-hidden="true"></i>
+          <span id="attachName">file.pdf</span>
+          <i class="ti ti-x" style="cursor:pointer;margin-left:4px;" onclick="removeAttach()" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <button class="chat-attach" onclick="triggerFakeAttach()" title="Attach file">
+          <i class="ti ti-paperclip" aria-hidden="true"></i>
+        </button>
+        <textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1"></textarea>
+        <button class="chat-send" onclick="chatSend()"><i class="ti ti-send" aria-hidden="true"></i></button>
+      </div>
     </div>
   </div>
 
@@ -553,14 +1052,30 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
   <div class="page pages" id="page-profile">
     <div class="profile-header">
       <div class="hblob"></div>
-      <div class="profile-avatar" id="profileAvatarWrap">
-        <span id="profileInitials">?</span>
-        <div class="cam-overlay" onclick="document.getElementById('avatarInput').click()"><i class="ti ti-camera" aria-hidden="true"></i></div>
+      <div class="profile-top-row">
+        <div class="profile-avatar" id="profileAvatarWrap">
+          <span id="profileInitials">?</span>
+          <div class="cam-overlay" onclick="document.getElementById('avatarInput').click()"><i class="ti ti-camera" aria-hidden="true"></i></div>
+        </div>
+        <div class="profile-meta">
+          <div class="profile-name" id="profileName">User</div>
+          <div class="profile-sub" id="profileSub">Joined today</div>
+        </div>
+        <div class="profile-plan-badge" id="profilePlanBadge" onclick="openModal('plansModal')">
+          <div class="ppb-plan" id="ppbPlan">Free</div>
+          <div class="ppb-label">PLAN</div>
+        </div>
       </div>
-      <div class="profile-name" id="profileName">User</div>
-      <div class="profile-sub" id="profileSub">Bergabung days ini</div>
     </div>
     <div class="scroll-body">
+      <div class="card-wrap" style="margin-bottom:12px;">
+        <div class="settings-item plan-row-item" onclick="openModal('plansModal')">
+          <div class="settings-icon" style="background:rgba(232,201,74,0.18);color:var(--gold)"><i class="ti ti-crown" aria-hidden="true"></i></div>
+          <div class="settings-label">Subscription Plan</div>
+          <div class="settings-val" id="planSettingsVal">Free</div>
+          <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+        </div>
+      </div>
       <div class="card-wrap">
         <div class="settings-list">
           <div class="settings-item" onclick="openModal('nameModal')">
@@ -571,7 +1086,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
           </div>
           <div class="settings-item" onclick="document.getElementById('avatarInput').click()">
             <div class="settings-icon"><i class="ti ti-photo" aria-hidden="true"></i></div>
-            <div class="settings-label">Profilee Photo</div>
+            <div class="settings-label">Profile Photo</div>
             <div class="settings-val">Change photo</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
@@ -581,10 +1096,11 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
             <div class="settings-val">Customize</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
-          <div class="settings-item" onclick="openModal('aiModal')">
-            <div class="settings-icon"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
-            <div class="settings-label">Edit AI Templates</div>
-            <div class="settings-val">Filming mode</div>
+
+          <div class="settings-item" onclick="openModal('connectModal')">
+            <div class="settings-icon" style="background:rgba(42,168,158,0.15);color:var(--kraft)"><i class="ti ti-plug-connected" aria-hidden="true"></i></div>
+            <div class="settings-label">Connected Accounts</div>
+            <div class="settings-val" id="connectedCount">None</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="openModal('resetModal')">
@@ -593,12 +1109,61 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
             <div class="settings-val"></div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
+          <div class="settings-item" onclick="doLogout()">
+            <div class="settings-icon" style="background:rgba(192,57,43,0.1);color:var(--red)"><i class="ti ti-logout" aria-hidden="true"></i></div>
+            <div class="settings-label" style="color:var(--red)">Logout</div>
+            <div class="settings-val" id="settingsUsername" style="font-size:11px;"></div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ════════════════ FAB ════════════════ -->
+
+
+  <!-- ════════════════ PAGE: PRICING ════════════════ -->
+  <div class="page pages" id="page-pricing">
+    <div class="pricing-header">
+      <div class="hblob"></div>
+      <div class="top-row">
+        <div class="logo">Dl<span>u</span>ang</div>
+        <div style="font-size:12px;color:var(--kraft)">Plans</div>
+      </div>
+      <div class="greeting">Choose your plan</div>
+      <div class="billing-toggle">
+        <div class="billing-opt active" id="billMonthly" onclick="setBilling('monthly')">Monthly</div>
+        <div class="toggle-switch" id="billToggle" onclick="toggleBilling()"><div class="toggle-knob"></div></div>
+        <div class="billing-opt" id="billAnnual" onclick="setBilling('annual')">Annual <span class="save-badge">Save 20%</span></div>
+      </div>
+    </div>
+    <div class="scroll-body" style="padding:0;">
+      <div class="plan-scroll" id="planScroll"></div>
+      <div class="compare-note" onclick="openModal('compareModal')">
+        See full <span>feature comparison</span> →
+      </div>
+    </div>
+  </div>
+
+  <!-- Plan detail / upgrade modal -->
+  <div class="modal-backdrop" id="planModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div id="planModalContent"></div>
+      <button class="btn-primary" style="margin-top:4px;" onclick="closeModal('planModal')">Maybe later</button>
+    </div>
+  </div>
+
+  <!-- Compare modal -->
+  <div class="modal-backdrop" id="compareModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-title">Feature Comparison</div>
+      <div id="compareContent"></div>
+      <button class="btn-primary btn-outline" style="margin-top:12px;" onclick="closeModal('compareModal')">Close</button>
+    </div>
+  </div>
 
   <!-- ════════════════ PAGE: STOCKS ════════════════ -->
   <div class="page pages" id="page-stocks">
@@ -643,6 +1208,41 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
     </div>
   </div>
 
+
+  <!-- ════════════════ PAGE: SUBSCRIPTION ════════════════ -->
+  <div class="page pages" id="page-sub">
+    <div class="sub-header">
+      <div class="hblob"></div>
+      <div class="top-row">
+        <div class="logo">Dl<span>u</span>ang</div>
+        <div style="font-size:12px;color:var(--kraft);font-weight:500;">Plans</div>
+      </div>
+      <div class="greeting">Choose your plan</div>
+      <div class="billing-toggle">
+        <span class="billing-label active" id="billLabelMonth">Monthly</span>
+        <div class="toggle-track" id="billingToggle" onclick="toggleBilling()">
+          <div class="toggle-thumb"></div>
+        </div>
+        <span class="billing-label" id="billLabelYear">Yearly <span class="save-badge">SAVE 30%</span></span>
+      </div>
+    </div>
+    <div class="scroll-body" style="padding:0 0 80px;">
+      <div class="plan-cards" id="planCards"></div>
+      <div class="compare-note">
+        All plans include end-to-end encryption and 24/7 data sync.<br>
+        <a onclick="toast('Full comparison coming soon!')">Compare all features →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plan confirm modal -->
+  <div class="modal-backdrop plan-confirm-modal" id="planConfirmModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div id="planConfirmContent"></div>
+    </div>
+  </div>
+
   <button class="fab" id="fab" onclick="openModal('txModal')" aria-label="Add transaksi">
     <i class="ti ti-plus" aria-hidden="true"></i>
   </button>
@@ -651,7 +1251,6 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
   <div class="bottom-nav">
     <div class="nav-item active" id="nav-home" onclick="goPage('home')"><i class="ti ti-home" aria-hidden="true"></i>Home</div>
     <div class="nav-item" id="nav-goals" onclick="goPage('goals')"><i class="ti ti-target" aria-hidden="true"></i>Goals</div>
-    <div class="nav-item" id="nav-stocks" onclick="goPage('stocks')"><i class="ti ti-trending-up" aria-hidden="true"></i>Stocks</div>
     <div class="nav-item" id="nav-ai" onclick="goPage('ai')"><i class="ti ti-sparkles" aria-hidden="true"></i>AI Coach</div>
     <div class="nav-item" id="nav-profile" onclick="goPage('profile')"><i class="ti ti-user" aria-hidden="true"></i>Profile</div>
   </div>
@@ -668,7 +1267,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
         <div class="type-btn exp" id="typeExp" onclick="setType('exp')"><i class="ti ti-arrow-up-circle" aria-hidden="true"></i> Expenses</div>
       </div>
       <div class="form-group">
-        <label class="form-label">Amount ($)</label>
+        <label class="form-label">Amount (Rp)</label>
         <input class="form-input" id="txAmount" type="number" placeholder="0" inputmode="numeric">
       </div>
       <div class="form-group">
@@ -703,7 +1302,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
         <input class="form-input" id="goalName" type="text" placeholder="e.g. Sony Headset, New Shoes...">
       </div>
       <div class="form-group">
-        <label class="form-label">Goals Amount ($)</label>
+        <label class="form-label">Goals Amount (Rp)</label>
         <input class="form-input" id="goalGoals" type="number" placeholder="0" inputmode="numeric">
       </div>
       <div class="form-group">
@@ -730,7 +1329,7 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
       <div class="modal-handle"></div>
       <div class="modal-title" id="addGoalModalTitle">Add to Goal</div>
       <div class="form-group">
-        <label class="form-label">Amount ($)</label>
+        <label class="form-label">Amount (Rp)</label>
         <input class="form-input" id="addGoalAmount" type="number" placeholder="0" inputmode="numeric">
       </div>
       <button class="btn-primary" onclick="saveToGoal()">Add</button>
@@ -791,6 +1390,38 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
     </div>
   </div>
 
+
+  <!-- Plans Modal (from profile) -->
+  <div class="modal-backdrop" id="plansModal">
+    <div class="modal" style="max-height:88vh;overflow-y:auto;">
+      <div class="modal-handle"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <div class="modal-title" style="margin-bottom:0;">Choose Your Plan</div>
+        <div class="billing-toggle" style="margin:0;">
+          <span class="billing-label active" id="billLabelMonth2" style="font-size:11px;">Monthly</span>
+          <div class="toggle-track" id="billingToggle2" onclick="toggleBilling()">
+            <div class="toggle-thumb"></div>
+          </div>
+          <span class="billing-label" id="billLabelYear2" style="font-size:11px;">Yearly <span class="save-badge">-30%</span></span>
+        </div>
+      </div>
+      <div id="plansModalCards" style="margin-top:14px;display:flex;flex-direction:column;gap:12px;"></div>
+      <button class="btn-primary btn-outline" style="margin-top:10px;" onclick="closeModal('plansModal')">Close</button>
+    </div>
+  </div>
+
+
+  <!-- Connect Account Modal -->
+  <div class="modal-backdrop" id="connectModal">
+    <div class="modal" style="max-height:88vh;overflow-y:auto;">
+      <div class="modal-handle"></div>
+      <div class="modal-title">Connected Accounts</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Link your accounts to automatically sync transactions into Dluang.</p>
+      <div id="connectList"></div>
+      <button class="btn-primary btn-outline" style="margin-top:10px;" onclick="closeModal('connectModal')">Done</button>
+    </div>
+  </div>
+
   <!-- Hidden inputs -->
   <input type="file" accept="image/*" id="avatarInput" class="hidden" onchange="handleAvatar(event)">
 
@@ -799,6 +1430,15 @@ body{font-family:'DM Sans',sans-serif;background:#071f1d;display:flex;justify-co
 </div>
 
 <script>
+// ══════════════════════════════════════════
+// SUPABASE CONFIG
+// ══════════════════════════════════════════
+// SUPABASE CONFIG — update URL + ANON key dari Dashboard → Settings → API
+const SUPABASE_URL = 'https://jovsaydqahjydetxazns.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpvdnNheWRxYWhqeWRldHhhem5zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MjYzMzMsImV4cCI6MjA5NjUwMjMzM30.8oVLXXST-lO6-NlvyzMmmPn0Y4AZxzQfIJ3OkTZuiKU'; // Settings → API → anon public
+// Edge function base — no auth needed for the functions themselves (they use session tokens)
+const FN_BASE = `${SUPABASE_URL}/functions/v1`;
+
 // ══════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════
@@ -814,9 +1454,229 @@ const DEFAULT_STATE = {
   joinDate: new Date().toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'}),
 };
 
-let S = JSON.parse(localStorage.getItem('dluang_v1') || 'null') || {...DEFAULT_STATE};
+// In-memory state — synced from Supabase after auth
+let S = {...DEFAULT_STATE};
+let CU = null;         // current user object from Supabase
+let SESSION_TOKEN = localStorage.getItem('dluang_token') || null;
 
-function save(){ localStorage.setItem('dluang_v1', JSON.stringify(S)); }
+function fmtRp(n){ return parseFloat(n).toLocaleString('id-ID'); }
+function fmtPrice(n){ return parseFloat(n).toLocaleString('id-ID'); }
+
+// save() persists to Supabase (non-blocking). Local state is source of truth in-session.
+function save(){
+  if(!SESSION_TOKEN) return;
+  // Persist name/avatar/bg/streak to Supabase in background
+  apiFetch('data', {
+    action: 'update_user',
+    name: S.name,
+    avatar_url: S.avatar,
+    bg: S.bg,
+  }).catch(()=>{});
+}
+
+// ── Supabase API helpers ──────────────────
+async function apiFetch(fn, body){
+  const headers = { 'Content-Type': 'application/json' };
+  if(SESSION_TOKEN) headers['Authorization'] = 'Bearer ' + SESSION_TOKEN;
+  const res = await fetch(`${FN_BASE}/${fn}`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if(!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+// ── Load all user data from Supabase ─────
+async function loadUserData(){
+  const [txRes, goalRes] = await Promise.all([
+    apiFetch('data', { action: 'get_transactions', limit: 500 }),
+    apiFetch('data', { action: 'get_goals' }),
+  ]);
+
+  // Map Supabase rows → app format
+  S.transactions = (txRes.transactions || []).map(t => ({
+    id: t.id,
+    type: t.type,
+    amount: parseFloat(t.amount),
+    note: t.note,
+    category: t.category,
+    date: t.date,
+  }));
+
+  S.goals = (goalRes.goals || []).map(g => ({
+    id: g.id,
+    name: g.name,
+    target: parseFloat(g.target),
+    saved: parseFloat(g.saved),
+    icon: g.icon,
+  }));
+
+  // Recalculate balance
+  S.balance = S.transactions.reduce((acc, t) => t.type === 'inc' ? acc + t.amount : acc - t.amount, 0);
+}
+
+// ── Auth state from saved token ───────────
+async function tryRestoreSession(){
+  if(!SESSION_TOKEN) { showAuthScreen(); return; }
+  try {
+    const data = await apiFetch('auth', { action: 'verify', token: SESSION_TOKEN });
+    if(data.user) {
+      CU = data.user;
+      applyUserToState(CU);
+      await loadUserData();
+      hideAuthScreen();
+    } else {
+      clearSession();
+      showAuthScreen();
+    }
+  } catch(e) {
+    clearSession();
+    showAuthScreen();
+  }
+}
+
+function applyUserToState(user){
+  S.name = user.name || 'User';
+  S.avatar = user.avatar_url || null;
+  S.bg = user.bg || null;
+  S.streak = user.streak || 0;
+  S.lastStreakDate = user.last_streak_date || null;
+  S.joinDate = user.join_date ? new Date(user.join_date).toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'}) : S.joinDate;
+}
+
+function clearSession(){
+  SESSION_TOKEN = null;
+  localStorage.removeItem('dluang_token');
+  CU = null;
+}
+
+// ══════════════════════════════════════════
+// AUTH UI
+// ══════════════════════════════════════════
+let loginPin = '';
+let regPin = '';
+
+function showAuthScreen(){ document.getElementById('authScreen').classList.remove('hidden'); }
+function hideAuthScreen(){ document.getElementById('authScreen').classList.add('hidden'); }
+
+function switchAuthTab(tab){
+  document.getElementById('tabLogin').classList.toggle('active', tab==='login');
+  document.getElementById('tabRegister').classList.toggle('active', tab==='register');
+  document.getElementById('loginForm').style.display = tab==='login' ? '' : 'none';
+  document.getElementById('registerForm').style.display = tab==='register' ? '' : 'none';
+  document.getElementById('authError').textContent = '';
+  loginPin = ''; regPin = '';
+  updatePinDots('login'); updatePinDots('reg');
+}
+
+function pinKey(mode, digit){
+  if(mode === 'login'){
+    if(loginPin.length >= 6) return;
+    loginPin += digit;
+    updatePinDots('login');
+    if(loginPin.length === 6) setTimeout(()=>doLogin(), 150);
+  } else {
+    if(regPin.length >= 6) return;
+    regPin += digit;
+    updatePinDots('reg');
+  }
+}
+
+function pinBackspace(mode){
+  if(mode === 'login'){ loginPin = loginPin.slice(0,-1); updatePinDots('login'); }
+  else { regPin = regPin.slice(0,-1); updatePinDots('reg'); }
+}
+
+function updatePinDots(mode){
+  const len = mode === 'login' ? loginPin.length : regPin.length;
+  const prefix = mode === 'login' ? 'lpd' : 'rpd';
+  for(let i=0;i<6;i++){
+    document.getElementById(prefix+i)?.classList.toggle('filled', i < len);
+  }
+}
+
+function setAuthError(msg){ document.getElementById('authError').textContent = msg || ''; }
+
+async function doLogin(){
+  const username = document.getElementById('loginUsername').value.trim();
+  if(!username){ setAuthError('Masukkan username'); return; }
+  if(loginPin.length !== 6){ setAuthError('PIN harus 6 angka'); return; }
+
+  document.getElementById('loginLoading').style.display = 'flex';
+  setAuthError('');
+  try {
+    const data = await apiFetch('auth', { action: 'login', username, pin: loginPin });
+    SESSION_TOKEN = data.token;
+    localStorage.setItem('dluang_token', SESSION_TOKEN);
+    CU = data.user;
+    applyUserToState(CU);
+    await loadUserData();
+    hideAuthScreen();
+    renderHome(); renderChips(); animateHome();
+    setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
+    toast('Selamat datang, ' + S.name + '! 👋');
+  } catch(e) {
+    setAuthError(e.message || 'Login gagal');
+    loginPin = '';
+    updatePinDots('login');
+  } finally {
+    document.getElementById('loginLoading').style.display = 'none';
+  }
+}
+
+async function doRegister(){
+  const username = document.getElementById('regUsername').value.trim();
+  const name = document.getElementById('regName').value.trim();
+  if(!username){ setAuthError('Masukkan username'); return; }
+  if(regPin.length !== 6){ setAuthError('Buat PIN 6 angka'); return; }
+
+  document.getElementById('regLoading').style.display = 'flex';
+  setAuthError('');
+  try {
+    const data = await apiFetch('auth', { action: 'register', username, pin: regPin, name: name || username });
+    SESSION_TOKEN = data.token;
+    localStorage.setItem('dluang_token', SESSION_TOKEN);
+    CU = data.user;
+    applyUserToState(CU);
+
+    // Sync any existing localStorage data as a one-time migration
+    const oldLocal = JSON.parse(localStorage.getItem('dluang_v1') || 'null');
+    if(oldLocal && (oldLocal.transactions?.length || oldLocal.goals?.length)){
+      await apiFetch('data', {
+        action: 'sync_from_local',
+        transactions: oldLocal.transactions || [],
+        goals: oldLocal.goals || [],
+        name: oldLocal.name,
+        streak: oldLocal.streak || 0,
+      }).catch(()=>{});
+      localStorage.removeItem('dluang_v1');
+    }
+
+    await loadUserData();
+    hideAuthScreen();
+    renderHome(); renderChips(); animateHome();
+    setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
+    toast('Akun berhasil dibuat! 🎉');
+  } catch(e) {
+    setAuthError(e.message || 'Registrasi gagal');
+    regPin = '';
+    updatePinDots('reg');
+  } finally {
+    document.getElementById('regLoading').style.display = 'none';
+  }
+}
+
+function doLogout(){
+  if(SESSION_TOKEN) apiFetch('auth', { action: 'logout', token: SESSION_TOKEN }).catch(()=>{});
+  clearSession();
+  S = {...DEFAULT_STATE};
+  loginPin = ''; regPin = '';
+  updatePinDots('login'); updatePinDots('reg');
+  showAuthScreen();
+  toast('Berhasil logout');
+}
 
 // ══════════════════════════════════════════
 // UTILS
@@ -829,7 +1689,7 @@ function initials(name){ return name.split(' ').slice(0,2).map(w=>w[0]||'').join
 // ══════════════════════════════════════════
 // NAV
 // ══════════════════════════════════════════
-const PAGE_ORDER=['home','goals','stocks','ai','profile'];
+const PAGE_ORDER=['home','goals','ai','profile'];
 let curPage='home';
 
 function goPage(p){
@@ -873,12 +1733,13 @@ function goPage(p){
   setTimeout(()=>{
     if(p==='home'){ renderHome(); animateHome(); }
     if(p==='goals'){ renderGoalsPage(); animateGoals(); }
-    if(p==='profile'){ renderProfilee(); animateProfilee(); }
+    if(p==='profile'){ renderProfile();
+ animateProfilee(); }
     if(p==='ai'){ renderChips(); animateAI(); }
-    if(p==='stocks'){
-      animateStocks();
-      if(!stocksFetched) fetchAllStocks();
-      else renderStockList();
+    if(p==='sub'){ renderPlans(); animateSub(); }
+    if(p==='pricing'){
+      renderPlans();
+      animatePricing();
     }
   }, 60);
 }
@@ -888,10 +1749,13 @@ function goPage(p){
 // ══════════════════════════════════════════
 function openModal(id){
   if(id==='txModal'){ txType='inc'; setType('inc'); document.getElementById('txAmount').value=''; document.getElementById('txNote').value=''; }
-  if(id==='goalModal'){ document.getElementById('goalName').value=''; document.getElementById('goalGoals').value=''; }
+  if(id==='goalModal'){ document.getElementById('goalName').value=''; document.getElementById('goalTarget').value=''; }
   if(id==='nameModal'){ document.getElementById('nameInput').value=S.name; }
   if(id==='aiModal'){ renderAIEditList(); }
   if(id==='bgModal'){ renderBgGrid(); }
+  if(id==='compareModal'){ renderCompare(); }
+  if(id==='plansModal'){ renderPlansModal(); syncBillingToggles(); }
+  if(id==='connectModal'){ renderConnectList(); }
   document.getElementById(id).classList.add('show');
 }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
@@ -919,40 +1783,68 @@ function addTransaction(){
   const amt = parseFloat(document.getElementById('txAmount').value);
   const note = document.getElementById('txNote').value.trim();
   const cat = document.getElementById('txCat').value;
-  if(!amt||amt<=0){ toast('Inkan jumlah yang valid'); return; }
-  if(!note){ toast('Fill in description first'); return; }
-  const tx = { id:Date.now(), type:txType, amount:amt, note, cat, date: new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short'}) };
+  if(!amt||amt<=0){ toast('Masukkan jumlah yang valid'); return; }
+  if(!note){ toast('Isi deskripsi dulu'); return; }
+
+  const now_iso = new Date().toISOString();
+  const tx = {
+    id: 'tmp_' + Date.now(),
+    type: txType,
+    amount: amt,
+    note,
+    category: cat,
+    date: now_iso,
+  };
+
+  // Optimistic update
   S.transactions.unshift(tx);
-  if(txType==='inc') S.balance+=amt;
-  else S.balance=Math.max(0,S.balance-amt);
-  updateStreak();
-  save();
+  if(txType==='inc') S.balance += amt;
+  else S.balance = Math.max(0, S.balance - amt);
   closeModal('txModal');
   renderHome();
-  toast(txType==='inc'?'Income dicatat! 💰':'Expenses dicatat!');
+  toast(txType==='inc' ? 'Income dicatat! 💰' : 'Expenses dicatat!');
+
+  // Persist to Supabase
+  apiFetch('data', {
+    action: 'add_transaction',
+    type: txType, amount: amt, note, category: cat, date: now_iso,
+  }).then(res => {
+    // Replace temp id with real id
+    const idx = S.transactions.findIndex(t => t.id === tx.id);
+    if(idx !== -1 && res.transaction) S.transactions[idx].id = res.transaction.id;
+    // Sync streak from server
+    if(res.transaction) loadUserStreak();
+  }).catch(e => {
+    toast('Gagal simpan ke server 😅');
+    console.error(e);
+  });
 }
 
-function updateStreak(){
-  const today = new Date().toDateString();
-  if(S.lastStreakDate!==today){ S.streak=(S.streak||0)+1; S.lastStreakDate=today; }
+async function loadUserStreak(){
+  try {
+    const d = await apiFetch('data', { action: 'get_user' });
+    if(d.user){ S.streak = d.user.streak || 0; renderHome(); }
+  } catch(e){}
 }
 
 function renderTxList(container, limit=null){
   const txs = limit ? S.transactions.slice(0,limit) : S.transactions;
   if(!txs.length){ container.innerHTML='<div class="empty-state"><i class="ti ti-receipt-off"></i>No transactions yet</div>'; return; }
-  container.innerHTML = txs.map((tx,idx)=>`
-    <div class="tx-item stagger-in" style="animation-delay:${idx*0.06}s">
-      <div class="tx-icon ${tx.type}"><i class="ti ${CAT_ICONS[tx.cat]||'ti-coin'}" aria-hidden="true"></i></div>
+  container.innerHTML = txs.map((tx,idx)=>{
+    const cat = tx.category || tx.cat || 'Others';
+    const dateStr = tx.date ? new Date(tx.date).toLocaleDateString('id-ID',{day:'numeric',month:'short'}) : '';
+    return `<div class="tx-item stagger-in" style="animation-delay:${idx*0.06}s">
+      <div class="tx-icon ${tx.type}"><i class="ti ${CAT_ICONS[cat]||'ti-coin'}" aria-hidden="true"></i></div>
       <div class="tx-info">
         <div class="tx-name">${tx.note}</div>
-        <div class="tx-cat">${tx.cat}</div>
+        <div class="tx-cat">${cat}</div>
       </div>
       <div class="tx-right">
         <div class="tx-amt ${tx.type}">${tx.type==='inc'?'+':'-'}${fmt(tx.amount)}</div>
-        <div class="tx-date">${tx.date}</div>
+        <div class="tx-date">${dateStr}</div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 // ══════════════════════════════════════════
@@ -963,30 +1855,48 @@ function addGoal(){
   const name = document.getElementById('goalName').value.trim();
   const target = parseFloat(document.getElementById('goalGoals').value);
   const icon = document.getElementById('goalIcon').value;
-  if(!name){ toast('Fill in goal name'); return; }
-  if(!target||target<=0){ toast('Fill in target amount'); return; }
-  S.goals.push({ id:Date.now(), name, target, saved:0, icon });
-  save(); closeModal('goalModal'); renderGoalsPage(); renderHome(); toast('Goals dibuat! 🎯');
+  if(!name){ toast('Isi nama goal'); return; }
+  if(!target||target<=0){ toast('Isi target amount'); return; }
+
+  const tempGoal = { id: 'tmp_' + Date.now(), name, target, saved: 0, icon };
+  S.goals.push(tempGoal);
+  closeModal('goalModal'); renderGoalsPage(); renderHome(); toast('Goal dibuat! 🎯');
+
+  apiFetch('data', { action: 'add_goal', name, target, icon })
+    .then(res => {
+      const idx = S.goals.findIndex(g => g.id === tempGoal.id);
+      if(idx !== -1 && res.goal) S.goals[idx].id = res.goal.id;
+    }).catch(e => { toast('Gagal simpan goal 😅'); console.error(e); });
 }
 
 function openAddToGoal(idx){
-  activeGoalIdx=idx;
-  document.getElementById('addGoalModalTitle').textContent='Add to: '+S.goals[idx].name;
-  document.getElementById('addGoalAmount').value='';
+  activeGoalIdx = idx;
+  document.getElementById('addGoalModalTitle').textContent = 'Add to: ' + S.goals[idx].name;
+  document.getElementById('addGoalAmount').value = '';
   openModal('addGoalModal');
 }
 
 function saveToGoal(){
-  const amt=parseFloat(document.getElementById('addGoalAmount').value);
-  if(!amt||amt<=0){ toast('Inkan jumlah yang valid'); return; }
-  S.goals[activeGoalIdx].saved=Math.min(S.goals[activeGoalIdx].saved+amt, S.goals[activeGoalIdx].target);
-  save(); closeModal('addGoalModal'); renderGoalsPage(); renderHome();
-  if(S.goals[activeGoalIdx].saved>=S.goals[activeGoalIdx].target) toast('Goal reached! 🎉🎉');
+  const amt = parseFloat(document.getElementById('addGoalAmount').value);
+  if(!amt||amt<=0){ toast('Masukkan jumlah yang valid'); return; }
+  const goal = S.goals[activeGoalIdx];
+  const newSaved = Math.min(goal.saved + amt, goal.target);
+  S.goals[activeGoalIdx].saved = newSaved;
+  closeModal('addGoalModal'); renderGoalsPage(); renderHome();
+  if(newSaved >= goal.target) toast('Goal tercapai! 🎉🎉');
   else toast('Progress updated!');
+
+  apiFetch('data', { action: 'update_goal', id: goal.id, saved: newSaved })
+    .catch(e => { toast('Gagal update goal 😅'); console.error(e); });
 }
 
 function deleteGoal(idx){
-  S.goals.splice(idx,1); save(); renderGoalsPage(); renderHome(); toast('Goal deleted');
+  const goal = S.goals[idx];
+  S.goals.splice(idx, 1);
+  renderGoalsPage(); renderHome(); toast('Goal deleted');
+
+  apiFetch('data', { action: 'delete_goal', id: goal.id })
+    .catch(e => console.error(e));
 }
 
 function renderGoalsPage(){
@@ -1103,24 +2013,40 @@ function renderAvatar(){
   }
 }
 
-function renderProfilee(){
+function renderProfile(){
   document.getElementById('profileName').textContent=S.name;
   document.getElementById('profileSub').textContent='Joined: '+S.joinDate;
   document.getElementById('settingsName').textContent=S.name;
+  const suEl = document.getElementById('settingsUsername');
+  if(suEl && CU) suEl.textContent = '@' + CU.username;
+  const planNames={'free':'Free','student':'Student','worker':'Worker','business':'Business'};
+  const planIcons={'free':'','student':'🎓','worker':'💼','business':'🏢'};
+  const cp=S.plan||'free';
+  const ppb=document.getElementById('ppbPlan');
+  if(ppb) ppb.innerHTML=(planIcons[cp]?'<span style="margin-right:4px;">'+planIcons[cp]+'</span>':'')+planNames[cp];
+  const psv=document.getElementById('planSettingsVal');
+  if(psv) psv.textContent=(planIcons[cp]?planIcons[cp]+' ':'')+planNames[cp];
   renderAvatar();
+  updateConnectedCount();
 }
 
 function handleAvatar(e){
   const f=e.target.files[0]; if(!f) return;
   const r=new FileReader();
-  r.onload=ev=>{ S.avatar=ev.target.result; save(); renderAvatar(); renderProfilee(); toast('Profilee photo updated!'); };
+  r.onload=ev=>{
+    S.avatar=ev.target.result;
+    save(); // triggers Supabase update_user
+    renderAvatar(); renderProfile(); toast('Profile photo updated!');
+  };
   r.readAsDataURL(f);
 }
 
 function saveName(){
   const n=document.getElementById('nameInput').value.trim();
   if(!n){ toast('Name cannot be empty'); return; }
-  S.name=n; save(); closeModal('nameModal'); renderProfilee(); renderHome(); toast('Name updated!');
+  S.name=n;
+  save(); // triggers Supabase update_user
+  closeModal('nameModal'); renderProfile(); renderHome(); toast('Name updated!');
 }
 
 // ══════════════════════════════════════════
@@ -1150,7 +2076,7 @@ function setBg(i){
   const bgOverlay=document.getElementById('bgOverlay');
   if(!b.img&&!b.grad){ bgLayer.style.background=b.color; bgLayer.style.backgroundImage=''; bgOverlay.style.background='rgba(251,245,232,0.88)'; S.bg=null; }
   else{ bgLayer.style.background=b.grad||b.color; bgLayer.style.backgroundImage=''; bgOverlay.classList.add('dim'); S.bg={grad:b.grad,color:b.color}; }
-  save(); toast('Background changed!');
+  save(); toast('Background changed!'); // save() -> Supabase
 }
 
 function handleBgUpload(e){
@@ -1163,7 +2089,7 @@ function handleBgUpload(e){
     bgLayer.style.backgroundSize='cover';
     bgOverlay.classList.add('dim');
     S.bg={img:ev.target.result};
-    save(); toast('Background updated!');
+    save(); toast('Background updated!'); // save() -> Supabase
   };
   r.readAsDataURL(f);
 }
@@ -1195,6 +2121,7 @@ function saveTemplatesLocal(){ localStorage.setItem('dluang_aitpl',JSON.stringif
 
 function renderChips(){
   const row=document.getElementById('chipRow');
+  if(!row) return;
   row.innerHTML=templates.map((t,i)=>`<div class="chip" onclick="selectChip(${i},this)">${t.chip}</div>`).join('');
 }
 
@@ -1206,17 +2133,54 @@ function selectChip(i,el){
   else { document.getElementById('chatInput').value=''; document.getElementById('chatInput').focus(); }
 }
 
-function chatSend(){
+const GROQ_KEY='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';
+const GROQ_MODEL='llama3-8b-8192';
+
+function buildHistory(){
+  const bubbles=document.querySelectorAll('#chatArea .bwrap');
+  const msgs=[];
+  bubbles.forEach(b=>{
+    const isUser=b.classList.contains('user');
+    const text=b.querySelector('.bubble')?.innerText||'';
+    if(text) msgs.push({role:isUser?'user':'assistant',content:text});
+  });
+  return msgs.slice(-10);
+}
+
+async function chatSend(){
   const box=document.getElementById('chatInput');
   const msg=box.value.trim(); if(!msg) return;
-  appendBubble('user',msg); box.value=''; box.style.height='auto';
-  const typing=document.getElementById('typing'); typing.classList.add('show');
+  appendBubble('user',msg);
+  box.value=''; box.style.height='auto';
+  const typing=document.getElementById('typing');
+  typing.classList.add('show');
   document.getElementById('chatArea').scrollTop=99999;
-  let reply='Hmm, I\'m analyzing your financial data... Try asking again with different keywords! 😊';
-  if(activeChip!==null&&templates[activeChip].key!=='custom'&&templates[activeChip].reply) reply=templates[activeChip].reply;
-  else{ const lower=msg.toLowerCase(); for(const t of templates){ if(t.key==='custom') continue; const kws=t.user.toLowerCase().split(' ').filter(w=>w.length>3); if(kws.some(k=>lower.includes(k))){ reply=t.reply; break; } } }
-  setTimeout(()=>{ typing.classList.remove('show'); appendBubble('ai',reply); activeChip=null; document.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel')); },1400);
+  try{
+    const history=buildHistory();
+    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
+      body:JSON.stringify({
+        model:GROQ_MODEL,
+        max_tokens:300,
+        messages:[
+          {role:'system',content:'Kamu adalah Dluang AI, asisten keuangan personal yang friendly dan kasual dalam bahasa Indonesia. Bantu user manage keuangan mereka — pengeluaran, tabungan, goals, dan kebiasaan finansial. Jawab singkat, natural, dan relatable. Pakai emoji sesekali. Jangan terlalu formal.'},
+          ...history,
+          {role:'user',content:msg}
+        ]
+      })
+    });
+    const data=await res.json();
+    const reply=data.choices?.[0]?.message?.content||'Hmm, coba tanya lagi ya! 😊';
+    typing.classList.remove('show');
+    appendBubble('ai',reply);
+  }catch(e){
+    typing.classList.remove('show');
+    appendBubble('ai','Koneksi bermasalah, coba lagi ya! 😅');
+  }
+  activeChip=null;
 }
+
 
 function appendBubble(type,text){
   const area=document.getElementById('chatArea');
@@ -1253,9 +2217,14 @@ function saveAITemplates(){
 // RESET
 // ══════════════════════════════════════════
 function resetAll(){
-  S={...DEFAULT_STATE,joinDate:new Date().toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'})};
-  templates=[...DEFAULT_TEMPLATES];
-  localStorage.removeItem('dluang_v1'); localStorage.removeItem('dluang_aitpl');
+  apiFetch('data', { action: 'reset_data' }).catch(()=>{});
+  S = {...DEFAULT_STATE, name: CU?.name || 'User',
+    joinDate: CU?.join_date
+      ? new Date(CU.join_date).toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'})
+      : new Date().toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'})
+  };
+  templates = [...DEFAULT_TEMPLATES];
+  localStorage.removeItem('dluang_aitpl');
   closeModal('resetModal'); goPage('home'); toast('Data reset!');
 }
 
@@ -1334,26 +2303,28 @@ async function fetchQuote(ticker){
 async function fetchAllStocks(){
   stocksFetched=false;
   renderStockSkeletons();
-  // AV free: 25 req/day, fetch first 8 to be safe
-  const toFetch=WATCHLIST.slice(0,8);
+  // AV free: 25 req/day, fetch first 6 for home widget
+  const toFetch=WATCHLIST.slice(0,6);
   for(const s of toFetch){
     const q=await fetchQuote(s.ticker);
     if(q) renderStockList();
-    await new Promise(r=>setTimeout(r,400)); // small delay
+    await new Promise(r=>setTimeout(r,350));
   }
   stocksFetched=true;
   renderStockList();
 }
 
 function renderStockSkeletons(){
-  document.getElementById('stockList').innerHTML=
-    '<div style="padding:12px 14px;">'+
-    Array(5).fill('<div class="skeleton skel-row"></div>').join('')+
+  const el=document.getElementById('homeStockList')||document.getElementById('stockList');
+  if(!el) return;
+  el.innerHTML='<div style="padding:12px 14px;">'+
+    Array(4).fill('<div class="skeleton skel-row" style="height:44px;margin-bottom:6px;"></div>').join('')+
     '</div>';
 }
 
 function renderStockList(){
-  const list=document.getElementById('stockList');
+  const list=document.getElementById('homeStockList')||document.getElementById('stockList');
+  if(!list) return;
   let filtered=WATCHLIST.filter(s=>{
     if(stockFilter!=='all'&&s.sector!==stockFilter) return false;
     if(stockSearch&&!s.ticker.toLowerCase().includes(stockSearch)&&!s.name.toLowerCase().includes(stockSearch)) return false;
@@ -1476,6 +2447,376 @@ function animateStocks(){
   animateHeader('page-stocks');
   setTimeout(()=>{ stagger('#stockList .stock-item',0,50); },80);
 }
+// ══════════════════════════════════════════
+// SUBSCRIPTION
+// ══════════════════════════════════════════
+let billingYearly = false;
+let currentPlan = S.plan || 'free';
+
+const PLANS = [
+  {
+    id: 'student',
+    name: 'Student',
+    tagline: 'Perfect for teens & students managing allowance and side hustles',
+    icon: '🎓',
+    iconBg: 'rgba(42,168,158,0.15)',
+    monthly: 49000,
+    popular: false,
+    features: [
+      {icon:'yes', text:'Unlimited transaction tracking'},
+      {icon:'yes', text:'Up to 5 saving goals'},
+      {icon:'yes', text:'Basic AI spending insights'},
+      {icon:'yes', text:'Saving streak & badges'},
+      {icon:'yes', text:'Student budget templates'},
+      {icon:'yes', text:'Export monthly report (PDF)'},
+      {icon:'no',  text:'Stock market watchlist'},
+      {icon:'no',  text:'Multi-currency support'},
+      {icon:'no',  text:'Tax & invoice tools'},
+    ]
+  },
+  {
+    id: 'worker',
+    name: 'Worker',
+    tagline: 'Built for professionals tracking salary, bills, and investments',
+    icon: '💼',
+    iconBg: 'rgba(15,84,78,0.12)',
+    monthly: 109000,
+    popular: true,
+    features: [
+      {icon:'yes', text:'Everything in Student'},
+      {icon:'yes', text:'Unlimited saving goals'},
+      {icon:'yes', text:'Advanced AI Coach (GPT-powered)'},
+      {icon:'yes', text:'Stock market watchlist & alerts'},
+      {icon:'yes', text:'Bill & subscription reminders'},
+      {icon:'yes', text:'Salary & payslip tracker'},
+      {icon:'yes', text:'Multi-currency support'},
+      {icon:'star', text:'Priority support'},
+      {icon:'no',  text:'Business invoicing tools'},
+    ]
+  },
+  {
+    id: 'business',
+    name: 'Business',
+    tagline: 'For freelancers and small business owners who need full control',
+    icon: '🏢',
+    iconBg: 'rgba(232,201,74,0.15)',
+    monthly: 229000,
+    popular: false,
+    features: [
+      {icon:'yes', text:'Everything in Worker'},
+      {icon:'yes', text:'Invoice creation & sending'},
+      {icon:'yes', text:'Client & project expense tracking'},
+      {icon:'yes', text:'Tax estimation & reports'},
+      {icon:'yes', text:'Team member access (up to 5)'},
+      {icon:'yes', text:'API & accounting app integrations'},
+      {icon:'star', text:'Dedicated account manager'},
+      {icon:'star', text:'Custom branding on reports'},
+      {icon:'star', text:'Early access to new features'},
+    ]
+  },
+];
+
+function toggleBilling(){
+  billingYearly = !billingYearly;
+  const track = document.getElementById('billingToggle');
+  if(track) track.classList.toggle('on', billingYearly);
+  const bm=document.getElementById('billLabelMonth'); if(bm) bm.classList.toggle('active',!billingYearly);
+  const by=document.getElementById('billLabelYear');  if(by) by.classList.toggle('active', billingYearly);
+  syncBillingToggles();
+  renderPlans();
+  renderPlansModal();
+}
+
+function renderPlans(){
+  const container = document.getElementById('planCards');
+
+  // Free card first
+  const freeCard = `
+    <div class="plan-card stagger-in">
+      <div class="plan-top">
+        <div class="plan-icon" style="background:rgba(46,139,87,0.12);font-size:20px;">✦</div>
+        <div class="plan-name">Free</div>
+        <div class="plan-tagline">Get started with the basics — no credit card needed</div>
+        <div class="plan-price-row">
+          <div class="plan-price free-price">Rp 0</div>
+          <div class="plan-period">/ forever</div>
+        </div>
+      </div>
+      <div class="plan-divider"></div>
+      <div class="plan-features">
+        ${[
+          {icon:'yes', text:'Up to 50 transactions/month'},
+          {icon:'yes', text:'2 saving goals'},
+          {icon:'yes', text:'Basic balance dashboard'},
+          {icon:'no',  text:'AI Coach insights'},
+          {icon:'no',  text:'Stock watchlist'},
+          {icon:'no',  text:'Export & reports'},
+        ].map(f=>`
+          <div class="feat-item">
+            <div class="feat-icon ${f.icon}"><i class="ti ti-${f.icon==='yes'?'check':'x'}" aria-hidden="true"></i></div>
+            <span>${f.text}</span>
+          </div>`).join('')}
+      </div>
+      <button class="plan-btn ${currentPlan==='free'?'current':'outline'}" onclick="selectPlan('free',0)">
+        ${currentPlan==='free'?'✓ Current Plan':'Get Started Free'}
+      </button>
+    </div>`;
+
+  const planCardsHTML = PLANS.map((p,i) => {
+    const price = billingYearly ? Math.round(p.monthly * 12 * 0.7) : p.monthly;
+    const origPrice = billingYearly ? Math.round(p.monthly * 12) : null;
+    const period = billingYearly ? '/ year' : '/ month';
+    const isCurrent = currentPlan === p.id;
+
+    return `
+      <div class="plan-card ${p.popular?'popular':''} stagger-in" style="animation-delay:${(i+1)*80}ms">
+        ${p.popular ? '<div class="popular-banner">⭐ Most Popular</div>' : ''}
+        <div class="plan-top">
+          <div class="plan-icon" style="background:${p.iconBg}">${p.icon}</div>
+          <div class="plan-name">${p.name}</div>
+          <div class="plan-tagline">${p.tagline}</div>
+          <div class="plan-price-row">
+            <div class="plan-price">Rp ${fmtRp(price)}</div>
+            <div class="plan-period">${period}</div>
+            ${origPrice ? `<div class="plan-orig">Rp ${fmtRp(origPrice)}</div>` : ''}
+          </div>
+        </div>
+        <div class="plan-divider"></div>
+        <div class="plan-features">
+          ${p.features.map(f=>`
+            <div class="feat-item">
+              <div class="feat-icon ${f.icon}">
+                <i class="ti ti-${f.icon==='yes'?'check':f.icon==='star'?'star':'x'}" aria-hidden="true"></i>
+              </div>
+              <span>${f.text}</span>
+            </div>`).join('')}
+        </div>
+        <button class="plan-btn ${isCurrent?'current':'primary'}" onclick="selectPlan('${p.id}',${price})">
+          ${isCurrent ? '✓ Current Plan' : `Get ${p.name}`}
+        </button>
+      </div>`;
+  }).join('');
+
+  container.innerHTML = freeCard + planCardsHTML;
+}
+
+function selectPlan(planId, price){
+  if(planId === 'free'){
+    currentPlan = 'free';
+    S.plan = 'free';
+    save();
+    renderPlans();
+    renderProfile();
+    closeModal('plansModal');
+    toast('Switched to Free plan');
+    return;
+  }
+  const plan = PLANS.find(p=>p.id===planId);
+  const period = billingYearly ? 'year' : 'month';
+  const label = billingYearly ? 'Billed yearly (save 30%)' : 'Billed monthly';
+  const priceNum = typeof price === 'string' ? parseFloat(price) : price;
+
+  document.getElementById('planConfirmContent').innerHTML = `
+    <div class="confirm-icon" style="background:${plan.iconBg}">${plan.icon}</div>
+    <div class="confirm-title">Upgrade to ${plan.name}</div>
+    <div class="confirm-sub">You're about to subscribe to Dluang ${plan.name}.<br>Cancel anytime from your profile.</div>
+    <div class="confirm-price-block">
+      <div class="confirm-price-label">Total today</div>
+      <div class="confirm-price-val">Rp ${fmtRp(priceNum)}</div>
+      <div class="confirm-period">${label} · Auto-renews every ${period}</div>
+    </div>
+    <button class="btn-primary" onclick="confirmPlan('${planId}')">Confirm & Subscribe</button>
+    <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('planConfirmModal')">Not now</button>
+  `;
+  // close plansModal first, then open confirm after animation settles
+  closeModal('plansModal');
+  setTimeout(()=>{ openModal('planConfirmModal'); }, 320);
+}
+
+function confirmPlan(planId){
+  currentPlan = planId;
+  S.plan = planId;
+  save();
+  closeModal('planConfirmModal');
+  renderPlans();
+  renderProfile();
+  const plan = PLANS.find(p=>p.id===planId);
+  toast(plan.icon+' Welcome to '+plan.name+'!');
+}
+
+function animateSub(){
+  animateHeader('page-sub');
+  setTimeout(()=>{ stagger('#planCards .plan-card', 0, 80); }, 80);
+}
+
+
+function syncBillingToggles(){
+  const t2=document.getElementById('billingToggle2');
+  const m2=document.getElementById('billLabelMonth2');
+  const y2=document.getElementById('billLabelYear2');
+  if(t2) t2.classList.toggle('on', billingYearly);
+  if(m2){ m2.classList.toggle('active',!billingYearly); }
+  if(y2){ y2.classList.toggle('active', billingYearly); }
+}
+
+function renderPlansModal(){
+  const container=document.getElementById('plansModalCards');
+  if(!container) return;
+
+  const freeCard=`<div class="plan-card" style="border-radius:14px;">
+    <div class="plan-top" style="padding:13px 14px 10px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div class="plan-icon" style="background:rgba(46,139,87,0.12);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;">✦</div>
+        <div>
+          <div class="plan-name" style="font-size:15px;">Free</div>
+          <div class="plan-tagline">Get started, no card needed</div>
+        </div>
+        <div style="margin-left:auto;font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:var(--green);">Rp 0</div>
+      </div>
+    </div>
+    <button class="plan-btn ${currentPlan==='free'?'current':'outline'}" style="margin:0 14px 14px;width:calc(100% - 28px);" onclick="selectPlan('free',0);closeModal('plansModal');">
+      ${currentPlan==='free'?'✓ Current Plan':'Switch to Free'}
+    </button>
+  </div>`;
+
+  const planHTML=PLANS.map(p=>{
+    const price=billingYearly?Math.round(p.monthly*12*0.7):p.monthly;
+    const period=billingYearly?'/ yr':'/ mo';
+    const isCurrent=currentPlan===p.id;
+    return `<div class="plan-card ${p.popular?'popular':''}" style="border-radius:14px;">
+      ${p.popular?'<div class="popular-banner">⭐ Most Popular</div>':''}
+      <div class="plan-top" style="padding:13px 14px 10px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div class="plan-icon" style="background:${p.iconBg};width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;">${p.icon}</div>
+          <div style="flex:1;">
+            <div class="plan-name" style="font-size:15px;">${p.name}</div>
+            <div class="plan-tagline">${p.tagline}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:var(--earth);">Rp ${fmtRp(price)}</div>
+            <div style="font-size:10px;color:var(--muted);">${period}</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          ${p.features.slice(0,4).map(f=>`<div style="display:flex;align-items:center;gap:7px;font-size:11px;color:${f.icon==='no'?'var(--muted)':'var(--ink)'};">
+            <div style="width:14px;height:14px;border-radius:50%;background:${f.icon==='yes'?'var(--green-bg)':f.icon==='star'?'rgba(232,201,74,0.2)':'var(--red-bg)'};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="ti ti-${f.icon==='yes'?'check':f.icon==='star'?'star':'x'}" style="font-size:8px;color:${f.icon==='yes'?'var(--green)':f.icon==='star'?'var(--gold)':'var(--red)'};" aria-hidden="true"></i>
+            </div>
+            ${f.text}
+          </div>`).join('')}
+          <div style="font-size:10px;color:var(--kraft);margin-top:2px;">+${p.features.length-4} more features</div>
+        </div>
+      </div>
+      <button class="plan-btn ${isCurrent?'current':'primary'}" style="margin:0 14px 14px;width:calc(100% - 28px);" onclick="selectPlan('${p.id}',${price})">
+        ${isCurrent?'✓ Current Plan':'Get '+p.name}
+      </button>
+    </div>`;
+  }).join('');
+
+  container.innerHTML = freeCard + planHTML;
+}
+
+// ══════════════════════════════════════════
+// CONNECTED ACCOUNTS
+// ══════════════════════════════════════════
+const ACCOUNT_OPTIONS = [
+  // E-Wallets
+  { id:'gopay',    name:'GoPay',       category:'E-Wallet', color:'#00AED6', bg:'#E6F8FC', abbr:'GP', icon:'ti-device-mobile' },
+  { id:'ovo',      name:'OVO',         category:'E-Wallet', color:'#4C3494', bg:'#EDE8F8', abbr:'OV', icon:'ti-device-mobile' },
+  { id:'dana',     name:'DANA',        category:'E-Wallet', color:'#118EEA', bg:'#E6F3FD', abbr:'DN', icon:'ti-device-mobile' },
+  { id:'shopeepay',name:'ShopeePay',   category:'E-Wallet', color:'#EE4D2D', bg:'#FDECEA', abbr:'SP', icon:'ti-device-mobile' },
+  { id:'linkaja',  name:'LinkAja',     category:'E-Wallet', color:'#E82529', bg:'#FDECEA', abbr:'LA', icon:'ti-device-mobile' },
+  // Banks
+  { id:'bca',      name:'BCA',         category:'Bank',     color:'#005BAA', bg:'#E5F0FA', abbr:'BCA', icon:'ti-building-bank' },
+  { id:'mandiri',  name:'Mandiri',     category:'Bank',     color:'#003D7C', bg:'#E5EBF5', abbr:'MDR', icon:'ti-building-bank' },
+  { id:'bni',      name:'BNI',         category:'Bank',     color:'#F05A28', bg:'#FDF0EB', abbr:'BNI', icon:'ti-building-bank' },
+  { id:'bri',      name:'BRI',         category:'Bank',     color:'#006CB7', bg:'#E5F1FA', abbr:'BRI', icon:'ti-building-bank' },
+  { id:'cimb',     name:'CIMB Niaga',  category:'Bank',     color:'#CF0A2C', bg:'#FDECEA', abbr:'CIMB',icon:'ti-building-bank' },
+  // Credit Cards
+  { id:'visa',     name:'Visa',        category:'Credit Card', color:'#1A1F71', bg:'#EAEAF7', abbr:'VISA', icon:'ti-credit-card' },
+  { id:'mastercard',name:'Mastercard', category:'Credit Card', color:'#EB001B', bg:'#FDECEA', abbr:'MC',  icon:'ti-credit-card' },
+  { id:'amex',     name:'Amex',        category:'Credit Card', color:'#007BC1', bg:'#E5F2FA', abbr:'AMEX', icon:'ti-credit-card' },
+  // Investments
+  { id:'bibit',    name:'Bibit',       category:'Investment', color:'#00B14F', bg:'#E5F8EE', abbr:'BB', icon:'ti-chart-line' },
+  { id:'ajaib',    name:'Ajaib',       category:'Investment', color:'#FF6B35', bg:'#FFF0EB', abbr:'AJ', icon:'ti-chart-line' },
+  { id:'stockbit', name:'Stockbit',    category:'Investment', color:'#0071BC', bg:'#E5F2FB', abbr:'SB', icon:'ti-chart-line' },
+];
+
+let connectedAccounts = S.connectedAccounts || [];
+
+function saveConnectedAccounts(){
+  S.connectedAccounts = connectedAccounts;
+  save();
+  updateConnectedCount();
+}
+
+function updateConnectedCount(){
+  const el = document.getElementById('connectedCount');
+  if(!el) return;
+  el.textContent = connectedAccounts.length > 0
+    ? connectedAccounts.length + ' connected'
+    : 'None';
+}
+
+function toggleAccount(id){
+  const idx = connectedAccounts.indexOf(id);
+  if(idx === -1){
+    connectedAccounts.push(id);
+  } else {
+    connectedAccounts.splice(idx, 1);
+  }
+  saveConnectedAccounts();
+  renderConnectList();
+}
+
+function renderConnectList(){
+  const container = document.getElementById('connectList');
+  if(!container) return;
+
+  const categories = [...new Set(ACCOUNT_OPTIONS.map(a => a.category))];
+
+  container.innerHTML = categories.map(cat => {
+    const accounts = ACCOUNT_OPTIONS.filter(a => a.category === cat);
+    return `
+      <div style="margin-bottom:16px;">
+        <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">${cat}</div>
+        <div class="card-wrap" style="margin:0;">
+          ${accounts.map((a, i) => {
+            const connected = connectedAccounts.includes(a.id);
+            return `<div class="connect-item ${i < accounts.length-1 ? 'has-border' : ''}" onclick="toggleAccount('${a.id}')">
+              <div class="connect-logo" style="background:${a.bg};color:${a.color};">
+                <i class="ti ${a.icon}" aria-hidden="true" style="font-size:16px;"></i>
+              </div>
+              <div class="connect-info">
+                <div class="connect-name">${a.name}</div>
+                <div class="connect-status ${connected ? 'on' : ''}">${connected ? 'Connected' : 'Tap to connect'}</div>
+              </div>
+              <div class="connect-toggle ${connected ? 'on' : ''}">
+                <div class="connect-thumb"></div>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+
+function triggerFakeAttach(){
+  const files = [
+    'bank_statement_may.pdf',
+    'salary_slip_june.pdf',
+    'receipt_tokopedia.jpg',
+    'invoice_freelance.pdf',
+    'monthly_report.xlsx',
+  ];
+  const name = files[Math.floor(Math.random()*files.length)];
+  document.getElementById('attachName').textContent = name;
+  document.getElementById('attachPreview').style.display = 'block';
+}
+function removeAttach(){
+  document.getElementById('attachPreview').style.display = 'none';
+}
 
 // ══════════════════════════════════════════
 // ANIMATION HELPERS
@@ -1542,6 +2883,10 @@ function animateHome(){
       requestAnimationFrame(function(){ b.style.height=h; });
     });
   }, 80);
+  // re-animate stock items when they appear
+  setTimeout(function(){
+    stagger('#homeStockList .stock-item', 0, 50);
+  }, 900);
 }
 
 function animateGoals(){
@@ -1564,7 +2909,8 @@ function animateProfilee(){
 function animateAI(){
   animateHeader('page-ai');
   setTimeout(function(){
-    stagger('#chipRow .chip', 0, 50);
+    const ca = document.getElementById('chatArea');
+    if(ca) ca.scrollTop = ca.scrollHeight;
   }, 100);
 }
 
@@ -1574,10 +2920,17 @@ function animateAI(){
 document.getElementById('chatInput').addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();chatSend();} });
 document.getElementById('chatInput').addEventListener('input',function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,72)+'px'; });
 
+connectedAccounts = S.connectedAccounts || [];
 applyBg();
-renderHome();
-renderChips();
-setTimeout(function(){ animateHome(); }, 200);
+
+// Start with auth check — app only loads after successful session
+tryRestoreSession().then(()=>{
+  if(document.getElementById('authScreen').classList.contains('hidden')){
+    renderHome(); renderChips();
+    setTimeout(function(){ animateHome(); }, 200);
+    setTimeout(function(){ if(!stocksFetched) fetchAllStocks(); }, 600);
+  }
+});
 </script>
 </body>
 </html>

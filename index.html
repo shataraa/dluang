@@ -1488,9 +1488,9 @@ body.dark-mode #authScreen{ background:#0e1312; }
         <div style="font-size:13px;color:var(--muted);">Complete your payment there</div>
       </div>
       <div style="background:var(--paper-dark);border-radius:14px;padding:14px;margin-bottom:16px;">
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">⚠️ Important — tulis di kolom pesan/catatan:</div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">⚠️ Tulis username kamu di kolom pesan:</div>
         <div id="trakteerNote" style="font-size:18px;font-weight:700;color:var(--earth);text-align:center;padding:8px;background:var(--paper);border-radius:10px;letter-spacing:1px;">username:f10</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;">Fiorino akan otomatis ditambahkan setelah pembayaran</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;">Fiorino otomatis masuk sesuai nominal yang dibayar</div>
       </div>
       <button class="btn-primary btn-outline" onclick="closeModal('trakteerModal')">Got it</button>
     </div>
@@ -3269,15 +3269,15 @@ function renderShopPage(){
   `).join('');
 }
 
-const TRAKTEER_URL = 'https://trakteer.id/shatara_shatara?quantity=1';
+const TRAKTEER_BASE = 'https://trakteer.id/shatara_shatara';
+const PACKAGE_QTY = { f10: 1, f25: 2, f60: 4, f100: 6 };
 
 function buyPackage(id, fiorino, chats, price){
   const username = CU?.username || '';
-  const note = username ? username+':'+id : id;
-  const url = TRAKTEER_URL + '&note=' + encodeURIComponent(note);
+  const qty = PACKAGE_QTY[id] || 1;
+  const url = TRAKTEER_BASE + '?quantity=' + qty + '&note=' + encodeURIComponent(username);
   closeModal('shopModal');
-  // Show instruction modal
-  document.getElementById('trakteerNote').textContent = note;
+  document.getElementById('trakteerNote').textContent = username || '(username kamu)';
   openModal('trakteerModal');
   setTimeout(()=>{ window.open(url, '_blank'); }, 600);
 }

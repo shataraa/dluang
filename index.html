@@ -720,18 +720,74 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
 /* ── DARK MODE ── */
 body.dark-mode{
-  --paper: #1a1f1e;
-  --paper-dark: #252b2a;
-  --ink: #e8e0d0;
-  --muted: #7a8a87;
-  --earth: #2a6b64;
-  --kraft: #d4a017;
+  --paper: #151a19;
+  --paper-dark: #1f2724;
+  --ink: #e2ddd4;
+  --muted: #6a7a77;
+  --earth: #1e5c56;
+  --earth-light: #2a7a72;
+  --kraft: #c9a020;
+  --gold: #c9a020;
+  --gold-light: #d4b040;
+  --red-bg: rgba(192,57,43,0.15);
 }
-body.dark-mode .shell{ background:#111615; }
-body.dark-mode .card-wrap{ background:#1e2523; }
-body.dark-mode .modal{ background:#1e2523; }
-body.dark-mode .auth-card{ background:#1e2523; }
-body.dark-mode .bottom-nav{ background:#1a1f1e; border-top-color:#252b2a; }
+/* Shell & pages */
+body.dark-mode .shell{ background:#0e1312; }
+body.dark-mode .pages{ background:var(--paper); }
+body.dark-mode #page-ai{ background:var(--paper); }
+body.dark-mode #page-profile{ background:var(--paper); }
+
+/* Header/hero area */
+body.dark-mode .header{ background: linear-gradient(135deg, #0e3330 0%, #0a2220 100%); }
+body.dark-mode .profile-header{ background: linear-gradient(135deg, #0e3330 0%, #0a2220 100%); }
+body.dark-mode .chat-header{ background: linear-gradient(135deg, #0e3330 0%, #0a2220 100%); }
+
+/* Cards */
+body.dark-mode .card-wrap{ background:#1a1f1e; border:1px solid #252b2a; }
+body.dark-mode .stat-card{ background:#1a1f1e; }
+body.dark-mode .tx-item{ background:#1a1f1e; border-bottom-color:#1f2724; }
+body.dark-mode .goal-card{ background:#1a1f1e; }
+body.dark-mode .settings-item{ border-bottom-color:#1f2724; }
+body.dark-mode .settings-icon{ background:#1f2724; color:var(--kraft); }
+
+/* Modal */
+body.dark-mode .modal{ background:#1a1f1e; }
+body.dark-mode .modal-input{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
+body.dark-mode .modal-input:focus{ border-color:var(--kraft); }
+body.dark-mode .auth-card{ background:#1a1f1e; }
+body.dark-mode .auth-input{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
+body.dark-mode .auth-input:focus{ border-color:var(--kraft); }
+body.dark-mode .auth-tab{ color:var(--muted); }
+body.dark-mode .auth-tab.active{ background:var(--earth); color:var(--kraft); }
+body.dark-mode .pin-key{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
+body.dark-mode .pin-key:hover, body.dark-mode .pin-key:active{ background:var(--earth); color:var(--kraft); }
+
+/* Nav */
+body.dark-mode .bottom-nav{ background:#151a19; border-top-color:#1f2724; }
+
+/* Chart & misc */
+body.dark-mode .bar-chart-wrap{ background:#1a1f1e; }
+body.dark-mode .chart-bar-bg{ background:#1f2724; }
+body.dark-mode .select-field{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
+body.dark-mode .chip{ background:#1f2724; border-color:#2a3330; color:var(--muted); }
+body.dark-mode .chip:hover,.dark-mode .chip.sel{ background:var(--earth); color:var(--kraft); }
+
+/* AI chat */
+body.dark-mode .chat-area{ background:var(--paper); }
+body.dark-mode .chat-footer{ background:#151a19; border-top-color:#1f2724; }
+body.dark-mode .chat-input-wrap{ background:#1f2724; border-color:#2a3330; }
+body.dark-mode .chat-input{ background:transparent; color:var(--ink); }
+body.dark-mode .bubble-ai{ background:#1f2724; color:var(--ink); }
+body.dark-mode .bubble-user{ background:var(--earth); color:#fff; }
+
+/* Stock cards */
+body.dark-mode .stock-item{ background:#1a1f1e; border-color:#1f2724; }
+body.dark-mode .stock-tab{ background:#1f2724; }
+body.dark-mode .stock-tab-btn.active{ background:var(--earth); color:var(--kraft); }
+
+/* Scroll body */
+body.dark-mode .scroll-body{ background:var(--paper); }
+body.dark-mode #authScreen{ background:#0e1312; }
 
 /* ── AUTH SCREEN ── */
 #authScreen{
@@ -1087,12 +1143,7 @@ body.dark-mode .bottom-nav{ background:#1a1f1e; border-top-color:#252b2a; }
       <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;padding:0 4px;margin-bottom:6px;">Personalize</div>
       <div class="card-wrap" style="margin-bottom:12px;">
         <div class="settings-list">
-          <div class="settings-item" onclick="openModal('bgModal')">
-            <div class="settings-icon"><i class="ti ti-palette" aria-hidden="true"></i></div>
-            <div class="settings-label">App Background</div>
-            <div class="settings-val">Customize</div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
+
           <div class="settings-item" onclick="toggleDarkMode()">
             <div class="settings-icon" style="background:rgba(30,30,60,0.1);color:#6c6caa"><i class="ti ti-moon" id="darkModeIcon" aria-hidden="true"></i></div>
             <div class="settings-label">Dark Mode</div>

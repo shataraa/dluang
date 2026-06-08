@@ -2560,7 +2560,7 @@ ${userContext}`},
     const data=await res.json();
     const reply=data.choices?.[0]?.message?.content||'Hmm, coba tanya lagi ya! 😊';
     typing.classList.remove('show');
-    appendBubble('ai',reply);
+    await typewriterBubble(reply);
   }catch(e){
     typing.classList.remove('show');
     appendBubble('ai','Koneksi bermasalah, coba lagi ya! 😅');
@@ -3422,6 +3422,36 @@ function clearChatImage(){
   if(wrap) wrap.style.display = 'none';
   const preview = document.getElementById('imgPreview');
   if(preview) preview.src = '';
+}
+
+async function typewriterBubble(text){
+  const area = document.getElementById('chatArea');
+  const wrap = document.createElement('div'); wrap.className = 'bwrap ai';
+  const b = document.createElement('div'); b.className = 'bubble ai bubble-new';
+  const meta = document.createElement('div'); meta.className = 'bmeta';
+  meta.style.opacity = '0';
+  meta.textContent = 'Dluang AI • ' + now();
+  wrap.appendChild(b); wrap.appendChild(meta); area.appendChild(wrap);
+
+  // FIFO
+  const bubbles = area.querySelectorAll('.bwrap');
+  if(bubbles.length > MAX_CHAT_PAIRS * 2) bubbles[0].remove();
+
+  const words = text.split(' ');
+  // Adaptive speed: short response = slower, long = faster
+  // Target total time: ~2.5s regardless of length
+  const totalMs = 2500;
+  const delayPerWord = Math.min(120, Math.max(25, totalMs / words.length));
+
+  let displayed = '';
+  for(let i = 0; i < words.length; i++){
+    displayed += (i === 0 ? '' : ' ') + words[i];
+    b.innerHTML = displayed;
+    area.scrollTop = area.scrollHeight;
+    await new Promise(r => setTimeout(r, delayPerWord));
+  }
+
+  setTimeout(()=>{ meta.style.transition='opacity 0.3s'; meta.style.opacity='1'; }, 220);
 }
 
 function renderAIWelcome(){

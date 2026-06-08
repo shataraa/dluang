@@ -319,7 +319,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .chat-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:14px;background:var(--paper);border-radius:14px 14px 0 0;}
 .chat-title{font-family:'Poppins',sans-serif;font-size:17px;color:#fff;font-weight:600;}
 .chat-sub{font-size:11px;color:rgba(200,169,110,0.7);margin-top:2px;}
-.chat-area{flex:1;overflow-y:auto;padding:12px 14px 8px;display:flex;flex-direction:column;gap:10px;min-height:0;padding-bottom:8px;}
+.chat-area{flex:1;overflow-y:auto;padding:12px 14px 80px;display:flex;flex-direction:column;gap:10px;min-height:0;}
 .chat-area::-webkit-scrollbar{width:3px;}
 .bwrap{display:flex;flex-direction:column;gap:2px;}
 .bwrap.user{align-items:flex-end;}
@@ -2354,7 +2354,7 @@ function buildHistory(){
     const text=b.querySelector('.bubble')?.innerText||'';
     if(text) msgs.push({role:isUser?'user':'assistant',content:text});
   });
-  return msgs.slice(-10);
+  return msgs.slice(-4); // last 2 pairs
 }
 
 function buildUserContext(){
@@ -2445,7 +2445,7 @@ async function chatSend(){
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
       body:JSON.stringify({
         model:GROQ_MODEL,
-        max_tokens:400,
+        max_tokens:1024,
         messages:[
           {role:'system',content:`You are Dluang AI, a personal finance assistant. Be direct and concise. No filler words, no emotional validation, no emoji. If there are numbers, be specific. If there's a solution, give it immediately. Respond in the same language the user writes in.
 
@@ -2466,8 +2466,16 @@ ${userContext}`},
 }
 
 
+const MAX_CHAT_PAIRS = 2; // FIFO: keep only last 2 conversation pairs
+
 function appendBubble(type,text){
   const area=document.getElementById('chatArea');
+
+  // Clear welcome placeholder if present
+  if(area.children.length === 1 && area.children[0].querySelector && !area.children[0].classList.contains('bwrap')){
+    area.innerHTML = '';
+  }
+
   const wrap=document.createElement('div'); wrap.className='bwrap '+type;
   const b=document.createElement('div'); b.className='bubble '+type+' bubble-new';
   if(type==='ai') b.innerHTML=text; else b.textContent=text;
@@ -2475,6 +2483,14 @@ function appendBubble(type,text){
   meta.style.opacity='0';
   meta.textContent=(type==='ai'?'Dluang AI':'You')+' • '+now();
   wrap.appendChild(b); wrap.appendChild(meta); area.appendChild(wrap);
+
+  // FIFO: remove oldest pair if over limit (1 pair = 1 user + 1 ai bubble)
+  const bubbles = area.querySelectorAll('.bwrap');
+  const maxBubbles = MAX_CHAT_PAIRS * 2;
+  if(bubbles.length > maxBubbles){
+    bubbles[0].remove();
+  }
+
   area.scrollTop=area.scrollHeight;
   setTimeout(()=>{ meta.style.transition='opacity 0.3s'; meta.style.opacity='1'; }, 220);
 }

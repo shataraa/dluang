@@ -2203,13 +2203,16 @@ async function chatSend(){
   const box=document.getElementById('chatInput');
   const msg=box.value.trim(); if(!msg) return;
 
-  // Check AI chat balance
-  if(!useAIChat()){
-    appendBubble('ai', "You're out of AI chats. Buy Fiorino to continue.");
-    setTimeout(()=>openModal('shopModal'), 1200);
-    return;
+  // Check AI chat balance — paid plans get unlimited
+  const userPlan = CU?.plan || S.plan || 'free';
+  if(userPlan === 'free'){
+    if(!useAIChat()){
+      appendBubble('ai', "You're out of AI chats. Buy Fiorino to get more, or upgrade your plan for unlimited access.");
+      setTimeout(()=>openModal('shopModal'), 1200);
+      return;
+    }
+    updateAIChatBadge();
   }
-  updateAIChatBadge();
 
   appendBubble('user',msg);
   box.value=''; box.style.height='auto';
@@ -2504,7 +2507,7 @@ const PLANS = [
     tagline: 'Perfect for teens & students managing allowance and side hustles',
     icon: '🎓',
     iconBg: 'rgba(42,168,158,0.15)',
-    monthly: 49000,
+    monthly: 39000,
     popular: false,
     features: [
       {icon:'yes', text:'Unlimited transaction tracking'},
@@ -2524,7 +2527,7 @@ const PLANS = [
     tagline: 'Built for professionals tracking salary, bills, and investments',
     icon: '💼',
     iconBg: 'rgba(15,84,78,0.12)',
-    monthly: 109000,
+    monthly: 119000,
     popular: true,
     features: [
       {icon:'yes', text:'Everything in Student'},
@@ -2544,7 +2547,7 @@ const PLANS = [
     tagline: 'For freelancers and small business owners who need full control',
     icon: '🏢',
     iconBg: 'rgba(232,201,74,0.15)',
-    monthly: 229000,
+    monthly: 239000,
     popular: false,
     features: [
       {icon:'yes', text:'Everything in Worker'},
@@ -3011,10 +3014,10 @@ function renderShopPage(){
   if(!pkgs) return;
 
   const PACKAGES = [
-    { id:'f10',  fiorino:10,  chats:100,  price:'Rp 5.000',   label:'Starter',   color:'var(--kraft)',      popular:false },
-    { id:'f30',  fiorino:30,  chats:300,  price:'Rp 12.000',  label:'Popular',   color:'var(--earth)',      popular:true  },
-    { id:'f100', fiorino:100, chats:1000, price:'Rp 35.000',  label:'Best Value',color:'var(--gold)',       popular:false },
-    { id:'f300', fiorino:300, chats:3000, price:'Rp 89.000',  label:'Pro',       color:'var(--earth-light)',popular:false },
+    { id:'f10',  fiorino:10,  chats:100,  price:'Rp 5.000',   label:'Starter',   color:'var(--kraft)',       popular:false },
+    { id:'f25',  fiorino:25,  chats:250,  price:'Rp 10.000',  label:'Popular',   color:'var(--earth)',       popular:true  },
+    { id:'f60',  fiorino:60,  chats:600,  price:'Rp 20.000',  label:'Best Value',color:'var(--gold)',        popular:false },
+    { id:'f100', fiorino:100, chats:1000, price:'Rp 30.000',  label:'Max',       color:'var(--earth-light)', popular:false },
   ];
 
   pkgs.innerHTML = PACKAGES.map(p => `
@@ -3040,9 +3043,12 @@ function renderShopPage(){
   `).join('');
 }
 
+const TRAKTEER_URL = 'https://trakteer.id/dluang'; // ganti dengan URL Trakteer lo
+
 function buyPackage(id, fiorino, chats, price){
-  // Dummy — payment not integrated yet
-  toast('Payment coming soon! (Preview: +'+fiorino+' Fiorino)');
+  // Open Trakteer in new tab
+  toast('Redirecting to Trakteer...');
+  setTimeout(()=>{ window.open(TRAKTEER_URL, '_blank'); }, 500);
 }
 
 function animateShop(){

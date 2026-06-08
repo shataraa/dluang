@@ -802,11 +802,11 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 <div id="authScreen">
   <div class="auth-card">
     <div class="auth-logo">Dl<span>u</span>ang</div>
-    <div class="auth-tagline">Financemu, Beres.</div>
+    <div class="auth-tagline" data-t="tagline">Financemu, Beres.</div>
 
     <div class="auth-tabs">
-      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Login</button>
-      <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Daftar</button>
+      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')" data-t="login">Login</button>
+      <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')" data-t="register">Daftar</button>
     </div>
 
     <div id="authError" class="auth-error"></div>
@@ -814,11 +814,11 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
     <!-- LOGIN FORM -->
     <div id="loginForm">
       <div class="auth-field">
-        <label class="auth-label">Username</label>
+        <label class="auth-label" data-t="username">Username</label>
         <input class="auth-input" id="loginUsername" type="text" placeholder="username kamu" autocomplete="username" autocapitalize="none">
       </div>
       <div class="auth-field" style="margin-bottom:4px;">
-        <label class="auth-label">PIN (6 angka)</label>
+        <label class="auth-label" data-t="pinLabel">PIN (6 angka)</label>
         <div class="pin-display" id="loginPinDisplay">
           <div class="pin-dot" id="lpd0"></div><div class="pin-dot" id="lpd1"></div>
           <div class="pin-dot" id="lpd2"></div><div class="pin-dot" id="lpd3"></div>
@@ -842,21 +842,21 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
       <div id="loginLoading" class="auth-loading" style="display:none;">
         <div class="auth-spinner"></div> Masuk...
       </div>
-      <button class="btn-primary" style="margin-top:14px;" onclick="doLogin()">Masuk</button>
+      <button class="btn-primary" style="margin-top:14px;" onclick="doLogin()" data-t="login">Masuk</button>
     </div>
 
     <!-- REGISTER FORM -->
     <div id="registerForm" style="display:none;">
       <div class="auth-field">
-        <label class="auth-label">Username</label>
+        <label class="auth-label" data-t="username">Username</label>
         <input class="auth-input" id="regUsername" type="text" placeholder="min 3 karakter, huruf/angka/_" autocomplete="username" autocapitalize="none">
       </div>
       <div class="auth-field">
-        <label class="auth-label">Nama tampilan</label>
+        <label class="auth-label" data-t="displayName">Nama tampilan</label>
         <input class="auth-input" id="regName" type="text" placeholder="nama kamu">
       </div>
       <div class="auth-field" style="margin-bottom:4px;">
-        <label class="auth-label">Buat PIN (6 angka)</label>
+        <label class="auth-label" data-t="createPin">Buat PIN (6 angka)</label>
         <div class="pin-display" id="regPinDisplay">
           <div class="pin-dot" id="rpd0"></div><div class="pin-dot" id="rpd1"></div>
           <div class="pin-dot" id="rpd2"></div><div class="pin-dot" id="rpd3"></div>
@@ -880,7 +880,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
       <div id="regLoading" class="auth-loading" style="display:none;">
         <div class="auth-spinner"></div> Mendaftar...
       </div>
-      <button class="btn-primary" style="margin-top:14px;" onclick="doRegister()">Daftar</button>
+      <button class="btn-primary" style="margin-top:14px;" onclick="doRegister()" data-t="register">Daftar</button>
       <div class="auth-hint">Sudah punya akun? <span onclick="switchAuthTab('login')">Masuk</span></div>
     </div>
   </div>
@@ -900,18 +900,18 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
         <div class="avatar-btn" id="homeAvatar" onclick="goPage('profile')"></div>
       </div>
       <div class="greeting" id="homeGreeting">Welcome!</div>
-      <div class="balance-label">Total Balance</div>
+      <div class="balance-label" data-t="totalBalance">Total Balance</div>
       <div class="balance-amount"><span class="cur">Rp</span><span id="balanceDisplay">0</span></div>
       <div class="streak-badge"><i class="ti ti-flame" aria-hidden="true"></i><span id="streakDisplay">0 day saving streak</span></div>
     </div>
     <div class="scroll-body">
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-label"><i class="ti ti-arrow-down-circle" aria-hidden="true"></i>Income</div>
+          <div class="stat-label"><i class="ti ti-arrow-down-circle" aria-hidden="true"></i><span data-t="income">Income</span></div>
           <div class="stat-val inc" id="totalInc">Rp 0</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label"><i class="ti ti-arrow-up-circle" aria-hidden="true"></i>Expenses</div>
+          <div class="stat-label"><i class="ti ti-arrow-up-circle" aria-hidden="true"></i><span data-t="expenses">Expenses</span></div>
           <div class="stat-val exp" id="totalExp">Rp 0</div>
         </div>
       </div>
@@ -931,14 +931,14 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
         <div class="insight-text" id="insightText">Add your first transaction to get personal insights! ✨</div>
       </div>
       <!-- Goals preview -->
-      <div class="sec-title">Savings Goals <a onclick="goPage('goals')">See all</a></div>
+      <div class="sec-title"><span data-t="savingsGoals">Savings Goals</span> <a onclick="goPage('goals')"><span data-t="seeAll">See all</span></a></div>
       <div class="card-wrap" id="homeGoals"></div>
       <!-- Transactions -->
-      <div class="sec-title">Recent Transactions <a onclick="goPage('home');setTimeout(()=>showAllTx(),100)">See all</a></div>
+      <div class="sec-title"><span data-t="recentTx">Recent Transactions</span> <a onclick="goPage('home');setTimeout(()=>showAllTx(),100)"><span data-t="seeAll">See all</span></a></div>
       <div class="card-wrap" id="homeTx"></div>
       <!-- Stocks widget -->
       <div class="sec-title" style="margin-top:14px;">
-        Market Watch
+        <span data-t="marketWatch">Market Watch</span>
         <span class="market-status" style="margin:0;"><div class="market-dot"></div>Live</span>
       </div>
       <div class="card-wrap" id="homeStocksWrap">
@@ -962,7 +962,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
         <div class="logo">Dl<span>u</span>ang</div>
         <div style="font-size:12px;color:var(--kraft)">Savings Goals</div>
       </div>
-      <div class="greeting">Manage your financial goals</div>
+      <div class="greeting" data-t="manageGoals">Manage your financial goals</div>
     </div>
     <div class="scroll-body" id="goalsList"></div>
   </div>
@@ -970,8 +970,8 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   <!-- ════════════════ PAGE: AI CHAT ════════════════ -->
   <div class="page pages" id="page-ai" style="background:var(--paper);">
     <div class="chat-header">
-      <div class="chat-title">Dluang AI Coach</div>
-      <div class="chat-sub">Your smart finance assistant</div>
+      <div class="chat-title" data-t="aiCoachTitle">Dluang AI Coach</div>
+      <div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div>
     </div>
     <div class="chat-area" id="chatArea">
       <div class="bwrap ai">
@@ -1042,7 +1042,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
         <button class="chat-attach" onclick="triggerFakeAttach()" title="Attach file">
           <i class="ti ti-paperclip" aria-hidden="true"></i>
         </button>
-        <textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1"></textarea>
+        <textarea class="chat-input" id="chatInput" data-tp="typeMsg" placeholder="Type a message..." rows="1"></textarea>
         <button class="chat-send" onclick="chatSend()"><i class="ti ti-send" aria-hidden="true"></i></button>
       </div>
     </div>
@@ -1080,38 +1080,44 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
         <div class="settings-list">
           <div class="settings-item" onclick="openModal('nameModal')">
             <div class="settings-icon"><i class="ti ti-user" aria-hidden="true"></i></div>
-            <div class="settings-label">Change Name</div>
+            <div class="settings-label" data-t="changeName">Change Name</div>
             <div class="settings-val" id="settingsName">—</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="document.getElementById('avatarInput').click()">
             <div class="settings-icon"><i class="ti ti-photo" aria-hidden="true"></i></div>
-            <div class="settings-label">Profile Photo</div>
-            <div class="settings-val">Change photo</div>
+            <div class="settings-label" data-t="profilePhoto">Profile Photo</div>
+            <div class="settings-val" data-t="changePhoto">Change photo</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="openModal('bgModal')">
             <div class="settings-icon"><i class="ti ti-palette" aria-hidden="true"></i></div>
-            <div class="settings-label">App Background</div>
-            <div class="settings-val">Customize</div>
+            <div class="settings-label" data-t="appBg">App Background</div>
+            <div class="settings-val" data-t="customize">Customize</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
 
           <div class="settings-item" onclick="openModal('connectModal')">
             <div class="settings-icon" style="background:rgba(42,168,158,0.15);color:var(--kraft)"><i class="ti ti-plug-connected" aria-hidden="true"></i></div>
-            <div class="settings-label">Connected Accounts</div>
+            <div class="settings-label" data-t="connectedAccounts">Connected Accounts</div>
             <div class="settings-val" id="connectedCount">None</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="openModal('resetModal')">
             <div class="settings-icon" style="background:var(--red-bg);color:var(--red)"><i class="ti ti-trash" aria-hidden="true"></i></div>
-            <div class="settings-label" style="color:var(--red)">Reset Data</div>
+            <div class="settings-label" style="color:var(--red)" data-t="resetData">Reset Data</div>
             <div class="settings-val"></div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="openLangModal()">
+            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-language" aria-hidden="true"></i></div>
+            <div class="settings-label" data-t="aiLang">Bahasa AI</div>
+            <div class="settings-val" id="langSettingsVal">Indonesia</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="doLogout()">
             <div class="settings-icon" style="background:rgba(192,57,43,0.1);color:var(--red)"><i class="ti ti-logout" aria-hidden="true"></i></div>
-            <div class="settings-label" style="color:var(--red)">Logout</div>
+            <div class="settings-label" style="color:var(--red)" data-t="logout">Logout</div>
             <div class="settings-val" id="settingsUsername" style="font-size:11px;"></div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
@@ -1249,7 +1255,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
   <!-- ════════════════ BOTTOM NAV ════════════════ -->
   <div class="bottom-nav">
-    <div class="nav-item active" id="nav-home" onclick="goPage('home')"><i class="ti ti-home" aria-hidden="true"></i>Home</div>
+    <div class="nav-item active" id="nav-home" onclick="goPage('home')"><i class="ti ti-home" aria-hidden="true"></i><span data-t="income">Home</span></div>
     <div class="nav-item" id="nav-goals" onclick="goPage('goals')"><i class="ti ti-target" aria-hidden="true"></i>Goals</div>
     <div class="nav-item" id="nav-ai" onclick="goPage('ai')"><i class="ti ti-sparkles" aria-hidden="true"></i>AI Coach</div>
     <div class="nav-item" id="nav-profile" onclick="goPage('profile')"><i class="ti ti-user" aria-hidden="true"></i>Profile</div>
@@ -1261,7 +1267,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   <div class="modal-backdrop" id="txModal">
     <div class="modal">
       <div class="modal-handle"></div>
-      <div class="modal-title">Log Transaction</div>
+      <div class="modal-title" data-t="addTx">Log Transaction</div>
       <div class="type-toggle">
         <div class="type-btn inc sel" id="typeInc" onclick="setType('inc')"><i class="ti ti-arrow-down-circle" aria-hidden="true"></i> Income</div>
         <div class="type-btn exp" id="typeExp" onclick="setType('exp')"><i class="ti ti-arrow-up-circle" aria-hidden="true"></i> Expenses</div>
@@ -1287,7 +1293,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
           <option>Others</option>
         </select>
       </div>
-      <button class="btn-primary" onclick="addTransaction()">Save Transaction</button>
+      <button class="btn-primary" onclick="addTransaction()" data-t="saveTx">Save Transaction</button>
       <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('txModal')">Cancel</button>
     </div>
   </div>
@@ -1296,7 +1302,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   <div class="modal-backdrop" id="goalModal">
     <div class="modal">
       <div class="modal-handle"></div>
-      <div class="modal-title">Buat Savings Goals</div>
+      <div class="modal-title" data-t="newGoal">Buat Savings Goals</div>
       <div class="form-group">
         <label class="form-label">Goal Name</label>
         <input class="form-input" id="goalName" type="text" placeholder="e.g. Sony Headset, New Shoes...">
@@ -1318,7 +1324,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
           <option value="ti-book">📚 Education</option>
         </select>
       </div>
-      <button class="btn-primary" onclick="addGoal()">Create Goal</button>
+      <button class="btn-primary" onclick="addGoal()" data-t="createGoal">Create Goal</button>
       <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('goalModal')">Cancel</button>
     </div>
   </div>
@@ -1341,12 +1347,12 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   <div class="modal-backdrop" id="nameModal">
     <div class="modal">
       <div class="modal-handle"></div>
-      <div class="modal-title">Change Name</div>
+      <div class="modal-title" data-t="changeName">Change Name</div>
       <div class="form-group">
         <label class="form-label">Your name</label>
         <input class="form-input" id="nameInput" type="text" placeholder="Your name...">
       </div>
-      <button class="btn-primary" onclick="saveName()">Save</button>
+      <button class="btn-primary" onclick="saveName()" data-t="save">Save</button>
       <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('nameModal')">Cancel</button>
     </div>
   </div>
@@ -1379,13 +1385,53 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
     </div>
   </div>
 
+  <!-- Language Modal -->
+  <div class="modal-backdrop" id="langModal">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-title" data-t="uiLang">Bahasa Tampilan</div>
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;" data-t="uiLang">Tampilan</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+        <div onclick="setUILang('id')" id="uiLangOpt-id" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--kraft);background:rgba(42,168,158,0.08);cursor:pointer;transition:all 0.15s;">
+          <span style="font-size:18px;">🇮🇩</span>
+          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">Indonesia</div>
+          <i class="ti ti-check" id="uiCheck-id" style="font-size:16px;color:var(--kraft);"></i>
+        </div>
+        <div onclick="setUILang('en')" id="uiLangOpt-en" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
+          <span style="font-size:18px;">🇬🇧</span>
+          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">English</div>
+          <i class="ti ti-check" id="uiCheck-en" style="font-size:16px;color:transparent;"></i>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;" data-t="aiLang">Bahasa AI</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+        <div class="lang-opt" id="langOpt-id" onclick="setLang('id')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
+          <span style="font-size:18px;">🇮🇩</span>
+          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">Indonesia</div>
+          <i class="ti ti-check lang-check" id="langCheck-id" style="font-size:16px;color:var(--kraft);"></i>
+        </div>
+        <div class="lang-opt" id="langOpt-en" onclick="setLang('en')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
+          <span style="font-size:18px;">🇬🇧</span>
+          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">English</div>
+          <i class="ti ti-check lang-check" id="langCheck-en" style="font-size:16px;color:transparent;"></i>
+        </div>
+        <div class="lang-opt" id="langOpt-jv" onclick="setLang('jv')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
+          <span style="font-size:18px;">🏯</span>
+          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">Jawa</div>
+          <i class="ti ti-check lang-check" id="langCheck-jv" style="font-size:16px;color:transparent;"></i>
+        </div>
+      </div>
+      <button class="btn-primary btn-outline" onclick="closeModal('langModal')" data-t="close">Tutup</button>
+    </div>
+  </div>
+
   <!-- Reset -->
   <div class="modal-backdrop" id="resetModal">
     <div class="modal">
       <div class="modal-handle"></div>
-      <div class="modal-title">Reset Data?</div>
+      <div class="modal-title" data-t="resetConfirm">Reset Data?</div>
       <p style="font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.6;">All transactions, goals, and settings will be deleted. This cannot be undone.</p>
-      <button class="btn-primary btn-danger" onclick="resetAll()">Yes, Reset All</button>
+      <button class="btn-primary btn-danger" onclick="resetAll()" data-t="resetYes">Yes, Reset All</button>
       <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('resetModal')">Cancel</button>
     </div>
   </div>
@@ -1632,6 +1678,7 @@ async function doLogin(){
     await new Promise(r => setTimeout(r, 500));
     await loadUserData();
     hideAuthScreen();
+    applyUILang();
     renderHome(); renderChips(); animateHome();
     setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
     toast('Selamat datang, ' + S.name + '! 👋');
@@ -1675,6 +1722,7 @@ async function doRegister(){
     await new Promise(r => setTimeout(r, 500)); // wait for session to propagate
     await loadUserData();
     hideAuthScreen();
+    applyUILang();
     renderHome(); renderChips(); animateHome();
     setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
     toast('Akun berhasil dibuat! 🎉');
@@ -1848,7 +1896,7 @@ async function loadUserStreak(){
 
 function renderTxList(container, limit=null){
   const txs = limit ? S.transactions.slice(0,limit) : S.transactions;
-  if(!txs.length){ container.innerHTML='<div class="empty-state"><i class="ti ti-receipt-off"></i>No transactions yet</div>'; return; }
+  if(!txs.length){ container.innerHTML='<div class="empty-state"><i class="ti ti-receipt-off"></i>'+t('noTx')+'</div>'; return; }
   container.innerHTML = txs.map((tx,idx)=>{
     const cat = tx.category || tx.cat || 'Others';
     const dateStr = tx.date ? new Date(tx.date).toLocaleDateString('id-ID',{day:'numeric',month:'short'}) : '';
@@ -1920,8 +1968,8 @@ function deleteGoal(idx){
 
 function renderGoalsPage(){
   const el=document.getElementById('goalsList');
-  let html='<div style="padding:0 0 10px;"><button onclick="openModal(\'goalModal\')" class="btn-primary" style="margin:0 0 12px;width:100%;"><i class="ti ti-plus" style="margin-right:6px;" aria-hidden="true"></i>New Goal</button></div>';
-  if(!S.goals.length){ el.innerHTML=html+'<div class="empty-state"><i class="ti ti-target-off"></i>No savings goals yet</div>'; return; }
+  let html='<div style="padding:0 0 10px;"><button onclick="openModal(\'goalModal\')" class="btn-primary" style="margin:0 0 12px;width:100%;"><i class="ti ti-plus" style="margin-right:6px;" aria-hidden="true"></i>'+t('newGoal')+'</button></div>';
+  if(!S.goals.length){ el.innerHTML=html+'<div class="empty-state"><i class="ti ti-target-off"></i>'+t('noGoals')+'</div>'; return; }
   html+=S.goals.map((g,i)=>{
     const pct=Math.round((g.saved/g.target)*100);
     return `<div class="goal-page-item">
@@ -1966,7 +2014,7 @@ function renderHome(){
   renderTxList(document.getElementById('homeTx'),5);
   // Goals preview
   const hg=document.getElementById('homeGoals');
-  if(!S.goals.length){ hg.innerHTML='<div class="empty-state"><i class="ti ti-target-off"></i>Belum ada target. <span onclick="openModal(\'goalModal\')" style="color:var(--kraft);cursor:pointer;">Buat sekarang →</span></div>'; }
+  if(!S.goals.length){ hg.innerHTML='<div class="empty-state"><i class="ti ti-target-off"></i>'+t('noGoals')+'. <span onclick="openModal(\'goalModal\')" style="color:var(--kraft);cursor:pointer;">'+t('newGoal')+' →</span></div>'; }
   else{
     hg.innerHTML=S.goals.slice(0,2).map(g=>{
       const pct=Math.round((g.saved/g.target)*100);
@@ -2035,10 +2083,12 @@ function renderAvatar(){
 
 function renderProfile(){
   document.getElementById('profileName').textContent=S.name;
-  document.getElementById('profileSub').textContent='Joined: '+S.joinDate;
+  document.getElementById('profileSub').textContent=t('joined')+' '+S.joinDate;
   document.getElementById('settingsName').textContent=S.name;
   const suEl = document.getElementById('settingsUsername');
   if(suEl && CU) suEl.textContent = '@' + CU.username;
+  const langEl = document.getElementById('langSettingsVal');
+  if(langEl) langEl.textContent = LANG_LABELS[AI_LANG] || 'Indonesia';
   const planNames={'free':'Free','student':'Student','worker':'Worker','business':'Business'};
   const planIcons={'free':'','student':'🎓','worker':'💼','business':'🏢'};
   const cp=S.plan||'free';
@@ -2167,6 +2217,43 @@ function buildHistory(){
   return msgs.slice(-10);
 }
 
+function buildUserContext(){
+  const inc = S.transactions.filter(t=>t.type==='inc').reduce((a,t)=>a+t.amount,0);
+  const exp = S.transactions.filter(t=>t.type==='exp').reduce((a,t)=>a+t.amount,0);
+  const balance = S.balance || 0;
+  const streak = S.streak || 0;
+
+  // Category breakdown
+  const catMap = {};
+  S.transactions.filter(t=>t.type==='exp').forEach(t=>{
+    const cat = t.category || t.cat || 'Others';
+    catMap[cat] = (catMap[cat]||0) + t.amount;
+  });
+  const topCats = Object.entries(catMap).sort((a,b)=>b[1]-a[1]).slice(0,3)
+    .map(([cat,amt])=>`${cat}: Rp ${amt.toLocaleString('id-ID')}`).join(', ');
+
+  // Recent transactions (last 5)
+  const recentTx = S.transactions.slice(0,5)
+    .map(t=>`${t.type==='inc'?'+':'-'}Rp ${t.amount.toLocaleString('id-ID')} (${t.note}, ${t.category||t.cat||'Others'})`)
+    .join('; ');
+
+  // Goals
+  const goalsSummary = S.goals.length
+    ? S.goals.map(g=>`${g.name}: Rp ${g.saved.toLocaleString('id-ID')} / Rp ${g.target.toLocaleString('id-ID')} (${Math.round(g.saved/g.target*100)}%)`).join(', ')
+    : 'Belum ada savings goal';
+
+  return `DATA KEUANGAN USER (${S.name}):
+- Balance saat ini: Rp ${balance.toLocaleString('id-ID')}
+- Total pemasukan bulan ini: Rp ${inc.toLocaleString('id-ID')}
+- Total pengeluaran bulan ini: Rp ${exp.toLocaleString('id-ID')}
+- Saving streak: ${streak} hari
+- Top pengeluaran: ${topCats || 'belum ada'}
+- Transaksi terbaru: ${recentTx || 'belum ada'}
+- Savings goals: ${goalsSummary}
+
+Gunakan data ini untuk memberikan saran yang personal dan spesifik. Jika user tanya soal nabung, flow keuangan, atau penghematan — referensikan data mereka.`;
+}
+
 async function chatSend(){
   const box=document.getElementById('chatInput');
   const msg=box.value.trim(); if(!msg) return;
@@ -2177,14 +2264,17 @@ async function chatSend(){
   document.getElementById('chatArea').scrollTop=99999;
   try{
     const history=buildHistory();
+    const userContext=buildUserContext();
     const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
       body:JSON.stringify({
         model:GROQ_MODEL,
-        max_tokens:300,
+        max_tokens:400,
         messages:[
-          {role:'system',content:'Kamu adalah Dluang AI, asisten keuangan personal yang friendly dan kasual dalam bahasa Indonesia. Bantu user manage keuangan mereka — pengeluaran, tabungan, goals, dan kebiasaan finansial. Jawab singkat, natural, dan relatable. Pakai emoji sesekali. Jangan terlalu formal.'},
+          {role:'system',content:`Kamu adalah Dluang AI, financial assistant. ${LANG_PROMPTS[AI_LANG]} Singkat, langsung ke poin, tidak basa-basi. Tidak pakai emoji. Tidak ada kalimat pembuka atau penutup yang tidak perlu. Kalau ada angka, sebut spesifik. Kalau ada solusi, langsung kasih solusi. Tidak perlu validasi perasaan user.
+
+${userContext}`},
           ...history,
           {role:'user',content:msg}
         ]
@@ -2935,17 +3025,183 @@ function animateAI(){
 }
 
 // ══════════════════════════════════════════
+// LANGUAGE
+// ══════════════════════════════════════════
+let AI_LANG = localStorage.getItem('dluang_lang') || 'id';
+let UI_LANG = localStorage.getItem('dluang_ui_lang') || 'id';
+
+const LANG_LABELS = { id: 'Indonesia', en: 'English', jv: 'Jawa' };
+
+const LANG_PROMPTS = {
+  id: 'Jawab dalam bahasa Indonesia.',
+  en: 'Answer in English.',
+  jv: 'Wangsulna nganggo basa Jawa ngoko alus. Aja nganggo basa Indonesia utawa Inggris.',
+};
+
+const T = {
+  id: {
+    tagline: 'Financemu, Beres.',
+    login: 'Masuk', register: 'Daftar',
+    username: 'Username', displayName: 'Nama tampilan',
+    createPin: 'Buat PIN (6 angka)', pinLabel: 'PIN (6 angka)',
+    haveAccount: 'Sudah punya akun?', signIn: 'Masuk',
+    totalBalance: 'Total Balance',
+    income: 'Income', expenses: 'Expenses',
+    savingsGoals: 'Savings Goals', seeAll: 'See all',
+    recentTx: 'Recent Transactions', marketWatch: 'Market Watch',
+    manageGoals: 'Kelola savings goals kamu',
+    addTx: 'Log Transaction', incomeBtn: 'Income', expenseBtn: 'Expenses',
+    amount: 'Jumlah (Rp)', description: 'Deskripsi', category: 'Kategori',
+    saveTx: 'Simpan Transaksi', cancel: 'Batal',
+    newGoal: 'Goal Baru', goalName: 'Nama Goal', goalAmount: 'Target (Rp)', icon: 'Ikon',
+    createGoal: 'Buat Goal', addToGoal: 'Tambah ke Goal', add: 'Tambah',
+    changeName: 'Ganti Nama', yourName: 'Nama kamu',
+    save: 'Simpan',
+    profilePhoto: 'Foto Profil', changePhoto: 'Ganti foto',
+    appBg: 'Background App', customize: 'Kustomisasi',
+    connectedAccounts: 'Akun Terhubung', none: 'Tidak ada',
+    resetData: 'Reset Data', logout: 'Logout',
+    aiLang: 'Bahasa AI', uiLang: 'Bahasa Tampilan',
+    subsPlans: 'Langganan', choosePlan: 'Pilih paket kamu',
+    noGoals: 'Belum ada savings goal',
+    noTx: 'Belum ada transaksi',
+    joined: 'Bergabung:',
+    streak: 'hari saving streak',
+    upload: 'Upload foto',
+    choosePreset: 'Pilih preset',
+    close: 'Tutup',
+    resetConfirm: 'Reset Data?',
+    resetDesc: 'Semua transaksi, goals, dan pengaturan akan dihapus. Tidak bisa dibatalkan.',
+    resetYes: 'Ya, Reset Semua',
+    typeMsg: 'Ketik pesan...',
+    aiCoachTitle: 'Dluang AI Coach',
+    aiCoachSub: 'Asisten keuangan pintarmu',
+  },
+  en: {
+    tagline: 'Your Finance, Sorted.',
+    login: 'Login', register: 'Register',
+    username: 'Username', displayName: 'Display name',
+    createPin: 'Create PIN (6 digits)', pinLabel: 'PIN (6 digits)',
+    haveAccount: 'Already have an account?', signIn: 'Sign in',
+    totalBalance: 'Total Balance',
+    income: 'Income', expenses: 'Expenses',
+    savingsGoals: 'Savings Goals', seeAll: 'See all',
+    recentTx: 'Recent Transactions', marketWatch: 'Market Watch',
+    manageGoals: 'Manage your financial goals',
+    addTx: 'Log Transaction', incomeBtn: 'Income', expenseBtn: 'Expenses',
+    amount: 'Amount (Rp)', description: 'Description', category: 'Category',
+    saveTx: 'Save Transaction', cancel: 'Cancel',
+    newGoal: 'New Goal', goalName: 'Goal Name', goalAmount: 'Target (Rp)', icon: 'Icon',
+    createGoal: 'Create Goal', addToGoal: 'Add to Goal', add: 'Add',
+    changeName: 'Change Name', yourName: 'Your name',
+    save: 'Save',
+    profilePhoto: 'Profile Photo', changePhoto: 'Change photo',
+    appBg: 'App Background', customize: 'Customize',
+    connectedAccounts: 'Connected Accounts', none: 'None',
+    resetData: 'Reset Data', logout: 'Logout',
+    aiLang: 'AI Language', uiLang: 'Display Language',
+    subsPlans: 'Subscription', choosePlan: 'Choose your plan',
+    noGoals: 'No savings goals yet',
+    noTx: 'No transactions yet',
+    joined: 'Joined:',
+    streak: 'day saving streak',
+    upload: 'Upload photo',
+    choosePreset: 'Choose preset',
+    close: 'Close',
+    resetConfirm: 'Reset Data?',
+    resetDesc: 'All transactions, goals, and settings will be deleted. This cannot be undone.',
+    resetYes: 'Yes, Reset All',
+    typeMsg: 'Type a message...',
+    aiCoachTitle: 'Dluang AI Coach',
+    aiCoachSub: 'Your smart finance assistant',
+  },
+};
+
+function t(key){ return (T[UI_LANG]||T['id'])[key] || (T['id'])[key] || key; }
+
+function applyUILang(){
+  // Auth screen
+  document.getElementById('tabLogin')?.setAttribute('data-t', 'login');
+  document.getElementById('tabRegister')?.setAttribute('data-t', 'register');
+
+  // Apply all [data-t] elements
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const key = el.getAttribute('data-t');
+    if(key) el.textContent = t(key);
+  });
+
+  // Apply placeholders
+  document.querySelectorAll('[data-tp]').forEach(el => {
+    const key = el.getAttribute('data-tp');
+    if(key) el.placeholder = t(key);
+  });
+
+  // Update lang settings val
+  const uiEl = document.getElementById('uiLangSettingsVal');
+  if(uiEl) uiEl.textContent = UI_LANG === 'id' ? 'Indonesia' : 'English';
+}
+
+function setUILang(l){
+  UI_LANG = l;
+  localStorage.setItem('dluang_ui_lang', l);
+  applyUILang();
+  updateLangModal();
+  renderHome();
+  renderProfile();
+  toast(l === 'id' ? 'Bahasa: Indonesia' : 'Language: English');
+}
+
+function openLangModal(){
+  updateLangModal();
+  openModal('langModal');
+}
+
+function updateLangModal(){
+  ['id','en','jv'].forEach(l=>{
+    const opt = document.getElementById('langOpt-'+l);
+    const check = document.getElementById('langCheck-'+l);
+    if(!opt||!check) return;
+    opt.style.borderColor = l===AI_LANG ? 'var(--kraft)' : 'var(--paper-dark)';
+    opt.style.background = l===AI_LANG ? 'rgba(42,168,158,0.08)' : '';
+    check.style.color = l===AI_LANG ? 'var(--kraft)' : 'transparent';
+  });
+  ['id','en'].forEach(l=>{
+    const opt = document.getElementById('uiLangOpt-'+l);
+    const check = document.getElementById('uiCheck-'+l);
+    if(!opt||!check) return;
+    opt.style.borderColor = l===UI_LANG ? 'var(--kraft)' : 'var(--paper-dark)';
+    opt.style.background = l===UI_LANG ? 'rgba(42,168,158,0.08)' : '';
+    check.style.color = l===UI_LANG ? 'var(--kraft)' : 'transparent';
+  });
+  const el = document.getElementById('langSettingsVal');
+  if(el) el.textContent = LANG_LABELS[AI_LANG];
+  const uiEl = document.getElementById('uiLangSettingsVal');
+  if(uiEl) uiEl.textContent = UI_LANG === 'id' ? 'Indonesia' : 'English';
+}
+
+function setLang(l){
+  AI_LANG = l;
+  localStorage.setItem('dluang_lang', l);
+  updateLangModal();
+  const el = document.getElementById('langSettingsVal');
+  if(el) el.textContent = LANG_LABELS[l];
+  toast('Bahasa AI: ' + LANG_LABELS[l]);
+}
+
+// ══════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════
 document.getElementById('chatInput').addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();chatSend();} });
 document.getElementById('chatInput').addEventListener('input',function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,72)+'px'; });
 
 connectedAccounts = S.connectedAccounts || [];
+UI_LANG = localStorage.getItem('dluang_ui_lang') || 'id';
 applyBg();
 
 // Start with auth check — app only loads after successful session
 tryRestoreSession().then(()=>{
   if(document.getElementById('authScreen').classList.contains('hidden')){
+    applyUILang();
     renderHome(); renderChips();
     setTimeout(function(){ animateHome(); }, 200);
     setTimeout(function(){ if(!stocksFetched) fetchAllStocks(); }, 600);

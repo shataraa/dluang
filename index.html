@@ -2518,7 +2518,23 @@ async function chatSend(){
   const ca = document.getElementById('chatArea');
   if(ca && ca.querySelector('.ai-welcome')){ ca.innerHTML = ''; }
   else if(ca && ca.children.length === 1 && ca.children[0].style.textAlign === 'center'){ ca.innerHTML = ''; }
-  appendBubble('user',msg);
+
+  // If image attached, show it above the text bubble
+  if(chatImageBase64){
+    const imgWrap = document.createElement('div'); imgWrap.className = 'bwrap user';
+    const imgBubble = document.createElement('div'); imgBubble.className = 'bubble user bubble-new';
+    imgBubble.style.cssText = 'padding:4px;background:transparent;';
+    imgBubble.innerHTML = `<img src="data:${chatImageMediaType};base64,${chatImageBase64}" style="max-width:200px;max-height:160px;border-radius:12px;display:block;" />`;
+    const imgMeta = document.createElement('div'); imgMeta.className = 'bmeta';
+    imgMeta.style.opacity = '0';
+    imgMeta.textContent = 'You • ' + now();
+    imgWrap.appendChild(imgBubble); imgWrap.appendChild(imgMeta);
+    ca.appendChild(imgWrap);
+    setTimeout(()=>{ imgMeta.style.transition='opacity 0.3s'; imgMeta.style.opacity='1'; }, 220);
+    ca.scrollTop = ca.scrollHeight;
+  }
+
+  if(msg) appendBubble('user', msg);
   box.value=''; box.style.height='auto';
   const typing=document.getElementById('typing');
   typing.classList.add('show');
@@ -3403,6 +3419,11 @@ let chatImageMediaType = 'image/jpeg';
 function handleChatImage(e){
   const file = e.target.files[0];
   if(!file) return;
+  if(file.size > 5 * 1024 * 1024){
+    toast('Image too large. Max 5MB.');
+    e.target.value = '';
+    return;
+  }
   chatImageMediaType = file.type || 'image/jpeg';
   const reader = new FileReader();
   reader.onload = ev => {

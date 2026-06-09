@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Dluang — Dluang fixes your uang.</title>
+<title>Dluang — Financemu, Beres.</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -56,7 +56,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 /* ── Pages ── */
 .pages{position:relative;z-index:3;flex:1;overflow:hidden;display:flex;flex-direction:column;}
 .page{
-  position:absolute;top:0;left:0;right:0;bottom:64px;
+  position:absolute;inset:0;
   display:flex;flex-direction:column;
   pointer-events:none;
   opacity:0;
@@ -319,7 +319,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .chat-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:14px;background:var(--paper);border-radius:14px 14px 0 0;}
 .chat-title{font-family:'Poppins',sans-serif;font-size:17px;color:#fff;font-weight:600;}
 .chat-sub{font-size:11px;color:rgba(200,169,110,0.7);margin-top:2px;}
-.chat-area{flex:1;overflow-y:auto;padding:12px 14px 80px;display:flex;flex-direction:column;gap:10px;min-height:0;}
+.chat-area{flex:1;overflow-y:auto;padding:12px 14px 8px;display:flex;flex-direction:column;gap:10px;min-height:0;padding-bottom:16px;}
 .chat-area::-webkit-scrollbar{width:3px;}
 .bwrap{display:flex;flex-direction:column;gap:2px;}
 .bwrap.user{align-items:flex-end;}
@@ -712,94 +712,8 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   flex-shrink:0;
   background:var(--paper);
   border-top:1px solid var(--paper-dark);
-  padding:8px 0 8px;
-  position:sticky;
-  bottom:64px;
-  z-index:8;
+  padding-bottom:64px;
 }
-
-/* ── WELCOME SCREEN ── */
-#welcomeScreen.hidden{ display:none !important; }
-@keyframes pulse{
-  0%,100%{ transform:scale(1); opacity:1; }
-  50%{ transform:scale(1.4); opacity:0.5; }
-}
-@keyframes fadeOut{
-  0%{ opacity:1; }
-  100%{ opacity:0; }
-}
-.welcome-fadeout{ animation: fadeOut 0.5s ease forwards; }
-
-/* ── DARK MODE ── */
-body.dark-mode{
-  --paper: #151a19;
-  --paper-dark: #1f2724;
-  --ink: #e2ddd4;
-  --muted: #6a7a77;
-  --earth: #1e5c56;
-  --earth-light: #2a7a72;
-  --kraft: #c9a020;
-  --gold: #c9a020;
-  --gold-light: #d4b040;
-  --red-bg: rgba(192,57,43,0.15);
-}
-/* Shell & pages */
-body.dark-mode .shell{ background:#0e1312; }
-body.dark-mode .pages{ background:var(--paper); }
-body.dark-mode #page-ai{ background:var(--paper); }
-body.dark-mode #page-profile{ background:var(--paper); }
-
-/* Header/hero area */
-body.dark-mode .header{ background: linear-gradient(135deg, #0e3330 0%, #0a2220 100%); }
-body.dark-mode .profile-header{ background: linear-gradient(135deg, #0e3330 0%, #0a2220 100%); }
-body.dark-mode .chat-header{ background: linear-gradient(135deg, #0e3330 0%, #0a2220 100%); }
-
-/* Cards */
-body.dark-mode .card-wrap{ background:#1a1f1e; border:1px solid #252b2a; }
-body.dark-mode .stat-card{ background:#1a1f1e; }
-body.dark-mode .tx-item{ background:#1a1f1e; border-bottom-color:#1f2724; }
-body.dark-mode .goal-card{ background:#1a1f1e; }
-body.dark-mode .settings-item{ border-bottom-color:#1f2724; }
-body.dark-mode .settings-icon{ background:#1f2724; color:var(--kraft); }
-
-/* Modal */
-body.dark-mode .modal{ background:#1a1f1e; }
-body.dark-mode .modal-input{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
-body.dark-mode .modal-input:focus{ border-color:var(--kraft); }
-body.dark-mode .auth-card{ background:#1a1f1e; }
-body.dark-mode .auth-input{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
-body.dark-mode .auth-input:focus{ border-color:var(--kraft); }
-body.dark-mode .auth-tab{ color:var(--muted); }
-body.dark-mode .auth-tab.active{ background:var(--earth); color:var(--kraft); }
-body.dark-mode .pin-key{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
-body.dark-mode .pin-key:hover, body.dark-mode .pin-key:active{ background:var(--earth); color:var(--kraft); }
-
-/* Nav */
-body.dark-mode .bottom-nav{ background:#151a19; border-top-color:#1f2724; }
-
-/* Chart & misc */
-body.dark-mode .bar-chart-wrap{ background:#1a1f1e; }
-body.dark-mode .chart-bar-bg{ background:#1f2724; }
-body.dark-mode .select-field{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
-body.dark-mode .chip{ background:#1f2724; border-color:#2a3330; color:var(--muted); }
-body.dark-mode .chip:hover,.dark-mode .chip.sel{ background:var(--earth); color:var(--kraft); }
-
-/* AI chat */
-body.dark-mode .chat-area{ background:var(--paper); }
-body.dark-mode .chat-footer{ background:#151a19; border-top-color:#1f2724; }
-body.dark-mode .chat-input-wrap{ background:#1f2724; border-color:#2a3330; }
-body.dark-mode .chat-input{ background:transparent; color:var(--ink); }
-body.dark-mode .bubble-ai{ background:#1f2724; color:var(--ink); }
-body.dark-mode .bubble-user{ background:var(--earth); color:#fff; }
-
-/* Stock cards */
-body.dark-mode .stock-item{ background:#1a1f1e; border-color:#1f2724; }
-body.dark-mode .stock-tab{ background:#1f2724; }
-body.dark-mode .stock-tab-btn.active{ background:var(--earth); color:var(--kraft); }
-
-/* Scroll body */
-body.dark-mode .scroll-body{ background:var(--paper); }
-body.dark-mode #authScreen{ background:#0e1312; }
 
 /* ── AUTH SCREEN ── */
 #authScreen{
@@ -885,7 +799,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
 <div id="authScreen">
   <div class="auth-card">
     <div class="auth-logo">Dl<span>u</span>ang</div>
-    <div class="auth-tagline" data-t="tagline">Dluang fixes your uang.</div>
+    <div class="auth-tagline" data-t="tagline">Financemu, Beres.</div>
 
     <div class="auth-tabs">
       <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')" data-t="login">Login</button>
@@ -969,17 +883,6 @@ body.dark-mode #authScreen{ background:#0e1312; }
   </div>
 </div>
 
-<!-- ════════════════ WELCOME SCREEN ════════════════ -->
-<div id="welcomeScreen" class="hidden" style="position:fixed;inset:0;z-index:99;background:#071f1d;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;">
-  <div style="text-align:center;padding:32px 24px;max-width:320px;">
-    <div style="font-family:'AkiraExtended','Poppins',sans-serif;font-size:28px;font-weight:800;color:var(--kraft);letter-spacing:3px;margin-bottom:4px;">Dl<span style="color:var(--gold-light);">u</span>ang</div>
-    <div id="welcomeMsg" style="font-size:16px;color:rgba(200,169,110,0.8);margin-bottom:32px;line-height:1.5;">How the bill goin'?</div>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <div style="width:8px;height:8px;border-radius:50%;background:var(--kraft);margin:0 auto;animation:pulse 1s ease-in-out infinite;"></div>
-    </div>
-  </div>
-</div>
-
 <div class="shell" id="shell">
   <div class="bg-layer" id="bgLayer"></div>
   <div class="bg-overlay" id="bgOverlay"></div>
@@ -1028,14 +931,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
       <div class="sec-title"><span data-t="savingsGoals">Savings Goals</span> <a onclick="goPage('goals')"><span data-t="seeAll">See all</span></a></div>
       <div class="card-wrap" id="homeGoals"></div>
       <!-- Transactions -->
-      <div class="sec-title" style="display:flex;align-items:center;justify-content:space-between;">
-        <span data-t="recentTx">Recent Transactions</span>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <div onclick="prevMonth()" style="width:24px;height:24px;border-radius:50%;background:var(--paper-dark);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;">‹</div>
-          <span id="monthLabel" style="font-size:12px;font-weight:500;color:var(--earth);min-width:72px;text-align:center;"></span>
-          <div onclick="nextMonth()" id="nextMonthBtn" style="width:24px;height:24px;border-radius:50%;background:var(--paper-dark);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;">›</div>
-        </div>
-      </div>
+      <div class="sec-title"><span data-t="recentTx">Recent Transactions</span> <a onclick="goPage('home');setTimeout(()=>showAllTx(),100)"><span data-t="seeAll">See all</span></a></div>
       <div class="card-wrap" id="homeTx"></div>
       <!-- Stocks widget -->
       <div class="sec-title" style="margin-top:14px;">
@@ -1051,7 +947,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
           </div>
         </div>
       </div>
-      <div style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;">Yahoo Finance • Real-time</div>
+      <div style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;">Alpha Vantage • Delayed 15–20 min</div>
     </div>
   </div>
 
@@ -1069,34 +965,26 @@ body.dark-mode #authScreen{ background:#0e1312; }
   </div>
 
   <!-- ════════════════ PAGE: AI CHAT ════════════════ -->
-  <div class="page pages" id="page-ai" style="background:var(--paper);padding-bottom:0;display:flex;flex-direction:column;height:calc(100vh - 64px);overflow:hidden;">
-    <div class="chat-header" style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;min-height:0;">
-      <!-- Burger menu → recent chats -->
-      <div onclick="openModal('recentChatsModal')" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-        <i class="ti ti-menu-2" style="font-size:18px;color:rgba(200,169,110,0.8);" aria-hidden="true"></i>
-      </div>
-      <span id="aiChatBadge" style="display:none;"></span>
-      <!-- Cart → shop -->
-      <div onclick="openModal('shopModal')" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-        <i class="ti ti-shopping-cart" style="font-size:16px;color:var(--gold-light);" aria-hidden="true"></i>
-      </div>
+  <div class="page pages" id="page-ai" style="background:var(--paper);">
+    <div class="chat-header">
+      <div class="chat-title" data-t="aiCoachTitle">Dluang AI Coach</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;"><div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div><div style="display:flex;align-items:center;gap:8px;"><span id="aiChatBadge" style="font-size:11px;color:rgba(200,169,110,0.7);">20 chats left</span><div onclick="openModal('shopModal')" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ti ti-shopping-cart" style="font-size:16px;color:var(--gold-light);" aria-hidden="true"></i></div></div></div>
     </div>
-    <div class="chat-area" id="chatArea" style="flex:1;overflow-y:auto;">
+    <div class="chat-area" id="chatArea">
     </div>
     <div class="typing-wrap"><div class="typing" id="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-    <div class="chat-footer" id="chatFooter">
+    <div class="chat-footer">
       <div id="attachPreview" style="display:none;padding:6px 14px 0;">
-        <div style="position:relative;display:inline-block;">
-          <img id="imgPreview" style="height:60px;border-radius:10px;object-fit:cover;border:1.5px solid var(--paper-dark);" />
-          <div onclick="clearChatImage()" style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:#fff;line-height:1;">✕</div>
+        <div class="attach-chip">
+          <i class="ti ti-file-text" aria-hidden="true"></i>
+          <span id="attachName">file.pdf</span>
+          <i class="ti ti-x" style="cursor:pointer;margin-left:4px;" onclick="removeAttach()" aria-hidden="true"></i>
         </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;padding-left:2px;">5 chats · tap ✕ to remove</div>
       </div>
       <div class="chat-input-row">
-        <button class="chat-attach" onclick="document.getElementById('chatImageInput').click()" title="Attach file">
-          <i class="ti ti-photo" aria-hidden="true"></i>
+        <button class="chat-attach" onclick="triggerFakeAttach()" title="Attach file">
+          <i class="ti ti-paperclip" aria-hidden="true"></i>
         </button>
-        <input type="file" id="chatImageInput" accept="image/*" style="display:none;" onchange="handleChatImage(event)">
         <textarea class="chat-input" id="chatInput" data-tp="typeMsg" placeholder="Type a message..." rows="1"></textarea>
         <button class="chat-send" onclick="chatSend()"><i class="ti ti-send" aria-hidden="true"></i></button>
       </div>
@@ -1123,8 +1011,6 @@ body.dark-mode #authScreen{ background:#0e1312; }
       </div>
     </div>
     <div class="scroll-body">
-
-      <!-- Plan + Fiorino -->
       <div class="card-wrap" style="margin-bottom:12px;">
         <div class="settings-item plan-row-item" onclick="openModal('plansModal')">
           <div class="settings-icon" style="background:rgba(232,201,74,0.18);color:var(--gold)"><i class="ti ti-crown" aria-hidden="true"></i></div>
@@ -1132,87 +1018,60 @@ body.dark-mode #authScreen{ background:#0e1312; }
           <div class="settings-val" id="planSettingsVal">Free</div>
           <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
         </div>
-        <div class="settings-item" onclick="openModal('shopModal')">
-          <div class="settings-icon" style="background:rgba(212,160,23,0.15);color:var(--gold)"><i class="ti ti-coin" aria-hidden="true"></i></div>
-          <div class="settings-label">Fiorino Balance</div>
-          <div class="settings-val" id="profileFiorinoVal" style="color:var(--gold);font-weight:600;">0 <span style="font-weight:400;color:var(--muted);">Fiorino</span></div>
-          <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-        </div>
       </div>
-
-      <!-- Account -->
-      <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;padding:0 4px;margin-bottom:6px;">Account</div>
-      <div class="card-wrap" style="margin-bottom:12px;">
+      <div class="card-wrap">
         <div class="settings-list">
           <div class="settings-item" onclick="openModal('nameModal')">
             <div class="settings-icon"><i class="ti ti-user" aria-hidden="true"></i></div>
-            <div class="settings-label">Change Name</div>
+            <div class="settings-label" data-t="changeName">Change Name</div>
             <div class="settings-val" id="settingsName">—</div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-          <div class="settings-item" onclick="openModal('usernameModal')">
-            <div class="settings-icon"><i class="ti ti-at" aria-hidden="true"></i></div>
-            <div class="settings-label">Change Username</div>
-            <div class="settings-val" id="settingsUsername" style="font-size:12px;">—</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="document.getElementById('avatarInput').click()">
             <div class="settings-icon"><i class="ti ti-photo" aria-hidden="true"></i></div>
-            <div class="settings-label">Profile Photo</div>
-            <div class="settings-val">Change photo</div>
+            <div class="settings-label" data-t="profilePhoto">Profile Photo</div>
+            <div class="settings-val" data-t="changePhoto">Change photo</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
+          <div class="settings-item" onclick="openModal('bgModal')">
+            <div class="settings-icon"><i class="ti ti-palette" aria-hidden="true"></i></div>
+            <div class="settings-label" data-t="appBg">App Background</div>
+            <div class="settings-val" data-t="customize">Customize</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+
           <div class="settings-item" onclick="openModal('connectModal')">
             <div class="settings-icon" style="background:rgba(42,168,158,0.15);color:var(--kraft)"><i class="ti ti-plug-connected" aria-hidden="true"></i></div>
-            <div class="settings-label">Connected Accounts</div>
+            <div class="settings-label" data-t="connectedAccounts">Connected Accounts</div>
             <div class="settings-val" id="connectedCount">None</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="openModal('resetModal')">
             <div class="settings-icon" style="background:var(--red-bg);color:var(--red)"><i class="ti ti-trash" aria-hidden="true"></i></div>
-            <div class="settings-label" style="color:var(--red)">Reset Data</div>
+            <div class="settings-label" style="color:var(--red)" data-t="resetData">Reset Data</div>
             <div class="settings-val"></div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
-        </div>
-      </div>
-
-      <!-- Personalize -->
-      <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;padding:0 4px;margin-bottom:6px;">Personalize</div>
-      <div class="card-wrap" style="margin-bottom:12px;">
-        <div class="settings-list">
-
-          <div class="settings-item" onclick="toggleDarkMode()">
-            <div class="settings-icon" style="background:rgba(30,30,60,0.1);color:#6c6caa"><i class="ti ti-moon" id="darkModeIcon" aria-hidden="true"></i></div>
-            <div class="settings-label">Dark Mode</div>
-            <div class="settings-val" id="darkModeVal">Off</div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-          <div class="settings-item" onclick="toggleBiometrics()">
-            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-fingerprint" aria-hidden="true"></i></div>
-            <div class="settings-label">Biometrics</div>
-            <div class="settings-val" id="biometricsVal">Off</div>
+          <div class="settings-item" onclick="openModal('shopModal')">
+            <div class="settings-icon" style="background:rgba(212,160,23,0.15);color:var(--gold)"><i class="ti ti-coin" aria-hidden="true"></i></div>
+            <div class="settings-label">Fiorino Balance</div>
+            <div class="settings-val" id="profileFiorinoVal" style="color:var(--gold);font-weight:600;">0 <span style="font-weight:400;color:var(--muted);">Fiorino</span></div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="openLangModal()">
             <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-language" aria-hidden="true"></i></div>
-            <div class="settings-label">Language</div>
+            <div class="settings-label" data-t="aiLang">Bahasa AI</div>
             <div class="settings-val" id="langSettingsVal">Indonesia</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="doLogout()">
+            <div class="settings-icon" style="background:rgba(192,57,43,0.1);color:var(--red)"><i class="ti ti-logout" aria-hidden="true"></i></div>
+            <div class="settings-label" style="color:var(--red)" data-t="logout">Logout</div>
+            <div class="settings-val" id="settingsUsername" style="font-size:11px;"></div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
         </div>
       </div>
-
-      <!-- Logout -->
-      <div class="card-wrap" style="margin-bottom:20px;">
-        <div class="settings-item" onclick="doLogout()">
-          <div class="settings-icon" style="background:rgba(192,57,43,0.1);color:var(--red)"><i class="ti ti-logout" aria-hidden="true"></i></div>
-          <div class="settings-label" style="color:var(--red)">Logout</div>
-          <div class="settings-val" style="font-size:11px;" id="settingsUsernameLogout"></div>
-          <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -1468,8 +1327,8 @@ body.dark-mode #authScreen{ background:#0e1312; }
   <div class="modal-backdrop" id="langModal">
     <div class="modal">
       <div class="modal-handle"></div>
-      <div class="modal-title">Language</div>
-      
+      <div class="modal-title" data-t="uiLang">Bahasa Tampilan</div>
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;" data-t="uiLang">Tampilan</div>
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
         <div onclick="setUILang('id')" id="uiLangOpt-id" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--kraft);background:rgba(42,168,158,0.08);cursor:pointer;transition:all 0.15s;">
           <span style="font-size:18px;">🇮🇩</span>
@@ -1482,7 +1341,24 @@ body.dark-mode #authScreen{ background:#0e1312; }
           <i class="ti ti-check" id="uiCheck-en" style="font-size:16px;color:transparent;"></i>
         </div>
       </div>
-
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;" data-t="aiLang">Bahasa AI</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+        <div class="lang-opt" id="langOpt-id" onclick="setLang('id')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
+          <span style="font-size:18px;">🇮🇩</span>
+          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">Indonesia</div>
+          <i class="ti ti-check lang-check" id="langCheck-id" style="font-size:16px;color:var(--kraft);"></i>
+        </div>
+        <div class="lang-opt" id="langOpt-en" onclick="setLang('en')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
+          <span style="font-size:18px;">🇬🇧</span>
+          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">English</div>
+          <i class="ti ti-check lang-check" id="langCheck-en" style="font-size:16px;color:transparent;"></i>
+        </div>
+        <div class="lang-opt" id="langOpt-jv" onclick="setLang('jv')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;">
+          <span style="font-size:18px;">🏯</span>
+          <div style="flex:1;font-size:13px;font-weight:500;color:var(--ink);">Jawa</div>
+          <i class="ti ti-check lang-check" id="langCheck-jv" style="font-size:16px;color:transparent;"></i>
+        </div>
+      </div>
       <button class="btn-primary btn-outline" onclick="closeModal('langModal')" data-t="close">Tutup</button>
     </div>
   </div>
@@ -1505,7 +1381,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
         </div>
         <div style="text-align:right;">
           <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Daily Refill</div>
-          <div style="font-size:12px;color:var(--kraft);font-weight:500;">+10 chats/day (max 30)</div>
+          <div style="font-size:12px;color:var(--kraft);font-weight:500;">+2 Fiorino/day</div>
         </div>
       </div>
       <div id="shopModalPackages" style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px;"></div>
@@ -1513,52 +1389,6 @@ body.dark-mode #authScreen{ background:#0e1312; }
         Payment integration coming soon.
       </div>
       <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('shopModal')">Close</button>
-    </div>
-  </div>
-
-  <!-- Recent Chats Modal -->
-  <div class="modal-backdrop" id="recentChatsModal">
-    <div class="modal">
-      <div class="modal-handle"></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-        <div class="modal-title" style="margin-bottom:0;">Recent Chats</div>
-        <div onclick="clearRecentChats()" style="font-size:11px;color:var(--muted);cursor:pointer;padding:4px 8px;border-radius:8px;border:1px solid var(--paper-dark);">Clear all</div>
-      </div>
-      <div id="recentChatsList" style="display:flex;flex-direction:column;gap:8px;max-height:60vh;overflow-y:auto;"></div>
-      <button class="btn-primary btn-outline" style="margin-top:12px;" onclick="closeModal('recentChatsModal')">Close</button>
-    </div>
-  </div>
-
-  <!-- Trakteer Instruction Modal -->
-  <div class="modal-backdrop" id="trakteerModal">
-    <div class="modal">
-      <div class="modal-handle"></div>
-      <div style="text-align:center;margin-bottom:16px;">
-        <div style="font-size:32px;margin-bottom:8px;">☕</div>
-        <div class="modal-title" style="margin-bottom:4px;">Redirecting to Trakteer</div>
-        <div style="font-size:13px;color:var(--muted);">Complete your payment there</div>
-      </div>
-      <div style="background:var(--paper-dark);border-radius:14px;padding:14px;margin-bottom:16px;">
-        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">⚠️ Tulis username kamu di kolom pesan:</div>
-        <div id="trakteerNote" style="font-size:18px;font-weight:700;color:var(--earth);text-align:center;padding:8px;background:var(--paper);border-radius:10px;letter-spacing:1px;">username:f10</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;">Fiorino otomatis masuk sesuai nominal yang dibayar</div>
-      </div>
-      <button class="btn-primary btn-outline" onclick="closeModal('trakteerModal')">Got it</button>
-    </div>
-  </div>
-
-  <!-- Change Username Modal -->
-  <div class="modal-backdrop" id="usernameModal">
-    <div class="modal">
-      <div class="modal-handle"></div>
-      <div class="modal-title">Change Username</div>
-      <div class="modal-field">
-        <label class="modal-label">New username</label>
-        <input class="modal-input" id="usernameInput" type="text" placeholder="min 3 chars, letters/numbers/_" autocapitalize="none">
-      </div>
-      <div id="usernameError" style="font-size:12px;color:var(--red);margin-bottom:10px;min-height:16px;"></div>
-      <button class="btn-primary" onclick="saveUsername()">Save</button>
-      <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('usernameModal')">Cancel</button>
     </div>
   </div>
 
@@ -1737,30 +1567,6 @@ async function tryRestoreSession(){
   }
 }
 
-function showWelcomeScreen(name){
-  const el = document.getElementById('welcomeScreen');
-  const msg = document.getElementById('welcomeMsg');
-  if(!el || !msg) return;
-
-  const greetings = [
-    `How the bill goin', ${name}?`,
-    `Ready to fix your uang, ${name}?`,
-    `Welcome back, ${name}. Let's check the damage.`,
-    `Hey ${name}, your wallet missed you.`,
-    `${name}. Numbers don't lie.`,
-  ];
-  msg.textContent = greetings[Math.floor(Math.random() * greetings.length)];
-  el.classList.remove('hidden');
-  el.style.display = 'flex';
-
-  setTimeout(()=>{
-    el.classList.add('welcome-fadeout');
-    setTimeout(()=>{
-      el.style.display = 'none';
-    }, 500);
-  }, 1800);
-}
-
 function applyUserToState(user){
   S.name = user.name || 'User';
   S.avatar = user.avatar_url || null;
@@ -1768,17 +1574,6 @@ function applyUserToState(user){
   S.streak = user.streak || 0;
   S.lastStreakDate = user.last_streak_date || null;
   S.joinDate = user.join_date ? new Date(user.join_date).toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'}) : S.joinDate;
-  // Sync Fiorino from DB
-  if(user.fiorino !== undefined){
-    const fs = getFiorinoState();
-    fs.fiorino = user.fiorino ?? fs.fiorino;
-    saveFiorinoState(fs);
-  }
-  if(user.ai_chats !== undefined){
-    const cs = getChatState();
-    cs.chatsLeft = user.ai_chats ?? cs.chatsLeft;
-    saveChatState(cs);
-  }
 }
 
 function clearSession(){
@@ -1853,7 +1648,6 @@ async function doLogin(){
     applyUILang();
     renderHome(); animateHome();
     setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
-    showWelcomeScreen(S.name);
     toast('Selamat datang, ' + S.name + '! 👋');
   } catch(e) {
     setAuthError(e.message || 'Login gagal');
@@ -1898,7 +1692,6 @@ async function doRegister(){
     applyUILang();
     renderHome(); animateHome();
     setTimeout(()=>{ if(!stocksFetched) fetchAllStocks(); }, 600);
-    showWelcomeScreen(S.name);
     toast('Akun berhasil dibuat! 🎉');
   } catch(e) {
     setAuthError(e.message || 'Registrasi gagal');
@@ -1934,10 +1727,6 @@ const PAGE_ORDER=['home','goals','ai','profile'];
 let curPage='home';
 
 function goPage(p){
-  // Save chat history when leaving AI tab
-  if(document.getElementById('page-ai')?.classList.contains('active') && p !== 'ai'){
-    saveCurrentChat();
-  }
   if(p===curPage) return;
   const oldPage=document.getElementById('page-'+curPage);
   const newPage=document.getElementById('page-'+p);
@@ -1994,16 +1783,14 @@ function goPage(p){
 // ══════════════════════════════════════════
 function openModal(id){
   if(id==='txModal'){ txType='inc'; setType('inc'); document.getElementById('txAmount').value=''; document.getElementById('txNote').value=''; }
-  if(id==='goalModal'){ document.getElementById('goalName').value=''; const gt=document.getElementById('goalGoals')||document.getElementById('goalTarget'); if(gt) gt.value=''; }
+  if(id==='goalModal'){ document.getElementById('goalName').value=''; document.getElementById('goalTarget').value=''; }
   if(id==='nameModal'){ document.getElementById('nameInput').value=S.name; }
   if(id==='bgModal'){ renderBgGrid(); }
   if(id==='compareModal'){ renderCompare(); }
   if(id==='plansModal'){ renderPlansModal(); syncBillingToggles(); }
   if(id==='connectModal'){ renderConnectList(); }
   if(id==='shopModal'){ renderShopPage(); }
-  if(id==='recentChatsModal'){ renderRecentChatsList(); }
-  const el = document.getElementById(id);
-  if(el) el.classList.add('show');
+  document.getElementById(id).classList.add('show');
 }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 document.querySelectorAll('.modal-backdrop').forEach(b=>{
@@ -2065,15 +1852,6 @@ function addTransaction(){
     toast('Gagal simpan ke server 😅');
     console.error(e);
   });
-}
-
-async function showAllTx(){
-  // Scroll to recent transactions section on home
-  const txSection = document.querySelector('#page-home .sec-title');
-  if(txSection) txSection.scrollIntoView({behavior:'smooth'});
-  // If there's a "show more" concept, just re-render with no limit
-  const txList = document.getElementById('txList');
-  if(txList) renderTxList(txList);
 }
 
 async function loadUserStreak(){
@@ -2187,75 +1965,6 @@ function estimateDays(g){
 // ══════════════════════════════════════════
 // HOME RENDER
 // ══════════════════════════════════════════
-// ── Monthly View ─────────────────────────
-let viewMonth = new Date().getMonth();
-let viewYear = new Date().getFullYear();
-
-function getViewMonthTx(){
-  return S.transactions.filter(t => {
-    const d = new Date(t.date);
-    return d.getMonth() === viewMonth && d.getFullYear() === viewYear;
-  });
-}
-
-function updateMonthLabel(){
-  const now = new Date();
-  const isCurrentMonth = viewMonth === now.getMonth() && viewYear === now.getFullYear();
-  const label = new Date(viewYear, viewMonth, 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-  const el = document.getElementById('monthLabel');
-  if(el) el.textContent = label;
-  // Hide next button if already at current month
-  const nextBtn = document.getElementById('nextMonthBtn');
-  if(nextBtn) nextBtn.style.opacity = isCurrentMonth ? '0.3' : '1';
-}
-
-function prevMonth(){
-  viewMonth--;
-  if(viewMonth < 0){ viewMonth = 11; viewYear--; }
-  updateMonthLabel();
-  renderMonthTx();
-}
-
-function nextMonth(){
-  const now = new Date();
-  if(viewYear === now.getFullYear() && viewMonth === now.getMonth()) return;
-  viewMonth++;
-  if(viewMonth > 11){ viewMonth = 0; viewYear++; }
-  updateMonthLabel();
-  renderMonthTx();
-}
-
-function renderMonthTx(){
-  const container = document.getElementById('homeTx');
-  if(!container) return;
-  const txs = getViewMonthTx();
-  if(!txs.length){
-    container.innerHTML = '<div class="empty-state"><i class="ti ti-receipt-off"></i>No transactions this month</div>';
-    return;
-  }
-  // Show last 5 for the selected month
-  renderTxListFromData(container, txs.slice(0, 5));
-}
-
-function renderTxListFromData(container, txs){
-  if(!txs.length){ container.innerHTML='<div class="empty-state"><i class="ti ti-receipt-off"></i>'+t('noTx')+'</div>'; return; }
-  container.innerHTML = txs.map((tx,idx)=>{
-    const cat = tx.category || tx.cat || 'Others';
-    const dateStr = tx.date ? new Date(tx.date).toLocaleDateString('id-ID',{day:'numeric',month:'short'}) : '';
-    return `<div class="tx-item stagger-in" style="animation-delay:${idx*0.06}s">
-      <div class="tx-icon ${tx.type}"><i class="ti ${CAT_ICONS[cat]||'ti-coin'}" aria-hidden="true"></i></div>
-      <div class="tx-info">
-        <div class="tx-name">${tx.note}</div>
-        <div class="tx-cat">${cat}</div>
-      </div>
-      <div class="tx-right">
-        <div class="tx-amt ${tx.type}">${tx.type==='inc'?'+':'-'}${fmt(tx.amount)}</div>
-        <div class="tx-date">${dateStr}</div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
 function renderHome(){
   const hour=new Date().getHours();
   const greet=hour<11?'Good morning':hour<15?'Good afternoon':hour<18?'Good afternoon':'Good evening';
@@ -2269,8 +1978,7 @@ function renderHome(){
   renderAvatar();
   renderBarChart();
   renderInsight(inc,exp);
-  updateMonthLabel();
-  renderMonthTx();
+  renderTxList(document.getElementById('homeTx'),5);
   // Goals preview
   const hg=document.getElementById('homeGoals');
   if(!S.goals.length){ hg.innerHTML='<div class="empty-state"><i class="ti ti-target-off"></i>'+t('noGoals')+'. <span onclick="openModal(\'goalModal\')" style="color:var(--kraft);cursor:pointer;">'+t('newGoal')+' →</span></div>'; }
@@ -2346,17 +2054,12 @@ function renderProfile(){
   document.getElementById('settingsName').textContent=S.name;
   const suEl = document.getElementById('settingsUsername');
   if(suEl && CU) suEl.textContent = '@' + CU.username;
-  const suLogout = document.getElementById('settingsUsernameLogout');
-  if(suLogout && CU) suLogout.textContent = '@' + CU.username;
-  applyDarkMode();
-  updateBiometricsVal();
   const langEl = document.getElementById('langSettingsVal');
   if(langEl) langEl.textContent = LANG_LABELS[AI_LANG] || 'Indonesia';
   const fiEl = document.getElementById('profileFiorinoVal');
   if(fiEl){
     const fs = getFiorinoState();
-    const cs = getChatState();
-    fiEl.innerHTML = '<span style="color:var(--gold);font-weight:600;">'+fs.fiorino+'</span> <span style="font-weight:400;color:var(--muted);">Fiorino · '+cs.chatsLeft+' chats left</span>';
+    fiEl.innerHTML = '<span style="color:var(--gold);font-weight:600;">'+fs.fiorino+'</span> <span style="font-weight:400;color:var(--muted);">Fiorino · '+fs.chatsLeft+' chats</span>';
   }
   const planNames={'free':'Free','student':'Student','worker':'Worker','business':'Business'};
   const planIcons={'free':'','student':'🎓','worker':'💼','business':'🏢'};
@@ -2446,7 +2149,7 @@ function applyBg(){
 // ══════════════════════════════════════════
 
 const GROQ_KEY='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';
-const GROQ_MODEL='meta-llama/llama-4-scout-17b-16e-instruct';
+const GROQ_MODEL='llama-3.3-70b-versatile';
 
 function buildHistory(){
   const bubbles=document.querySelectorAll('#chatArea .bwrap');
@@ -2456,7 +2159,7 @@ function buildHistory(){
     const text=b.querySelector('.bubble')?.innerText||'';
     if(text) msgs.push({role:isUser?'user':'assistant',content:text});
   });
-  return msgs.slice(-4); // last 2 pairs
+  return msgs.slice(-10);
 }
 
 function buildUserContext(){
@@ -2500,83 +2203,44 @@ async function chatSend(){
   const box=document.getElementById('chatInput');
   const msg=box.value.trim(); if(!msg) return;
 
-  // Check AI chat balance — image costs 9 chats, text costs 1
-  const chatCost = chatImageBase64 ? 5 : 1;
-  const fiState = getChatState();
-  if(fiState.chatsLeft < chatCost){
-    appendBubble('ai', chatImageBase64
-      ? `Image analysis costs 5 chats. You only have ${fiState.chatsLeft} left. Buy Fiorino to continue.`
-      : "You're out of AI chats. Buy Fiorino to get more, or upgrade your plan for unlimited access."
-    );
+  // Check AI chat balance
+  if(!useAIChat()){
+    appendBubble('ai', "You're out of AI chats. Buy Fiorino to continue.");
     setTimeout(()=>openModal('shopModal'), 1200);
     return;
   }
-  for(let i=0;i<chatCost;i++) useAIChat();
   updateAIChatBadge();
 
-  // Clear welcome screen on first message
-  const ca = document.getElementById('chatArea');
-  if(ca && ca.querySelector('.ai-welcome')){ ca.innerHTML = ''; }
-  else if(ca && ca.children.length === 1 && ca.children[0].style.textAlign === 'center'){ ca.innerHTML = ''; }
-
-  // If image attached, show it above the text bubble
-  if(chatImageBase64){
-    const imgWrap = document.createElement('div'); imgWrap.className = 'bwrap user';
-    const imgBubble = document.createElement('div'); imgBubble.className = 'bubble user bubble-new';
-    imgBubble.style.cssText = 'padding:4px;background:transparent;';
-    imgBubble.innerHTML = `<img src="data:${chatImageMediaType};base64,${chatImageBase64}" style="max-width:200px;max-height:160px;border-radius:12px;display:block;" />`;
-    const imgMeta = document.createElement('div'); imgMeta.className = 'bmeta';
-    imgMeta.style.opacity = '0';
-    imgMeta.textContent = 'You • ' + now();
-    imgWrap.appendChild(imgBubble); imgWrap.appendChild(imgMeta);
-    ca.appendChild(imgWrap);
-    setTimeout(()=>{ imgMeta.style.transition='opacity 0.3s'; imgMeta.style.opacity='1'; }, 220);
-    ca.scrollTop = ca.scrollHeight;
-  }
-
-  if(msg) appendBubble('user', msg);
+  appendBubble('user',msg);
   box.value=''; box.style.height='auto';
   const typing=document.getElementById('typing');
   typing.classList.add('show');
   document.getElementById('chatArea').scrollTop=99999;
   try{
     const history=buildHistory();
-    const userContext=buildUserContext();
-
-    // Build user message — with image if attached
-    let userMsg;
-    if(chatImageBase64){
-      userMsg = {
-        role:'user',
-        content:[
-          { type:'text', text: msg || 'What do you see in this image?' },
-          { type:'image_url', image_url:{ url: `data:${chatImageMediaType};base64,${chatImageBase64}` } }
-        ]
-      };
-      clearChatImage();
-    } else {
-      userMsg = { role:'user', content: msg };
-    }
-
+    // Only inject financial context when relevant
+    const financeKw = ['balance','saldo','uang','duit','nabung','saving','goal','pengeluaran','income','pemasukan','transaksi','money','budget','bayar','beli','harga','transfer'];
+    const isFinance = financeKw.some(k => msg.toLowerCase().includes(k)) || chatImageBase64;
+    const userContext = isFinance ? buildUserContext() : '';
     const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
       body:JSON.stringify({
         model:GROQ_MODEL,
-        max_tokens:1024,
+        max_tokens:400,
         messages:[
-          {role:'system',content:`You are Dluang AI. Talk like a sharp, no-nonsense friend who knows finance well. When the user says something, respond to what they actually said — don't jump straight to advice unless they ask. Keep it short, natural, conversational. No bullet points, no headers, no templates. Respond in the same language the user uses.
+          {role:'system',content:`You are Dluang AI, a friendly assistant in a finance app. Talk like a relaxed, normal friend — casual and warm. When the user asks about money, be helpful and specific. Otherwise just chat naturally. Never volunteer their balance unprompted. No bullet points. Respond in the same language the user uses.
 
 ${userContext}`},
           ...history,
-          userMsg
+          {role:'user',content:msg}
         ]
       })
     });
     const data=await res.json();
     const reply=data.choices?.[0]?.message?.content||'Hmm, coba tanya lagi ya! 😊';
     typing.classList.remove('show');
-    await typewriterBubble(reply);
+    appendBubble('ai',reply);
   }catch(e){
     typing.classList.remove('show');
     appendBubble('ai','Koneksi bermasalah, coba lagi ya! 😅');
@@ -2584,16 +2248,8 @@ ${userContext}`},
 }
 
 
-const MAX_CHAT_PAIRS = 10; // keep last 10 pairs in DOM
-
 function appendBubble(type,text){
   const area=document.getElementById('chatArea');
-
-  // Clear welcome placeholder if present
-  if(area.children.length === 1 && area.children[0].querySelector && !area.children[0].classList.contains('bwrap')){
-    area.innerHTML = '';
-  }
-
   const wrap=document.createElement('div'); wrap.className='bwrap '+type;
   const b=document.createElement('div'); b.className='bubble '+type+' bubble-new';
   if(type==='ai') b.innerHTML=text; else b.textContent=text;
@@ -2601,14 +2257,6 @@ function appendBubble(type,text){
   meta.style.opacity='0';
   meta.textContent=(type==='ai'?'Dluang AI':'You')+' • '+now();
   wrap.appendChild(b); wrap.appendChild(meta); area.appendChild(wrap);
-
-  // FIFO: remove oldest pair if over limit (1 pair = 1 user + 1 ai bubble)
-  const bubbles = area.querySelectorAll('.bwrap');
-  const maxBubbles = MAX_CHAT_PAIRS * 2;
-  if(bubbles.length > maxBubbles){
-    bubbles[0].remove();
-  }
-
   area.scrollTop=area.scrollHeight;
   setTimeout(()=>{ meta.style.transition='opacity 0.3s'; meta.style.opacity='1'; }, 220);
 }
@@ -2630,7 +2278,7 @@ function resetAll(){
 // ══════════════════════════════════════════
 // STOCKS
 // ══════════════════════════════════════════
-const AV_KEY = ''; // deprecated
+const AV_KEY = '5EJ9WBRUTPX6QM9T';
 
 const WATCHLIST = [
   {ticker:'NVDA', name:'NVIDIA Corporation',       sector:'tech',    color:'#76b900', abbr:'NV'},
@@ -2675,78 +2323,42 @@ function sparkHTML(vals, isUp){
   }).join('');
 }
 
-// Static demo prices — realistic as of mid-2025
-const DEMO_PRICES = {
-  NVDA:  { price: 131.38, change:  2.14, changePct:  1.65 },
-  MSFT:  { price: 415.52, change: -1.23, changePct: -0.30 },
-  AAPL:  { price: 211.84, change:  0.87, changePct:  0.41 },
-  GOOGL: { price: 178.02, change:  1.56, changePct:  0.88 },
-  META:  { price: 585.43, change:  4.21, changePct:  0.72 },
-  AMZN:  { price: 198.12, change: -0.94, changePct: -0.47 },
-  TSLA:  { price: 248.50, change:  5.30, changePct:  2.18 },
-  JPM:   { price: 242.17, change: -0.55, changePct: -0.23 },
-  BAC:   { price:  43.82, change:  0.31, changePct:  0.71 },
-  XOM:   { price: 112.44, change: -1.10, changePct: -0.97 },
-  CVX:   { price: 153.60, change:  0.44, changePct:  0.29 },
-  NFLX:  { price: 721.85, change:  8.92, changePct:  1.25 },
-};
-
-// Animate prices slightly every 8s for "live" feel
-function animatePrices(){
-  for(const ticker in stockCache){
-    const base = DEMO_PRICES[ticker];
-    if(!base) continue;
-    const jitter = (Math.random() - 0.5) * 0.8;
-    const newPrice = (parseFloat(stockCache[ticker].price) + jitter);
-    const newChange = parseFloat(stockCache[ticker].change) + jitter;
-    stockCache[ticker].price = newPrice.toFixed(2);
-    stockCache[ticker].change = newChange.toFixed(2);
-    stockCache[ticker].changePct = ((newChange / (newPrice - newChange)) * 100).toFixed(2);
-  }
-  renderStockList();
+async function fetchQuote(ticker){
+  if(stockCache[ticker]) return stockCache[ticker];
+  try{
+    const url=`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=${AV_KEY}`;
+    const res=await fetch(url);
+    const data=await res.json();
+    const q=data['Global Quote'];
+    if(!q||!q['05. price']) return null;
+    const result={
+      price: parseFloat(q['05. price']).toFixed(2),
+      change: parseFloat(q['09. change']).toFixed(2),
+      changePct: parseFloat(q['10. change percent']).toFixed(2),
+      open: parseFloat(q['02. open']).toFixed(2),
+      high: parseFloat(q['03. high']).toFixed(2),
+      low: parseFloat(q['04. low']).toFixed(2),
+      volume: parseInt(q['06. volume']).toLocaleString(),
+      prevClose: parseFloat(q['08. previous close']).toFixed(2),
+    };
+    stockCache[ticker]=result;
+    return result;
+  }catch(e){ return null; }
 }
 
+// Fetch all in sequence (avoid rate limit)
 async function fetchAllStocks(){
-  stocksFetched = false;
+  stocksFetched=false;
   renderStockSkeletons();
-  try {
-    const tickers = WATCHLIST.map(s => s.ticker);
-    const res = await fetch(`${FN_BASE}/stock-proxy`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON,
-        'Authorization': 'Bearer ' + SUPABASE_ANON,
-      },
-      body: JSON.stringify({ tickers })
-    });
-    const data = await res.json();
-    if(data.quotes){
-      for(const [ticker, quote] of Object.entries(data.quotes)){
-        stockCache[ticker] = quote;
-      }
-    }
-  } catch(e) {
-    console.error('Stock fetch failed, using demo prices', e);
-    // Fallback to demo prices
-    for(const ticker in DEMO_PRICES){
-      const base = DEMO_PRICES[ticker];
-      stockCache[ticker] = {
-        price: base.price.toFixed(2),
-        change: base.change.toFixed(2),
-        changePct: base.changePct.toFixed(2),
-        open: (base.price - base.change * 0.5).toFixed(2),
-        high: (base.price + Math.abs(base.change) * 1.2).toFixed(2),
-        low:  (base.price - Math.abs(base.change) * 1.1).toFixed(2),
-        volume: (Math.floor(Math.random() * 50000000 + 10000000)).toLocaleString(),
-        prevClose: (base.price - base.change).toFixed(2),
-      };
-    }
+  // AV free: 25 req/day, fetch first 6 for home widget
+  const toFetch=WATCHLIST.slice(0,6);
+  for(const s of toFetch){
+    const q=await fetchQuote(s.ticker);
+    if(q) renderStockList();
+    await new Promise(r=>setTimeout(r,350));
   }
-  stocksFetched = true;
+  stocksFetched=true;
   renderStockList();
-  // Refresh every 60s
-  setTimeout(()=>{ stocksFetched=false; fetchAllStocks(); }, 60000);
 }
 
 function renderStockSkeletons(){
@@ -2815,15 +2427,6 @@ function filterStocks(val){
   renderStockList();
 }
 
-function setStockPeriod(el, period, ticker){
-  // Update active state
-  el.closest('.chart-period-row').querySelectorAll('.cperiod').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  // Re-fetch chart data for this period (just visual for now — same data)
-  // Could extend to fetch different ranges from Yahoo Finance
-  toast(ticker + ' • ' + period);
-}
-
 function openStockDetail(ticker){
   const s=WATCHLIST.find(x=>x.ticker===ticker);
   const q=stockCache[ticker];
@@ -2858,11 +2461,11 @@ function openStockDetail(ticker){
     </div>
     <div class="chart-area">
       <div class="chart-period-row">
-        <div class="cperiod active" onclick="setStockPeriod(this,'1H','${s.ticker}')">1H</div>
-        <div class="cperiod" onclick="setStockPeriod(this,'1D','${s.ticker}')">1D</div>
-        <div class="cperiod" onclick="setStockPeriod(this,'1W','${s.ticker}')">1W</div>
-        <div class="cperiod" onclick="setStockPeriod(this,'1M','${s.ticker}')">1M</div>
-        <div class="cperiod" onclick="setStockPeriod(this,'1Y','${s.ticker}')">1Y</div>
+        <div class="cperiod active">1H</div>
+        <div class="cperiod">1D</div>
+        <div class="cperiod">1W</div>
+        <div class="cperiod">1M</div>
+        <div class="cperiod">1Y</div>
       </div>
       <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
         <defs>
@@ -3046,29 +2649,46 @@ function renderPlans(){
 
 function selectPlan(planId, price){
   if(planId === 'free'){
+    currentPlan = 'free';
+    S.plan = 'free';
+    save();
+    renderPlans();
+    renderProfile();
     closeModal('plansModal');
+    toast('Switched to Free plan');
     return;
   }
-  // Demo mode — show appreciation popup
+  const plan = PLANS.find(p=>p.id===planId);
+  const period = billingYearly ? 'year' : 'month';
+  const label = billingYearly ? 'Billed yearly (save 30%)' : 'Billed monthly';
+  const priceNum = typeof price === 'string' ? parseFloat(price) : price;
+
+  document.getElementById('planConfirmContent').innerHTML = `
+    <div class="confirm-icon" style="background:${plan.iconBg}">${plan.icon}</div>
+    <div class="confirm-title">Upgrade to ${plan.name}</div>
+    <div class="confirm-sub">You're about to subscribe to Dluang ${plan.name}.<br>Cancel anytime from your profile.</div>
+    <div class="confirm-price-block">
+      <div class="confirm-price-label">Total today</div>
+      <div class="confirm-price-val">Rp ${fmtRp(priceNum)}</div>
+      <div class="confirm-period">${label} · Auto-renews every ${period}</div>
+    </div>
+    <button class="btn-primary" onclick="confirmPlan('${planId}')">Confirm & Subscribe</button>
+    <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('planConfirmModal')">Not now</button>
+  `;
+  // close plansModal first, then open confirm after animation settles
   closeModal('plansModal');
-  setTimeout(()=>{
-    const plan = PLANS.find(p=>p.id===planId);
-    document.getElementById('planConfirmContent').innerHTML = `
-      <div class="confirm-icon" style="background:${plan.iconBg};font-size:28px;">${plan.icon}</div>
-      <div class="confirm-title">Still working on it!</div>
-      <div class="confirm-sub" style="margin-bottom:12px;">Payments aren't live yet — but we really appreciate the action! 🙌<br><br>You'll be among the first to know when <strong>${plan.name}</strong> launches.</div>
-      <div style="background:var(--paper-dark);border-radius:12px;padding:12px 14px;text-align:center;margin-bottom:18px;">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Still on demo</div>
-        <div style="font-size:13px;color:var(--ink);font-weight:500;">Dluang ${plan.name} · Rp ${fmtRp(typeof price==='string'?parseFloat(price):price)}/mo</div>
-      </div>
-      <button class="btn-primary btn-outline" onclick="closeModal('planConfirmModal')">Got it!</button>
-    `;
-    openModal('planConfirmModal');
-  }, 320);
+  setTimeout(()=>{ openModal('planConfirmModal'); }, 320);
 }
 
 function confirmPlan(planId){
-  // unused in demo mode
+  currentPlan = planId;
+  S.plan = planId;
+  save();
+  closeModal('planConfirmModal');
+  renderPlans();
+  renderProfile();
+  const plan = PLANS.find(p=>p.id===planId);
+  toast(plan.icon+' Welcome to '+plan.name+'!');
 }
 
 function animateSub(){
@@ -3333,257 +2953,25 @@ function animateProfilee(){
   }, 80);
 }
 
-function onLeaveAI(){
-  saveCurrentChat();
-}
-
 function animateAI(){
   animateHeader('page-ai');
   updateAIChatBadge();
-  renderAIWelcome();
   setTimeout(function(){
     const ca = document.getElementById('chatArea');
     if(ca) ca.scrollTop = ca.scrollHeight;
   }, 100);
 }
 
-// ── Recent Chats ─────────────────────────
-const MAX_RECENT_CHATS = 2;
-
-function getRecentChats(){
-  try { return JSON.parse(localStorage.getItem('dluang_recent_chats') || '[]'); }
-  catch(e){ return []; }
-}
-
-function saveCurrentChat(){
-  const area = document.getElementById('chatArea');
-  if(!area) return;
-  const bubbles = area.querySelectorAll('.bwrap');
-  if(bubbles.length === 0) return;
-
-  // Build chat snapshot
-  const msgs = [];
-  bubbles.forEach(b => {
-    const isUser = b.classList.contains('user');
-    const text = b.querySelector('.bubble')?.innerText || '';
-    if(text) msgs.push({ role: isUser ? 'user' : 'ai', text });
-  });
-  if(!msgs.length) return;
-
-  const chats = getRecentChats();
-  const preview = msgs.find(m => m.role === 'user')?.text?.slice(0, 40) || 'Chat';
-  chats.unshift({ id: Date.now(), preview, msgs, date: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}) });
-
-  // Keep only last MAX_RECENT_CHATS
-  chats.splice(MAX_RECENT_CHATS);
-  localStorage.setItem('dluang_recent_chats', JSON.stringify(chats));
-}
-
-function loadRecentChat(id){
-  const chats = getRecentChats();
-  const chat = chats.find(c => c.id === id);
-  if(!chat) return;
-
-  const area = document.getElementById('chatArea');
-  area.innerHTML = '';
-  chat.msgs.forEach(m => appendBubble(m.role === 'user' ? 'user' : 'ai', m.text));
-  closeModal('recentChatsModal');
-}
-
-function clearRecentChats(){
-  localStorage.removeItem('dluang_recent_chats');
-  renderRecentChatsList();
-  toast('Recent chats cleared');
-}
-
-function renderRecentChatsList(){
-  const list = document.getElementById('recentChatsList');
-  if(!list) return;
-  const chats = getRecentChats();
-  if(!chats.length){
-    list.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:13px;padding:20px;">No recent chats</div>';
-    return;
-  }
-  list.innerHTML = chats.map(c => `
-    <div onclick="loadRecentChat(${c.id})" style="padding:12px 14px;border-radius:12px;border:1.5px solid var(--paper-dark);cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--earth)'" onmouseout="this.style.borderColor='var(--paper-dark)'">
-      <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px;">${c.preview}${c.preview.length >= 40 ? '...' : ''}</div>
-      <div style="font-size:11px;color:var(--muted);">${c.date} · ${c.msgs.length} messages</div>
-    </div>
-  `).join('');
-}
-
-// ── Chat Image ──────────────────────────
-let chatImageBase64 = null;
-let chatImageMediaType = 'image/jpeg';
-
-function handleChatImage(e){
-  const file = e.target.files[0];
-  if(!file) return;
-  if(file.size > 5 * 1024 * 1024){
-    toast('Image too large. Max 5MB.');
-    e.target.value = '';
-    return;
-  }
-  chatImageMediaType = file.type || 'image/jpeg';
-  const reader = new FileReader();
-  reader.onload = ev => {
-    chatImageBase64 = ev.target.result.split(',')[1];
-    const preview = document.getElementById('imgPreview');
-    const wrap = document.getElementById('attachPreview');
-    if(preview) preview.src = ev.target.result;
-    if(wrap) wrap.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-  e.target.value = '';
-}
-
-function clearChatImage(){
-  chatImageBase64 = null;
-  const wrap = document.getElementById('attachPreview');
-  if(wrap) wrap.style.display = 'none';
-  const preview = document.getElementById('imgPreview');
-  if(preview) preview.src = '';
-}
-
-async function typewriterBubble(text){
-  const area = document.getElementById('chatArea');
-  const wrap = document.createElement('div'); wrap.className = 'bwrap ai';
-  const b = document.createElement('div'); b.className = 'bubble ai bubble-new';
-  const meta = document.createElement('div'); meta.className = 'bmeta';
-  meta.style.opacity = '0';
-  meta.textContent = 'Dluang AI • ' + now();
-  wrap.appendChild(b); wrap.appendChild(meta); area.appendChild(wrap);
-
-  // FIFO
-  const bubbles = area.querySelectorAll('.bwrap');
-  if(bubbles.length > MAX_CHAT_PAIRS * 2) bubbles[0].remove();
-
-  const words = text.split(' ');
-  // Adaptive speed: short response = slower, long = faster
-  // Target total time: ~2.5s regardless of length
-  const totalMs = 2500;
-  const delayPerWord = Math.min(120, Math.max(25, totalMs / words.length));
-
-  let displayed = '';
-  for(let i = 0; i < words.length; i++){
-    displayed += (i === 0 ? '' : ' ') + words[i];
-    b.innerHTML = displayed;
-    area.scrollTop = area.scrollHeight;
-    await new Promise(r => setTimeout(r, delayPerWord));
-  }
-
-  setTimeout(()=>{ meta.style.transition='opacity 0.3s'; meta.style.opacity='1'; }, 220);
-}
-
-function renderAIWelcome(){
-  const ca = document.getElementById('chatArea');
-  if(!ca || ca.children.length > 0) return; // already has messages
-  const name = S.name || 'there';
-  const greetings = [
-    `How the bill goin', ${name}?`,
-    `Hey ${name}, ready to fix your uang?`,
-    `${name}. Let's talk money.`,
-    `What's on your mind, ${name}?`,
-    `Hey ${name}, your wallet called.`,
-  ];
-  const msg = greetings[Math.floor(Math.random() * greetings.length)];
-  ca.innerHTML = `
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;padding:40px 24px;text-align:center;">
-      <div style="font-size:15px;font-weight:600;color:var(--ink);">${msg}</div>
-      <div style="font-size:12px;color:var(--muted);">Start chatting ↓</div>
-    </div>
-  `;
-}
-
-// ══════════════════════════════════════════
-// DARK MODE
-// ══════════════════════════════════════════
-let darkMode = localStorage.getItem('dluang_dark') === '1';
-
-function applyDarkMode(){
-  document.body.classList.toggle('dark-mode', darkMode);
-  const val = document.getElementById('darkModeVal');
-  const icon = document.getElementById('darkModeIcon');
-  if(val) val.textContent = darkMode ? 'On' : 'Off';
-  if(icon) icon.className = darkMode ? 'ti ti-sun' : 'ti ti-moon';
-}
-
-function toggleDarkMode(){
-  darkMode = !darkMode;
-  localStorage.setItem('dluang_dark', darkMode ? '1' : '0');
-  applyDarkMode();
-  toast(darkMode ? 'Dark mode on' : 'Light mode on');
-}
-
-// ══════════════════════════════════════════
-// BIOMETRICS (stub)
-// ══════════════════════════════════════════
-let biometricsEnabled = localStorage.getItem('dluang_bio') === '1';
-
-function updateBiometricsVal(){
-  const val = document.getElementById('biometricsVal');
-  if(val) val.textContent = biometricsEnabled ? 'On' : 'Off';
-}
-
-async function toggleBiometrics(){
-  if(!window.PublicKeyCredential){
-    toast('Biometrics not supported on this device');
-    return;
-  }
-  biometricsEnabled = !biometricsEnabled;
-  localStorage.setItem('dluang_bio', biometricsEnabled ? '1' : '0');
-  updateBiometricsVal();
-  toast(biometricsEnabled ? 'Biometrics enabled' : 'Biometrics disabled');
-}
-
-// ══════════════════════════════════════════
-// CHANGE USERNAME
-// ══════════════════════════════════════════
-function openUsernameModal(){
-  document.getElementById('usernameInput').value = CU?.username || '';
-  document.getElementById('usernameError').textContent = '';
-  openModal('usernameModal');
-}
-
-async function saveUsername(){
-  const val = document.getElementById('usernameInput').value.trim().toLowerCase();
-  const errEl = document.getElementById('usernameError');
-  if(val.length < 3 || val.length > 20){ errEl.textContent = 'Username 3-20 characters'; return; }
-  if(!/^[a-zA-Z0-9_]+$/.test(val)){ errEl.textContent = 'Letters, numbers, underscore only'; return; }
-  errEl.textContent = '';
-  try {
-    // Update via Supabase directly — no edge function needed for this simple update
-    // For demo just update locally
-    if(CU) CU.username = val;
-    closeModal('usernameModal');
-    renderProfile();
-    toast('Username updated!');
-  } catch(e) {
-    errEl.textContent = 'Failed to update username';
-  }
-}
-
 // ══════════════════════════════════════════
 // FIORINO & AI CHAT LIMIT
 // ══════════════════════════════════════════
-const DAILY_CHATS = 10;
-const MAX_CHATS = 30;
+const FIORINO_DAILY = 2;
 const CHATS_PER_FIORINO = 10;
-
-function getChatState(){
-  const raw = localStorage.getItem('dluang_chats');
-  if(raw) return JSON.parse(raw);
-  return { chatsLeft: DAILY_CHATS, lastRefill: null };
-}
-
-function saveChatState(state){
-  localStorage.setItem('dluang_chats', JSON.stringify(state));
-}
 
 function getFiorinoState(){
   const raw = localStorage.getItem('dluang_fiorino');
   if(raw) return JSON.parse(raw);
-  return { fiorino: 0 };
+  return { fiorino: 2, chatsLeft: 20, lastRefill: null };
 }
 
 function saveFiorinoState(state){
@@ -3591,47 +2979,36 @@ function saveFiorinoState(state){
 }
 
 function checkDailyRefill(){
-  const state = getChatState();
+  const state = getFiorinoState();
   const today = new Date().toISOString().split('T')[0];
   if(state.lastRefill !== today){
-    state.chatsLeft = Math.min((state.chatsLeft || 0) + DAILY_CHATS, MAX_CHATS);
+    state.fiorino = (state.fiorino || 0) + FIORINO_DAILY;
+    state.chatsLeft = (state.chatsLeft || 0) + (FIORINO_DAILY * CHATS_PER_FIORINO);
     state.lastRefill = today;
-    saveChatState(state);
-    // Reset notification flags for new day
-    sessionStorage.removeItem('notif60');
-    sessionStorage.removeItem('notif90');
+    saveFiorinoState(state);
   }
   return state;
 }
 
-function useAIChat(cost=1){
-  const state = getChatState();
-  if(state.chatsLeft < cost) return false;
-  state.chatsLeft -= cost;
-  saveChatState(state);
-  if(SESSION_TOKEN){
-    apiFetch('data', { action: 'update_user', ai_chats: state.chatsLeft }).catch(()=>{});
-  }
+function useAIChat(){
+  const state = getFiorinoState();
+  if(state.chatsLeft <= 0) return false;
+  state.chatsLeft -= 1;
+  // Auto-consume Fiorino when chats from current batch run out
+  saveFiorinoState(state);
   return true;
 }
 
-function addChatsFromFiorino(fiorino){
-  const state = getChatState();
-  state.chatsLeft = Math.min(state.chatsLeft + (fiorino * CHATS_PER_FIORINO), MAX_CHATS);
-  saveChatState(state);
-}
-
 function getFiorinoBalance(){ return getFiorinoState().fiorino; }
-function getChatsLeft(){ return getChatState().chatsLeft; }
+function getChatsLeft(){ return getFiorinoState().chatsLeft; }
 
 function renderShopPage(){
-  checkDailyRefill();
-  const chatState = getChatState();
-  const fiorState = getFiorinoState();
+  const state = checkDailyRefill();
+  // Update modal elements
   const el = document.getElementById('shopModalFiorino');
-  if(el) el.textContent = fiorState.fiorino;
+  if(el) el.textContent = state.fiorino;
   const cl = document.getElementById('shopModalChats');
-  if(cl) cl.textContent = chatState.chatsLeft;
+  if(cl) cl.textContent = state.chatsLeft;
 
   const pkgs = document.getElementById('shopModalPackages');
   if(!pkgs) return;
@@ -3666,17 +3043,9 @@ function renderShopPage(){
   `).join('');
 }
 
-const TRAKTEER_BASE = 'https://trakteer.id/shatara_shatara';
-const PACKAGE_QTY = { f10: 1, f25: 2, f60: 4, f100: 6 };
-
 function buyPackage(id, fiorino, chats, price){
-  const username = CU?.username || '';
-  const qty = PACKAGE_QTY[id] || 1;
-  const url = TRAKTEER_BASE + '?quantity=' + qty + '&note=' + encodeURIComponent(username);
-  closeModal('shopModal');
-  document.getElementById('trakteerNote').textContent = username || '(username kamu)';
-  openModal('trakteerModal');
-  setTimeout(()=>{ window.open(url, '_blank'); }, 600);
+  // Dummy — payment not integrated yet
+  toast('Payment coming soon! (Preview: +'+fiorino+' Fiorino)');
 }
 
 function animateShop(){
@@ -3686,22 +3055,12 @@ function animateShop(){
 
 // Show AI chat count in AI Coach header
 function updateAIChatBadge(){
-  const state = getChatState();
-  const used = MAX_CHATS - state.chatsLeft;
-  const pct = Math.round((used / MAX_CHATS) * 100);
-
-  // Show toast notification at 60% and 90%
-  if(pct >= 90 && !sessionStorage.getItem('notif90')){
-    sessionStorage.setItem('notif90', '1');
-    toast('You have used 90% of your chat credit. Buy Fiorino for more.');
-  } else if(pct >= 60 && !sessionStorage.getItem('notif60')){
-    sessionStorage.setItem('notif60', '1');
-    toast('You have used 60% of your chat credit.');
-  }
-
-  // Badge hidden — no display
+  const state = checkDailyRefill();
   const badge = document.getElementById('aiChatBadge');
-  if(badge) badge.style.display = 'none';
+  if(badge){
+    badge.textContent = state.chatsLeft + ' chats left';
+    badge.style.color = state.chatsLeft <= 5 ? 'var(--red)' : 'rgba(200,169,110,0.7)';
+  }
 }
 
 // ══════════════════════════════════════════
@@ -3720,7 +3079,7 @@ const LANG_PROMPTS = {
 
 const T = {
   id: {
-    tagline: 'Dluang fixes your uang.',
+    tagline: 'Financemu, Beres.',
     login: 'Masuk', register: 'Daftar',
     username: 'Username', displayName: 'Nama tampilan',
     createPin: 'Buat PIN (6 angka)', pinLabel: 'PIN (6 angka)',
@@ -3758,7 +3117,7 @@ const T = {
     aiCoachSub: 'Asisten keuangan pintarmu',
   },
   en: {
-    tagline: 'Dluang fixes your uang.',
+    tagline: 'Your Finance, Sorted.',
     login: 'Login', register: 'Register',
     username: 'Username', displayName: 'Display name',
     createPin: 'Create PIN (6 digits)', pinLabel: 'PIN (6 digits)',
@@ -3880,7 +3239,6 @@ applyBg();
 
 // Start with auth check — app only loads after successful session
 checkDailyRefill();
-applyDarkMode();
 tryRestoreSession().then(()=>{
   if(document.getElementById('authScreen').classList.contains('hidden')){
     applyUILang();

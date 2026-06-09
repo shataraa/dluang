@@ -102,7 +102,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 }
 
 /* ── Scrollable body ── */
-.scroll-body{flex:1;overflow-y:auto;padding:12px 14px 80px;}
+.scroll-body{flex:1;overflow-y:auto;padding:12px 14px calc(80px + env(safe-area-inset-bottom,0px));}
 .scroll-body::-webkit-scrollbar{width:3px;}
 .scroll-body::-webkit-scrollbar-thumb{background:var(--paper-dark);border-radius:3px;}
 
@@ -169,7 +169,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
 /* ── FAB ── */
 .fab{
-  position:fixed;bottom:72px;right:calc(50% - 210px + 16px);
+  position:fixed;bottom:calc(72px + env(safe-area-inset-bottom,0px));right:calc(50% - 210px + 16px);
   width:52px;height:52px;border-radius:50%;
   background:var(--earth);color:var(--kraft);
   font-size:24px;display:flex;align-items:center;justify-content:center;
@@ -320,7 +320,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .chat-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:14px;background:var(--paper);border-radius:14px 14px 0 0;}
 .chat-title{font-family:'Poppins',sans-serif;font-size:17px;color:#fff;font-weight:600;}
 .chat-sub{font-size:11px;color:rgba(200,169,110,0.7);margin-top:2px;}
-.chat-area{flex:1;overflow-y:auto;padding:12px 14px 80px;display:flex;flex-direction:column;gap:10px;min-height:0;}
+.chat-area{flex:1;overflow-y:auto;padding:12px 14px calc(80px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px;min-height:0;}
 .chat-area::-webkit-scrollbar{width:3px;}
 .bwrap{display:flex;flex-direction:column;gap:2px;}
 .bwrap.user{align-items:flex-end;}
@@ -390,7 +390,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
 /* ── Toast ── */
 .toast{
-  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
+  position:fixed;bottom:calc(90px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(20px);
   background:var(--earth);color:var(--kraft);padding:10px 18px;
   border-radius:20px;font-size:13px;font-weight:500;z-index:99;
   opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap;
@@ -492,7 +492,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .toggle-switch.annual .toggle-knob{transform:translateX(20px);}
 .save-badge{background:var(--gold);color:var(--ink);font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:4px;text-transform:uppercase;letter-spacing:.5px;}
 
-.plan-scroll{display:flex;flex-direction:column;gap:14px;padding:14px 14px 80px;}
+.plan-scroll{display:flex;flex-direction:column;gap:14px;padding:14px 14px calc(80px + env(safe-area-inset-bottom,0px));}
 
 .plan-card{
   background:var(--paper);border:1.5px solid var(--paper-dark);
@@ -576,7 +576,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   border-radius:10px;margin-left:4px;letter-spacing:0.5px;
 }
 
-.plan-cards{display:flex;flex-direction:column;gap:14px;padding:14px 14px 80px;}
+.plan-cards{display:flex;flex-direction:column;gap:14px;padding:14px 14px calc(80px + env(safe-area-inset-bottom,0px));}
 
 .plan-card{
   border-radius:18px;overflow:hidden;
@@ -707,7 +707,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
 .chat-footer{
   position:sticky;
-  bottom:64px;
+  bottom:calc(64px + env(safe-area-inset-bottom,0px));
   z-index:8;
   background:var(--paper);
   border-top:1px solid var(--paper-dark);

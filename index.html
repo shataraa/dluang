@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Dluang — Financemu, Beres.</title>
+<title>Dluang — Dluang fixes your uang.</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -839,7 +839,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
 <div id="authScreen">
   <div class="auth-card">
     <div class="auth-logo">Dl<span>u</span>ang</div>
-    <div class="auth-tagline" data-t="tagline">Financemu, Beres.</div>
+    <div class="auth-tagline" data-t="tagline">Dluang fixes your uang.</div>
 
     <div class="auth-tabs">
       <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')" data-t="login">Login</button>
@@ -1006,17 +1006,15 @@ body.dark-mode #authScreen{ background:#0e1312; }
 
   <!-- ════════════════ PAGE: AI CHAT ════════════════ -->
   <div class="page pages" id="page-ai" style="background:var(--paper);display:flex;flex-direction:column;height:calc(100vh - 64px);overflow:hidden;">
-    <div class="chat-header">
-      <div class="chat-title" data-t="aiCoachTitle">Dluang AI Coach</div>
+    <div class="chat-header" style="padding:12px 16px 22px;">
       <div style="display:flex;justify-content:space-between;align-items:center;">
-  <div class="chat-sub" data-t="aiCoachSub">Your smart finance assistant</div>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <span id="aiChatBadge" style="font-size:11px;color:rgba(200,169,110,0.7);">20 chats left</span>
-    <div onclick="openModal('chatMenuModal')" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-      <i class="ti ti-menu-2" style="font-size:18px;color:rgba(255,255,255,0.85);" aria-hidden="true"></i>
-    </div>
-  </div>
-</div>
+        <div onclick="openModal('chatMenuModal')" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+          <i class="ti ti-menu-2" style="font-size:22px;color:rgba(255,255,255,0.85);" aria-hidden="true"></i>
+        </div>
+        <div onclick="openModal('shopModal')" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+          <i class="ti ti-shopping-cart" style="font-size:22px;color:var(--gold-light);" aria-hidden="true"></i>
+        </div>
+      </div>
     </div>
     <div class="chat-area" id="chatArea">
     </div>
@@ -3352,7 +3350,7 @@ const LANG_PROMPTS = {
 
 const T = {
   id: {
-    tagline: 'Financemu, Beres.',
+    tagline: 'Dluang fixes your uang.',
     login: 'Masuk', register: 'Daftar',
     username: 'Username', displayName: 'Nama tampilan',
     createPin: 'Buat PIN (6 angka)', pinLabel: 'PIN (6 angka)',
@@ -3390,7 +3388,7 @@ const T = {
     aiCoachSub: 'Asisten keuangan pintarmu',
   },
   en: {
-    tagline: 'Your Finance, Sorted.',
+    tagline: 'Dluang fixes your uang.',
     login: 'Login', register: 'Register',
     username: 'Username', displayName: 'Display name',
     createPin: 'Create PIN (6 digits)', pinLabel: 'PIN (6 digits)',

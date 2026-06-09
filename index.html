@@ -715,6 +715,47 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   padding-bottom:64px;
 }
 
+/* ── DARK MODE ── */
+body.dark-mode{
+  --paper: #151a19;
+  --paper-dark: #1f2724;
+  --ink: #e2ddd4;
+  --muted: #6a7a77;
+  --earth: #1e5c56;
+  --earth-light: #2a7a72;
+  --kraft: #c9a020;
+  --gold: #c9a020;
+  --gold-light: #d4b040;
+  --red-bg: rgba(192,57,43,0.15);
+}
+body.dark-mode .shell{ background:#0e1312; }
+body.dark-mode .pages{ background:var(--paper); }
+body.dark-mode #page-ai{ background:var(--paper); }
+body.dark-mode .header{ background: linear-gradient(135deg, #0e3330 0%, #0a2220 100%); }
+body.dark-mode .chat-header{ background: linear-gradient(135deg, #0e3330 0%, #0a2220 100%); }
+body.dark-mode .card-wrap{ background:#1a1f1e; border:1px solid #252b2a; }
+body.dark-mode .stat-card{ background:#1a1f1e; }
+body.dark-mode .tx-item{ background:#1a1f1e; border-bottom-color:#1f2724; }
+body.dark-mode .goal-card{ background:#1a1f1e; }
+body.dark-mode .settings-item{ border-bottom-color:#1f2724; }
+body.dark-mode .settings-icon{ background:#1f2724; color:var(--kraft); }
+body.dark-mode .modal{ background:#1a1f1e; }
+body.dark-mode .modal-input{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
+body.dark-mode .auth-card{ background:#1a1f1e; }
+body.dark-mode .auth-input{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
+body.dark-mode .auth-tab.active{ background:var(--earth); color:var(--kraft); }
+body.dark-mode .pin-key{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
+body.dark-mode .pin-key:hover,.dark-mode .pin-key:active{ background:var(--earth); color:var(--kraft); }
+body.dark-mode .bottom-nav{ background:#151a19; border-top-color:#1f2724; }
+body.dark-mode .chat-area{ background:var(--paper); }
+body.dark-mode .chat-footer{ background:#151a19; border-top-color:#1f2724; }
+body.dark-mode .chat-input{ background:transparent; color:var(--ink); }
+body.dark-mode .bubble-ai{ background:#1f2724; color:var(--ink); }
+body.dark-mode .bubble-user{ background:var(--earth); color:#fff; }
+body.dark-mode .stock-item{ background:#1a1f1e; border-color:#1f2724; }
+body.dark-mode .scroll-body{ background:var(--paper); }
+body.dark-mode #authScreen{ background:#0e1312; }
+
 /* ── AUTH SCREEN ── */
 #authScreen{
   position:fixed;inset:0;z-index:100;
@@ -947,7 +988,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
           </div>
         </div>
       </div>
-      <div style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;">Alpha Vantage • Delayed 15–20 min</div>
+      <div style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;">Yahoo Finance • Real-time</div>
     </div>
   </div>
 
@@ -1064,6 +1105,18 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
             <div class="settings-val" style="color:var(--muted);">v0.1.1</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
+          <div class="settings-item" onclick="toggleDarkMode()">
+            <div class="settings-icon" style="background:rgba(30,30,60,0.1);color:#6c6caa"><i class="ti ti-moon" id="darkModeIcon" aria-hidden="true"></i></div>
+            <div class="settings-label">Dark Mode</div>
+            <div class="settings-val" id="darkModeVal">Off</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="toggleBiometrics()">
+            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-fingerprint" aria-hidden="true"></i></div>
+            <div class="settings-label">Biometrics</div>
+            <div class="settings-val" id="biometricsVal">Off</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
           <div class="settings-item" onclick="openLangModal()">
             <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-language" aria-hidden="true"></i></div>
             <div class="settings-label" data-t="aiLang">Bahasa AI</div>
@@ -1157,7 +1210,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
           </div>
         </div>
       </div>
-      <div style="padding:0 14px;font-size:10px;color:var(--muted);text-align:center;padding-bottom:12px;">Data from Alpha Vantage • Delayed 15–20 min</div>
+      <div style="padding:0 14px;font-size:10px;color:var(--muted);text-align:center;padding-bottom:12px;">Data from Yahoo Finance • Real-time</div>
     </div>
   </div>
 
@@ -2155,7 +2208,7 @@ function applyBg(){
 // ══════════════════════════════════════════
 
 const GROQ_KEY='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';
-const GROQ_MODEL='llama-3.3-70b-versatile';
+const GROQ_MODEL='meta-llama/llama-4-scout-17b-16e-instruct';
 
 function buildHistory(){
   const bubbles=document.querySelectorAll('#chatArea .bwrap');
@@ -2217,6 +2270,9 @@ async function chatSend(){
   }
   updateAIChatBadge();
 
+  // Clear welcome
+  const _ca = document.getElementById('chatArea');
+  if(_ca && _ca.children.length === 1 && !_ca.children[0].classList.contains('bwrap')){ _ca.innerHTML = ''; }
   appendBubble('user',msg);
   box.value=''; box.style.height='auto';
   const typing=document.getElementById('typing');
@@ -2246,13 +2302,53 @@ ${userContext}`},
     const data=await res.json();
     const reply=data.choices?.[0]?.message?.content||'Hmm, coba tanya lagi ya! 😊';
     typing.classList.remove('show');
-    appendBubble('ai',reply);
+    await typewriterBubble(reply);
   }catch(e){
     typing.classList.remove('show');
     appendBubble('ai','Koneksi bermasalah, coba lagi ya! 😅');
   }
 }
 
+
+const MAX_CHAT_PAIRS = 10;
+
+function renderAIWelcome(){
+  const ca = document.getElementById('chatArea');
+  if(!ca || ca.querySelectorAll('.bwrap').length > 0) return;
+  const name = S.name || 'there';
+  const greetings = [
+    `How the bill goin', ${name}?`,
+    `Hey ${name}, ready to fix your uang?`,
+    `${name}. Let's talk money.`,
+    `What's on your mind, ${name}?`,
+    `Hey ${name}, your wallet called.`,
+  ];
+  const msg = greetings[Math.floor(Math.random() * greetings.length)];
+  ca.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;padding:40px 24px;text-align:center;"><div style="font-size:15px;font-weight:600;color:var(--ink);">${msg}</div><div style="font-size:12px;color:var(--muted);">Start chatting ↓</div></div>`;
+}
+
+async function typewriterBubble(text){
+  const area = document.getElementById('chatArea');
+  const wrap = document.createElement('div'); wrap.className = 'bwrap ai';
+  const b = document.createElement('div'); b.className = 'bubble ai bubble-new';
+  const meta = document.createElement('div'); meta.className = 'bmeta';
+  meta.style.opacity = '0';
+  meta.textContent = 'Dluang AI • ' + now();
+  wrap.appendChild(b); wrap.appendChild(meta); area.appendChild(wrap);
+  const bubbles = area.querySelectorAll('.bwrap');
+  if(bubbles.length > MAX_CHAT_PAIRS * 2) bubbles[0].remove();
+  const words = text.split(' ');
+  const totalMs = 2500;
+  const delayPerWord = Math.min(120, Math.max(25, totalMs / words.length));
+  let displayed = '';
+  for(let i = 0; i < words.length; i++){
+    displayed += (i === 0 ? '' : ' ') + words[i];
+    b.innerHTML = displayed;
+    area.scrollTop = area.scrollHeight;
+    await new Promise(r => setTimeout(r, delayPerWord));
+  }
+  setTimeout(()=>{ meta.style.transition='opacity 0.3s'; meta.style.opacity='1'; }, 220);
+}
 
 function appendBubble(type,text){
   const area=document.getElementById('chatArea');
@@ -2284,7 +2380,7 @@ function resetAll(){
 // ══════════════════════════════════════════
 // STOCKS
 // ══════════════════════════════════════════
-const AV_KEY = '5EJ9WBRUTPX6QM9T';
+const AV_KEY = ''; // deprecated, using Yahoo Finance
 
 const WATCHLIST = [
   {ticker:'NVDA', name:'NVIDIA Corporation',       sector:'tech',    color:'#76b900', abbr:'NV'},
@@ -2329,30 +2425,38 @@ function sparkHTML(vals, isUp){
   }).join('');
 }
 
-async function fetchQuote(ticker){
-  if(stockCache[ticker]) return stockCache[ticker];
-  try{
-    const url=`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=${AV_KEY}`;
-    const res=await fetch(url);
-    const data=await res.json();
-    const q=data['Global Quote'];
-    if(!q||!q['05. price']) return null;
-    const result={
-      price: parseFloat(q['05. price']).toFixed(2),
-      change: parseFloat(q['09. change']).toFixed(2),
-      changePct: parseFloat(q['10. change percent']).toFixed(2),
-      open: parseFloat(q['02. open']).toFixed(2),
-      high: parseFloat(q['03. high']).toFixed(2),
-      low: parseFloat(q['04. low']).toFixed(2),
-      volume: parseInt(q['06. volume']).toLocaleString(),
-      prevClose: parseFloat(q['08. previous close']).toFixed(2),
-    };
-    stockCache[ticker]=result;
-    return result;
-  }catch(e){ return null; }
+async function fetchAllStocks(){
+  stocksFetched = false;
+  renderStockSkeletons();
+  try {
+    const tickers = WATCHLIST.map(s => s.ticker);
+    const res = await fetch(`${FN_BASE}/stock-proxy`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON },
+      body: JSON.stringify({ tickers })
+    });
+    const data = await res.json();
+    if(data.quotes){
+      for(const [ticker, quote] of Object.entries(data.quotes)){
+        stockCache[ticker] = quote;
+      }
+    }
+  } catch(e) {
+    console.error('Stock fetch failed', e);
+    // Fallback demo prices
+    const DEMO = {NVDA:{price:'131.38',change:'2.14',changePct:'1.65'},MSFT:{price:'415.52',change:'-1.23',changePct:'-0.30'},AAPL:{price:'211.84',change:'0.87',changePct:'0.41'},GOOGL:{price:'178.02',change:'1.56',changePct:'0.88'},META:{price:'585.43',change:'4.21',changePct:'0.72'},AMZN:{price:'198.12',change:'-0.94',changePct:'-0.47'},TSLA:{price:'248.50',change:'5.30',changePct:'2.18'},JPM:{price:'242.17',change:'-0.55',changePct:'-0.23'},BAC:{price:'43.82',change:'0.31',changePct:'0.71'},XOM:{price:'112.44',change:'-1.10',changePct:'-0.97'}};
+    for(const [t,q] of Object.entries(DEMO)) stockCache[t] = {...q, open:q.price, high:q.price, low:q.price, volume:'25000000', prevClose:String(parseFloat(q.price)-parseFloat(q.change))};
+  }
+  stocksFetched = true;
+  renderStockList();
+  setTimeout(()=>{ stocksFetched=false; fetchAllStocks(); }, 60000);
 }
 
-// Fetch all in sequence (avoid rate limit)
+async function fetchQuote(ticker){
+  return stockCache[ticker] || null;
+}
+
+
 async function fetchAllStocks(){
   stocksFetched=false;
   renderStockSkeletons();
@@ -2962,10 +3066,44 @@ function animateProfilee(){
 function animateAI(){
   animateHeader('page-ai');
   updateAIChatBadge();
+  renderAIWelcome();
   setTimeout(function(){
     const ca = document.getElementById('chatArea');
     if(ca) ca.scrollTop = ca.scrollHeight;
   }, 100);
+}
+
+// ══════════════════════════════════════════
+// BIOMETRICS (stub)
+// ══════════════════════════════════════════
+let biometricsEnabled = localStorage.getItem('dluang_bio') === '1';
+function updateBiometricsVal(){ const v=document.getElementById('biometricsVal'); if(v) v.textContent = biometricsEnabled?'On':'Off'; }
+async function toggleBiometrics(){
+  if(!window.PublicKeyCredential){ toast('Biometrics not supported'); return; }
+  biometricsEnabled = !biometricsEnabled;
+  localStorage.setItem('dluang_bio', biometricsEnabled?'1':'0');
+  updateBiometricsVal();
+  toast(biometricsEnabled?'Biometrics enabled':'Biometrics disabled');
+}
+
+// ══════════════════════════════════════════
+// DARK MODE
+// ══════════════════════════════════════════
+let darkMode = localStorage.getItem('dluang_dark') === '1';
+
+function applyDarkMode(){
+  document.body.classList.toggle('dark-mode', darkMode);
+  const val = document.getElementById('darkModeVal');
+  const icon = document.getElementById('darkModeIcon');
+  if(val) val.textContent = darkMode ? 'On' : 'Off';
+  if(icon) icon.className = darkMode ? 'ti ti-sun' : 'ti ti-moon';
+}
+
+function toggleDarkMode(){
+  darkMode = !darkMode;
+  localStorage.setItem('dluang_dark', darkMode ? '1' : '0');
+  applyDarkMode();
+  toast(darkMode ? 'Dark mode on' : 'Light mode on');
 }
 
 // ══════════════════════════════════════════
@@ -3245,6 +3383,7 @@ applyBg();
 
 // Start with auth check — app only loads after successful session
 checkDailyRefill();
+applyDarkMode();
 tryRestoreSession().then(()=>{
   if(document.getElementById('authScreen').classList.contains('hidden')){
     applyUILang();

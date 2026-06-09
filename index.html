@@ -282,6 +282,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
 
 .settings-list{display:flex;flex-direction:column;gap:0;}
+.settings-group-label{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;padding:14px 4px 6px;}
 .settings-item{
   display:flex;align-items:center;gap:12px;padding:14px 16px;
   border-bottom:1px solid var(--paper-dark);cursor:pointer;
@@ -738,6 +739,7 @@ body.dark-mode .stat-card{ background:#1a1f1e; }
 body.dark-mode .tx-item{ background:#1a1f1e; border-bottom-color:#1f2724; }
 body.dark-mode .goal-card{ background:#1a1f1e; }
 body.dark-mode .settings-item{ border-bottom-color:#1f2724; }
+body.dark-mode .settings-group-label{ color:#4a7a74; }
 body.dark-mode .settings-icon{ background:#1f2724; color:var(--kraft); }
 body.dark-mode .modal{ background:#1a1f1e; }
 body.dark-mode .modal-input{ background:#1f2724; border-color:#2a3330; color:var(--ink); }
@@ -1017,15 +1019,18 @@ body.dark-mode #authScreen{ background:#0e1312; }
     <div class="chat-footer">
       <div id="attachPreview" style="display:none;padding:6px 14px 0;">
         <div class="attach-chip">
-          <i class="ti ti-file-text" aria-hidden="true"></i>
-          <span id="attachName">file.pdf</span>
+          <i class="ti ti-photo" aria-hidden="true"></i>
+          <span id="attachName">image.jpg</span>
+          <span id="attachCost" style="font-size:10px;color:var(--muted);margin-left:4px;">−5 chats</span>
           <i class="ti ti-x" style="cursor:pointer;margin-left:4px;" onclick="removeAttach()" aria-hidden="true"></i>
         </div>
+        <img id="attachThumb" style="max-height:60px;max-width:120px;border-radius:8px;margin-top:4px;display:none;" />
       </div>
       <div class="chat-input-row">
-        <button class="chat-attach" onclick="triggerFakeAttach()" title="Attach file">
-          <i class="ti ti-paperclip" aria-hidden="true"></i>
+        <button class="chat-attach" onclick="document.getElementById('chatImgInput').click()" title="Attach image">
+          <i class="ti ti-photo" aria-hidden="true"></i>
         </button>
+        <input type="file" id="chatImgInput" accept="image/*" class="hidden" onchange="handleChatImage(event)">
         <textarea class="chat-input" id="chatInput" data-tp="typeMsg" placeholder="Type a message..." rows="1"></textarea>
         <button class="chat-send" onclick="chatSend()"><i class="ti ti-send" aria-hidden="true"></i></button>
       </div>
@@ -1060,7 +1065,9 @@ body.dark-mode #authScreen{ background:#0e1312; }
           <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="card-wrap">
+      <!-- ── Account ── -->
+      <div class="settings-group-label">Account</div>
+      <div class="card-wrap" style="margin-bottom:12px;">
         <div class="settings-list">
           <div class="settings-item" onclick="openModal('nameModal')">
             <div class="settings-icon"><i class="ti ti-user" aria-hidden="true"></i></div>
@@ -1074,35 +1081,23 @@ body.dark-mode #authScreen{ background:#0e1312; }
             <div class="settings-val" data-t="changePhoto">Change photo</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
-          <div class="settings-item" onclick="openModal('bgModal')">
-            <div class="settings-icon"><i class="ti ti-palette" aria-hidden="true"></i></div>
-            <div class="settings-label" data-t="appBg">App Background</div>
-            <div class="settings-val" data-t="customize">Customize</div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-
           <div class="settings-item" onclick="openModal('connectModal')">
             <div class="settings-icon" style="background:rgba(42,168,158,0.15);color:var(--kraft)"><i class="ti ti-plug-connected" aria-hidden="true"></i></div>
             <div class="settings-label" data-t="connectedAccounts">Connected Accounts</div>
             <div class="settings-val" id="connectedCount">None</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
-          <div class="settings-item" onclick="openModal('resetModal')">
-            <div class="settings-icon" style="background:var(--red-bg);color:var(--red)"><i class="ti ti-trash" aria-hidden="true"></i></div>
-            <div class="settings-label" style="color:var(--red)" data-t="resetData">Reset Data</div>
-            <div class="settings-val"></div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-          <div class="settings-item" onclick="openModal('shopModal')">
-            <div class="settings-icon" style="background:rgba(212,160,23,0.15);color:var(--gold)"><i class="ti ti-coin" aria-hidden="true"></i></div>
-            <div class="settings-label">Fiorino Balance</div>
-            <div class="settings-val" id="profileFiorinoVal" style="color:var(--gold);font-weight:600;">0 <span style="font-weight:400;color:var(--muted);">Fiorino</span></div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
-          <div class="settings-item" onclick="openModal('changelogModal')">
-            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-file-description" aria-hidden="true"></i></div>
-            <div class="settings-label">Changelog</div>
-            <div class="settings-val" style="color:var(--muted);">v0.1.1</div>
+        </div>
+      </div>
+
+      <!-- ── Appearance ── -->
+      <div class="settings-group-label">Appearance</div>
+      <div class="card-wrap" style="margin-bottom:12px;">
+        <div class="settings-list">
+          <div class="settings-item" onclick="openModal('bgModal')">
+            <div class="settings-icon"><i class="ti ti-palette" aria-hidden="true"></i></div>
+            <div class="settings-label" data-t="appBg">App Background</div>
+            <div class="settings-val" data-t="customize">Customize</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="toggleDarkMode()">
@@ -1111,16 +1106,55 @@ body.dark-mode #authScreen{ background:#0e1312; }
             <div class="settings-val" id="darkModeVal">Off</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
+        </div>
+      </div>
+
+      <!-- ── Preferences ── -->
+      <div class="settings-group-label">Preferences</div>
+      <div class="card-wrap" style="margin-bottom:12px;">
+        <div class="settings-list">
+          <div class="settings-item" onclick="openLangModal()">
+            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-language" aria-hidden="true"></i></div>
+            <div class="settings-label" data-t="aiLang">Bahasa AI</div>
+            <div class="settings-val" id="langSettingsVal">Indonesia</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
           <div class="settings-item" onclick="toggleBiometrics()">
             <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-fingerprint" aria-hidden="true"></i></div>
             <div class="settings-label">Biometrics</div>
             <div class="settings-val" id="biometricsVal">Off</div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
-          <div class="settings-item" onclick="openLangModal()">
-            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-language" aria-hidden="true"></i></div>
-            <div class="settings-label" data-t="aiLang">Bahasa AI</div>
-            <div class="settings-val" id="langSettingsVal">Indonesia</div>
+        </div>
+      </div>
+
+      <!-- ── Finance ── -->
+      <div class="settings-group-label">Finance</div>
+      <div class="card-wrap" style="margin-bottom:12px;">
+        <div class="settings-list">
+          <div class="settings-item" onclick="openModal('shopModal')">
+            <div class="settings-icon" style="background:rgba(212,160,23,0.15);color:var(--gold)"><i class="ti ti-coin" aria-hidden="true"></i></div>
+            <div class="settings-label">Fiorino Balance</div>
+            <div class="settings-val" id="profileFiorinoVal" style="color:var(--gold);font-weight:600;">0 <span style="font-weight:400;color:var(--muted);">Fiorino</span></div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── App ── -->
+      <div class="settings-group-label">App</div>
+      <div class="card-wrap" style="margin-bottom:12px;">
+        <div class="settings-list">
+          <div class="settings-item" onclick="openModal('changelogModal')">
+            <div class="settings-icon" style="background:rgba(42,168,158,0.12);color:var(--kraft)"><i class="ti ti-file-description" aria-hidden="true"></i></div>
+            <div class="settings-label">Changelog</div>
+            <div class="settings-val" style="color:var(--muted);">v0.1.1</div>
+            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="settings-item" onclick="openModal('resetModal')">
+            <div class="settings-icon" style="background:var(--red-bg);color:var(--red)"><i class="ti ti-trash" aria-hidden="true"></i></div>
+            <div class="settings-label" style="color:var(--red)" data-t="resetData">Reset Data</div>
+            <div class="settings-val"></div>
             <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
           </div>
           <div class="settings-item" onclick="doLogout()">
@@ -2260,42 +2294,71 @@ Gunakan data ini untuk memberikan saran yang personal dan spesifik. Jika user ta
 
 async function chatSend(){
   const box=document.getElementById('chatInput');
-  const msg=box.value.trim(); if(!msg) return;
+  const msg=box.value.trim();
+  const hasImage = !!chatImageBase64;
+  if(!msg && !hasImage) return;
 
-  // Check AI chat balance
-  if(!useAIChat()){
-    appendBubble('ai', "You're out of AI chats. Buy Fiorino to continue.");
+  const cost = hasImage ? IMAGE_CHAT_COST : 1;
+  if(!useAIChat(cost)){
+    appendBubble('ai', 'Chats habis. Top up Fiorino dulu ya! 🪙');
     setTimeout(()=>openModal('shopModal'), 1200);
     return;
   }
   updateAIChatBadge();
 
-  // Clear welcome
   const _ca = document.getElementById('chatArea');
   if(_ca && _ca.children.length === 1 && !_ca.children[0].classList.contains('bwrap')){ _ca.innerHTML = ''; }
-  appendBubble('user',msg);
+
+  if(hasImage){
+    const area = document.getElementById('chatArea');
+    const wrap = document.createElement('div'); wrap.className = 'bwrap user';
+    const b = document.createElement('div'); b.className = 'bubble user bubble-new';
+    b.innerHTML = (msg ? `<div style="margin-bottom:6px;">${msg}</div>` : '') + `<img src="data:${chatImageMime};base64,${chatImageBase64}" style="max-width:200px;max-height:160px;border-radius:10px;display:block;">`;
+    const meta = document.createElement('div'); meta.className = 'bmeta';
+    meta.style.opacity = '0'; meta.textContent = 'You \u2022 ' + now();
+    wrap.appendChild(b); wrap.appendChild(meta); area.appendChild(wrap);
+    setTimeout(()=>{ meta.style.transition='opacity 0.3s'; meta.style.opacity='1'; }, 220);
+    area.scrollTop = area.scrollHeight;
+  } else {
+    appendBubble('user', msg);
+  }
+
+  const sentMsg = msg;
+  const sentImg = chatImageBase64;
+  const sentMime = chatImageMime;
   box.value=''; box.style.height='auto';
+  removeAttach();
+
   const typing=document.getElementById('typing');
   typing.classList.add('show');
   document.getElementById('chatArea').scrollTop=99999;
+
   try{
     const history=buildHistory();
-    // Only inject financial context when relevant
     const financeKw = ['balance','saldo','uang','duit','nabung','saving','goal','pengeluaran','income','pemasukan','transaksi','money','budget','bayar','beli','harga','transfer'];
-    const isFinance = financeKw.some(k => msg.toLowerCase().includes(k)) || chatImageBase64;
+    const isFinance = financeKw.some(k => sentMsg.toLowerCase().includes(k)) || sentImg;
     const userContext = isFinance ? buildUserContext() : '';
+
+    let userContent;
+    if(sentImg){
+      userContent = [
+        { type:'image_url', image_url:{ url:'data:'+sentMime+';base64,'+sentImg } },
+        { type:'text', text: sentMsg || 'Apa yang ada di gambar ini? Bantu analisis dari sisi keuangan kalau relevan.' }
+      ];
+    } else {
+      userContent = sentMsg;
+    }
+
     const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
       body:JSON.stringify({
         model:GROQ_MODEL,
-        max_tokens:400,
+        max_tokens:1024,
         messages:[
-          {role:'system',content:`You are Dluang AI, a friendly assistant in a finance app. Talk like a relaxed, normal friend — casual and warm. When the user asks about money, be helpful and specific. Otherwise just chat naturally. Never volunteer their balance unprompted. No bullet points. Respond in the same language the user uses.
-
-${userContext}`},
+          {role:'system',content:'You are Dluang AI, a friendly assistant in a finance app. Talk like a relaxed, normal friend — casual and warm. When the user asks about money, be helpful and specific. Otherwise just chat naturally. Never volunteer their balance unprompted. No bullet points. Respond in the same language the user uses.\n\n'+userContext},
           ...history,
-          {role:'user',content:msg}
+          {role:'user',content:userContent}
         ]
       })
     });
@@ -2303,9 +2366,14 @@ ${userContext}`},
     const reply=data.choices?.[0]?.message?.content||'Hmm, coba tanya lagi ya! 😊';
     typing.classList.remove('show');
     await typewriterBubble(reply);
+
+    const msgs = buildHistory();
+    if(msgs.length >= 2) saveRecentChat(msgs.slice(-10));
+
   }catch(e){
     typing.classList.remove('show');
     appendBubble('ai','Koneksi bermasalah, coba lagi ya! 😅');
+    console.error(e);
   }
 }
 
@@ -2454,21 +2522,6 @@ async function fetchAllStocks(){
 
 async function fetchQuote(ticker){
   return stockCache[ticker] || null;
-}
-
-
-async function fetchAllStocks(){
-  stocksFetched=false;
-  renderStockSkeletons();
-  // AV free: 25 req/day, fetch first 6 for home widget
-  const toFetch=WATCHLIST.slice(0,6);
-  for(const s of toFetch){
-    const q=await fetchQuote(s.ticker);
-    if(q) renderStockList();
-    await new Promise(r=>setTimeout(r,350));
-  }
-  stocksFetched=true;
-  renderStockList();
 }
 
 function renderStockSkeletons(){
@@ -2959,21 +3012,7 @@ function renderConnectList(){
 }
 
 
-function triggerFakeAttach(){
-  const files = [
-    'bank_statement_may.pdf',
-    'salary_slip_june.pdf',
-    'receipt_tokopedia.jpg',
-    'invoice_freelance.pdf',
-    'monthly_report.xlsx',
-  ];
-  const name = files[Math.floor(Math.random()*files.length)];
-  document.getElementById('attachName').textContent = name;
-  document.getElementById('attachPreview').style.display = 'block';
-}
-function removeAttach(){
-  document.getElementById('attachPreview').style.display = 'none';
-}
+
 
 // ══════════════════════════════════════════
 // ANIMATION HELPERS
@@ -3109,8 +3148,13 @@ function toggleDarkMode(){
 // ══════════════════════════════════════════
 // FIORINO & AI CHAT LIMIT
 // ══════════════════════════════════════════
+// ══════════════════════════════════════════
+// FIORINO SYSTEM
+// ══════════════════════════════════════════
 const FIORINO_DAILY = 2;
 const CHATS_PER_FIORINO = 10;
+const MAX_FREE_CHATS = 30;
+const IMAGE_CHAT_COST = 5;
 
 function getFiorinoState(){
   const raw = localStorage.getItem('dluang_fiorino');
@@ -3126,20 +3170,28 @@ function checkDailyRefill(){
   const state = getFiorinoState();
   const today = new Date().toISOString().split('T')[0];
   if(state.lastRefill !== today){
+    const add = FIORINO_DAILY * CHATS_PER_FIORINO;
+    state.chatsLeft = Math.min((state.chatsLeft || 0) + add, MAX_FREE_CHATS);
     state.fiorino = (state.fiorino || 0) + FIORINO_DAILY;
-    state.chatsLeft = (state.chatsLeft || 0) + (FIORINO_DAILY * CHATS_PER_FIORINO);
     state.lastRefill = today;
     saveFiorinoState(state);
   }
   return state;
 }
 
-function useAIChat(){
+function useAIChat(cost = 1){
   const state = getFiorinoState();
-  if(state.chatsLeft <= 0) return false;
-  state.chatsLeft -= 1;
-  // Auto-consume Fiorino when chats from current batch run out
+  if(state.chatsLeft < cost) return false;
+  const before = state.chatsLeft;
+  state.chatsLeft -= cost;
   saveFiorinoState(state);
+  // Notify at 60% and 90% consumption (relative to MAX_FREE_CHATS)
+  const used = MAX_FREE_CHATS - state.chatsLeft;
+  if(before > Math.floor(MAX_FREE_CHATS * 0.9) && state.chatsLeft <= Math.floor(MAX_FREE_CHATS * 0.1)){
+    setTimeout(()=>toast('⚠️ Sisa ' + state.chatsLeft + ' chats! Top up Fiorino.'), 300);
+  } else if(before > Math.floor(MAX_FREE_CHATS * 0.6) && state.chatsLeft <= Math.floor(MAX_FREE_CHATS * 0.4)){
+    setTimeout(()=>toast('💡 ' + state.chatsLeft + ' chats tersisa hari ini.'), 300);
+  }
   return true;
 }
 
@@ -3148,7 +3200,6 @@ function getChatsLeft(){ return getFiorinoState().chatsLeft; }
 
 function renderShopPage(){
   const state = checkDailyRefill();
-  // Update modal elements
   const el = document.getElementById('shopModalFiorino');
   if(el) el.textContent = state.fiorino;
   const cl = document.getElementById('shopModalChats');
@@ -3157,11 +3208,14 @@ function renderShopPage(){
   const pkgs = document.getElementById('shopModalPackages');
   if(!pkgs) return;
 
+  // Packages match Trakteer pricing: qty determines Fiorino
+  // qty 1 = Rp 5.000 = 10 Fiorino | qty 2 = Rp 10.000 = 25 Fiorino
+  // qty 4 = Rp 20.000 = 60 Fiorino | qty 6 = Rp 30.000 = 100 Fiorino
   const PACKAGES = [
-    { id:'f10',  fiorino:10,  chats:100,  price:'Rp 5.000',   label:'Starter',   color:'var(--kraft)',      popular:false },
-    { id:'f30',  fiorino:30,  chats:300,  price:'Rp 12.000',  label:'Popular',   color:'var(--earth)',      popular:true  },
-    { id:'f100', fiorino:100, chats:1000, price:'Rp 35.000',  label:'Best Value',color:'var(--gold)',       popular:false },
-    { id:'f300', fiorino:300, chats:3000, price:'Rp 89.000',  label:'Pro',       color:'var(--earth-light)',popular:false },
+    { qty:1, fiorino:10,  chats:100,  price:'Rp 5.000',  label:'Starter',    popular:false },
+    { qty:2, fiorino:25,  chats:250,  price:'Rp 10.000', label:'Popular',     popular:true  },
+    { qty:4, fiorino:60,  chats:600,  price:'Rp 20.000', label:'Best Value',  popular:false },
+    { qty:6, fiorino:100, chats:1000, price:'Rp 30.000', label:'Pro',         popular:false },
   ];
 
   pkgs.innerHTML = PACKAGES.map(p => `
@@ -3171,7 +3225,7 @@ function renderShopPage(){
         <div>
           <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">${p.label}</div>
           <div style="display:flex;align-items:baseline;gap:5px;">
-            <span style="font-size:28px;font-weight:700;color:${p.color};">${p.fiorino}</span>
+            <span style="font-size:28px;font-weight:700;color:var(--gold);">${p.fiorino}</span>
             <span style="font-size:13px;color:var(--muted);">Fiorino</span>
           </div>
         </div>
@@ -3180,16 +3234,70 @@ function renderShopPage(){
           <div style="font-size:11px;color:var(--muted);">${p.chats} AI chats</div>
         </div>
       </div>
-      <button onclick="buyPackage('${p.id}',${p.fiorino},${p.chats},'${p.price}')" style="width:100%;padding:11px;border-radius:12px;border:none;background:${p.popular?'var(--earth)':'var(--paper-dark)'};color:${p.popular?'var(--paper)':'var(--ink)'};font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-        Buy Now
+      <button onclick="buyPackage(${p.qty})" style="width:100%;padding:11px;border-radius:12px;border:none;background:${p.popular?'var(--earth)':'var(--paper-dark)'};color:${p.popular?'var(--paper)':'var(--ink)'};font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        Beli via Trakteer
       </button>
     </div>
   `).join('');
 }
 
-function buyPackage(id, fiorino, chats, price){
-  // Dummy — payment not integrated yet
-  toast('Payment coming soon! (Preview: +'+fiorino+' Fiorino)');
+function buyPackage(qty){
+  // Redirect to Trakteer with pre-filled quantity
+  const url = `https://trakteer.id/shatara_shatara?quantity=${qty}`;
+  window.open(url, '_blank');
+  toast('Membuka Trakteer... 🛒');
+}
+
+// ══════════════════════════════════════════
+// AI CHAT — IMAGE ATTACH
+// ══════════════════════════════════════════
+let chatImageBase64 = null;
+let chatImageMime = null;
+
+function handleChatImage(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  if(file.size > 5 * 1024 * 1024){ toast('Gambar max 5MB!'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const result = ev.target.result;
+    const mime = file.type || 'image/jpeg';
+    chatImageBase64 = result.split(',')[1];
+    chatImageMime = mime;
+    document.getElementById('attachName').textContent = file.name;
+    const thumb = document.getElementById('attachThumb');
+    thumb.src = result; thumb.style.display = 'block';
+    document.getElementById('attachPreview').style.display = 'block';
+    // Reset input so same file can be re-selected
+    e.target.value = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeAttach(){
+  chatImageBase64 = null;
+  chatImageMime = null;
+  document.getElementById('attachPreview').style.display = 'none';
+  const thumb = document.getElementById('attachThumb');
+  thumb.src = ''; thumb.style.display = 'none';
+}
+
+// ══════════════════════════════════════════
+// AI CHAT — RECENT CONVERSATIONS (FIFO 2)
+// ══════════════════════════════════════════
+const MAX_RECENT_CONVS = 2;
+
+function saveRecentChat(messages){
+  const raw = localStorage.getItem('dluang_recent_chats');
+  let convs = raw ? JSON.parse(raw) : [];
+  convs.unshift({ ts: Date.now(), messages });
+  if(convs.length > MAX_RECENT_CONVS) convs = convs.slice(0, MAX_RECENT_CONVS);
+  localStorage.setItem('dluang_recent_chats', JSON.stringify(convs));
+}
+
+function getRecentChats(){
+  const raw = localStorage.getItem('dluang_recent_chats');
+  return raw ? JSON.parse(raw) : [];
 }
 
 function animateShop(){

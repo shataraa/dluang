@@ -30,7 +30,8 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
 /* ── Shell ── */
 .shell{
-  width:100%;max-width:420px;height:100vh;
+  width:100%;max-width:420px;
+  height:calc(100vh - 57px - env(safe-area-inset-bottom,0px));
   position:relative;overflow:hidden;
   display:flex;flex-direction:column;
 }
@@ -56,9 +57,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 /* ── Pages ── */
 .pages{position:relative;z-index:3;flex:1;overflow:hidden;display:flex;flex-direction:column;}
 .page{
-  position:absolute;
-  top:0;left:0;right:0;
-  bottom:calc(57px + env(safe-area-inset-bottom,0px));
+  position:absolute;inset:0;
   display:flex;flex-direction:column;
   pointer-events:none;
   opacity:0;
@@ -884,7 +883,6 @@ body.dark-mode #authScreen{ background:#0e1312; }
       <button class="btn-primary" style="margin-top:14px;" onclick="doLogin()" data-t="login">Masuk</button>
     </div>
 
-    <button onclick="enterGuestMode()" style="margin-top:10px;width:100%;padding:11px;background:transparent;border:1px solid var(--paper-dark,#d6efed);border-radius:12px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--muted,#5e9c96);cursor:pointer;">Lihat dulu tanpa akun →</button>
 
     <!-- REGISTER FORM -->
     <div id="registerForm" style="display:none;">
@@ -1063,12 +1061,15 @@ body.dark-mode #authScreen{ background:#0e1312; }
         </div>
       </div>
     </div>
-    <div id="guestProfileBanner" style="display:none;padding:16px 14px 0;">
-      <div style="background:var(--earth);border-radius:16px;padding:20px;text-align:center;">
-        <div style="font-size:32px;margin-bottom:10px;">👋</div>
-        <div style="font-size:16px;font-weight:600;color:#fff;margin-bottom:6px;">Buat akun gratis</div>
-        <div style="font-size:13px;color:rgba(200,169,110,0.8);margin-bottom:16px;">Simpan transaksi, goals, dan pantau keuanganmu.</div>
-        <button onclick="exitGuestMode()" class="btn-primary" style="width:100%;">Daftar / Masuk</button>
+    <div id="guestProfileBanner" style="display:none;padding:20px 14px 0;">
+      <div style="background:var(--earth);border-radius:20px;padding:24px 20px;">
+        <div style="font-size:13px;font-weight:600;color:rgba(200,169,110,0.7);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">Get started</div>
+        <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.2;">Dluang fixes<br>your uang.</div>
+        <div style="font-size:12px;color:rgba(200,169,110,0.65);margin-bottom:20px;">Track pengeluaran, goals, dan keuanganmu.</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="exitGuestMode();switchAuthTab('register')" style="flex:1;padding:12px;background:var(--gold);color:var(--earth);border:none;border-radius:12px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Create Account</button>
+          <button onclick="exitGuestMode();switchAuthTab('login')" style="flex:1;padding:12px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:12px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Log In</button>
+        </div>
       </div>
     </div>
     <div class="scroll-body">

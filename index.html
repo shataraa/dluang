@@ -65,6 +65,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   will-change:transform,opacity;
 }
 .page.active{pointer-events:all;opacity:1;transform:translateX(0);}
+#page-ai{bottom:calc(57px + env(safe-area-inset-bottom,0px));}
 .page.exit-left{opacity:0;transform:translateX(-36px);pointer-events:none;}
 .page.exit-right{opacity:0;transform:translateX(36px);pointer-events:none;}
 
@@ -709,7 +710,6 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   flex-shrink:0;
   background:var(--paper);
   border-top:1px solid var(--paper-dark);
-  padding-bottom:calc(90px + env(safe-area-inset-bottom,16px));
 }
 
 /* ── DARK MODE ── */

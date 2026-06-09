@@ -707,11 +707,10 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .attach-chip i:first-child{color:var(--kraft);font-size:13px;}
 
 .chat-footer{
-  position:sticky;
-  bottom:0;
-  z-index:8;
+  flex-shrink:0;
   background:var(--paper);
   border-top:1px solid var(--paper-dark);
+  padding-bottom:calc(57px + env(safe-area-inset-bottom,0px));
 }
 
 /* ── DARK MODE ── */
@@ -760,8 +759,10 @@ body.dark-mode #authScreen{ background:#0e1312; }
 #authScreen{
   position:fixed;inset:0;z-index:100;
   background:#071f1d;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:flex-start;justify-content:center;
   font-family:'Poppins',sans-serif;
+  overflow-y:auto;
+  padding:24px 0 24px;
 }
 #authScreen.hidden{display:none;}
 .auth-card{

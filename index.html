@@ -54,7 +54,6 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 }
 
 /* ── Pages ── */
-.pages-wrap{position:relative;z-index:3;flex:1;overflow:hidden;}
 .pages{position:relative;z-index:3;flex:1;overflow:hidden;display:flex;flex-direction:column;}
 .page{
   position:absolute;inset:0;
@@ -103,7 +102,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 }
 
 /* ── Scrollable body ── */
-.scroll-body{flex:1;overflow-y:auto;padding:12px 14px 24px;}
+.scroll-body{flex:1;overflow-y:auto;padding:12px 14px calc(80px + env(safe-area-inset-bottom,0px));}
 .scroll-body::-webkit-scrollbar{width:3px;}
 .scroll-body::-webkit-scrollbar-thumb{background:var(--paper-dark);border-radius:3px;}
 
@@ -170,7 +169,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
 /* ── FAB ── */
 .fab{
-  position:absolute;bottom:20px;right:16px;
+  position:fixed;bottom:72px;right:calc(50% - 210px + 16px);
   width:52px;height:52px;border-radius:50%;
   background:var(--earth);color:var(--kraft);
   font-size:24px;display:flex;align-items:center;justify-content:center;
@@ -182,8 +181,8 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 
 /* ── Bottom nav ── */
 .bottom-nav{
-  position:relative;
-  width:100%;
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:420px;
   background:var(--paper);border-top:1px solid var(--paper-dark);
   display:flex;justify-content:space-around;
   padding:8px 0 calc(14px + env(safe-area-inset-bottom, 0px));z-index:9;flex-shrink:0;
@@ -321,7 +320,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .chat-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:14px;background:var(--paper);border-radius:14px 14px 0 0;}
 .chat-title{font-family:'Poppins',sans-serif;font-size:17px;color:#fff;font-weight:600;}
 .chat-sub{font-size:11px;color:rgba(200,169,110,0.7);margin-top:2px;}
-.chat-area{flex:1;overflow-y:auto;padding:12px 14px 12px;display:flex;flex-direction:column;gap:10px;min-height:0;}
+.chat-area{flex:1;overflow-y:auto;padding:12px 14px 12px;display:flex;flex-direction:column;gap:10px;min-height:0;overflow-anchor:none;}
 .chat-area::-webkit-scrollbar{width:3px;}
 .bwrap{display:flex;flex-direction:column;gap:2px;}
 .bwrap.user{align-items:flex-end;}
@@ -710,6 +709,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   flex-shrink:0;
   background:var(--paper);
   border-top:1px solid var(--paper-dark);
+  padding-bottom:calc(68px + env(safe-area-inset-bottom,0px));
 }
 
 /* ── DARK MODE ── */
@@ -927,7 +927,6 @@ body.dark-mode #authScreen{ background:#0e1312; }
   <div class="bg-overlay" id="bgOverlay"></div>
   <div class="texture"></div>
 
-  <div class="pages-wrap">
   <!-- ════════════════ PAGE: HOME ════════════════ -->
   <div class="page active pages" id="page-home">
     <div class="header">
@@ -1296,7 +1295,6 @@ body.dark-mode #authScreen{ background:#0e1312; }
   </button>
 
   <!-- ════════════════ BOTTOM NAV ════════════════ -->
-  </div>
   <div class="bottom-nav">
     <div class="nav-item active" id="nav-home" onclick="goPage('home')"><i class="ti ti-home" aria-hidden="true"></i>Home</div>
     <div class="nav-item" id="nav-goals" onclick="goPage('goals')"><i class="ti ti-target" aria-hidden="true"></i>Goals</div>

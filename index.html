@@ -1231,7 +1231,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
       <div class="wtab" onclick="setWtab(this,'finance')">Finance</div>
       <div class="wtab" onclick="setWtab(this,'energy')">Energy</div>
     </div>
-    <div class="scroll-body" style="padding:0 0 80px;">
+    <div class="scroll-body" style="padding:0 0 calc(80px + env(safe-area-inset-bottom,0px));">
       <div class="card-wrap" id="stockListWrap" style="margin:10px 14px;">
         <div class="stock-list" id="stockList">
           <div style="padding:20px 14px;">
@@ -1272,7 +1272,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
         <span class="billing-label" id="billLabelYear">Yearly <span class="save-badge">SAVE 30%</span></span>
       </div>
     </div>
-    <div class="scroll-body" style="padding:0 0 80px;">
+    <div class="scroll-body" style="padding:0 0 calc(80px + env(safe-area-inset-bottom,0px));">
       <div class="plan-cards" id="planCards"></div>
       <div class="compare-note">
         All plans include end-to-end encryption and 24/7 data sync.<br>
@@ -2054,7 +2054,7 @@ function renderGoalsPage(){
   const el=document.getElementById('goalsList');
   let html='<div style="padding:14px 14px 0;"><button onclick="openModal(\'goalModal\')" class="btn-primary" style="margin:0 0 12px;width:100%;"><i class="ti ti-plus" style="margin-right:6px;" aria-hidden="true"></i>'+t('newGoal')+'</button></div>';
   if(!S.goals.length){ el.innerHTML=html+'<div class="empty-state"><i class="ti ti-target-off"></i>'+t('noGoals')+'</div>'; return; }
-  html+='<div style="padding:0 14px 80px;">';
+  html+='<div style="padding:0 14px calc(80px + env(safe-area-inset-bottom,0px));">';
   html+=S.goals.map((g,i)=>{
     const pct=Math.round((g.saved/g.target)*100);
     return `<div class="goal-page-item">

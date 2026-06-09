@@ -185,7 +185,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   width:100%;max-width:420px;
   background:var(--paper);border-top:1px solid var(--paper-dark);
   display:flex;justify-content:space-around;
-  padding:8px 0 14px;z-index:9;flex-shrink:0;
+  padding:8px 0 calc(14px + env(safe-area-inset-bottom, 0px));z-index:9;flex-shrink:0;
 }
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:var(--muted);cursor:pointer;padding:4px 10px;border-radius:10px;transition:color 0.15s;}
 .nav-item i{font-size:22px;}
@@ -344,11 +344,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .chat-send{width:36px;height:36px;border-radius:50%;background:var(--earth);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--kraft);font-size:16px;flex-shrink:0;}
 
 /* ── Backgrounds ── */
-.bg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
-.bg-thumb{width:100%;aspect-ratio:16/9;border-radius:10px;cursor:pointer;border:2px solid transparent;overflow:hidden;position:relative;}
-.bg-thumb img{width:100%;height:100%;object-fit:cover;}
-.bg-thumb.sel{border-color:var(--kraft);}
-.bg-thumb.none-opt{background:var(--paper-dark);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);font-weight:500;}
+
 
 /* ── Modal animations ── */
 .modal-backdrop{
@@ -713,7 +709,7 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   flex-shrink:0;
   background:var(--paper);
   border-top:1px solid var(--paper-dark);
-  padding-bottom:64px;
+  padding-bottom:calc(60px + env(safe-area-inset-bottom, 0px));
 }
 
 /* ── DARK MODE ── */
@@ -1090,16 +1086,11 @@ body.dark-mode #authScreen{ background:#0e1312; }
         </div>
       </div>
 
-      <!-- ── Appearance ── -->
-      <div class="settings-group-label">Appearance</div>
+      <!-- ── Display ── -->
+      <div class="settings-group-label">Display</div>
       <div class="card-wrap" style="margin-bottom:12px;">
         <div class="settings-list">
-          <div class="settings-item" onclick="openModal('bgModal')">
-            <div class="settings-icon"><i class="ti ti-palette" aria-hidden="true"></i></div>
-            <div class="settings-label" data-t="appBg">App Background</div>
-            <div class="settings-val" data-t="customize">Customize</div>
-            <i class="ti ti-chevron-right settings-arrow" aria-hidden="true"></i>
-          </div>
+
           <div class="settings-item" onclick="toggleDarkMode()">
             <div class="settings-icon" style="background:rgba(30,30,60,0.1);color:#6c6caa"><i class="ti ti-moon" id="darkModeIcon" aria-hidden="true"></i></div>
             <div class="settings-label">Dark Mode</div>
@@ -1400,21 +1391,8 @@ body.dark-mode #authScreen{ background:#0e1312; }
   </div>
 
   <!-- Background -->
-  <div class="modal-backdrop" id="bgModal">
-    <div class="modal">
-      <div class="modal-handle"></div>
-      <div class="modal-title">App Background</div>
-      <div class="form-group">
-        <label class="form-label">Upload photo</label>
-        <input type="file" accept="image/*" class="form-input" id="bgInput" onchange="handleBgUpload(event)">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Choose preset</label>
-        <div class="bg-grid" id="bgGrid"></div>
-      </div>
-      <button class="btn-primary btn-outline" style="margin-top:4px;" onclick="closeModal('bgModal')">Close</button>
-    </div>
-  </div>
+
+
 
   <!-- Language Modal -->
   <div class="modal-backdrop" id="langModal">
@@ -1480,6 +1458,10 @@ body.dark-mode #authScreen{ background:#0e1312; }
       <div id="shopModalPackages" style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px;"></div>
       <div style="font-size:11px;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:4px;">
         Payment integration coming soon.
+      </div>
+      <div style="margin-top:12px;padding:12px;background:rgba(42,168,158,0.08);border-radius:12px;border:1px solid rgba(42,168,158,0.2);">
+        <div style="font-size:11px;color:var(--kraft);font-weight:600;margin-bottom:4px;">ℹ️ Cara beli</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6;">Klik tombol → bayar di Trakteer → Fiorino otomatis masuk dalam beberapa menit via webhook. Pastikan nama di Trakteer sama dengan username kamu.</div>
       </div>
       <button class="btn-primary btn-outline" style="margin-top:8px;" onclick="closeModal('shopModal')">Close</button>
     </div>
@@ -1551,7 +1533,6 @@ const FN_BASE = `${SUPABASE_URL}/functions/v1`;
 const DEFAULT_STATE = {
   name: 'User',
   avatar: null,
-  bg: null,
   balance: 0,
   streak: 0,
   lastStreakDate: null,
@@ -1576,7 +1557,6 @@ function save(){
     action: 'update_user',
     name: S.name,
     avatar_url: S.avatar,
-    bg: S.bg,
   }).catch(()=>{});
 }
 
@@ -1663,7 +1643,6 @@ async function tryRestoreSession(){
 function applyUserToState(user){
   S.name = user.name || 'User';
   S.avatar = user.avatar_url || null;
-  S.bg = user.bg || null;
   S.streak = user.streak || 0;
   S.lastStreakDate = user.last_streak_date || null;
   S.joinDate = user.join_date ? new Date(user.join_date).toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'}) : S.joinDate;
@@ -1876,9 +1855,8 @@ function goPage(p){
 // ══════════════════════════════════════════
 function openModal(id){
   if(id==='txModal'){ txType='inc'; setType('inc'); document.getElementById('txAmount').value=''; document.getElementById('txNote').value=''; }
-  if(id==='goalModal'){ document.getElementById('goalName').value=''; document.getElementById('goalTarget').value=''; }
+  if(id==='goalModal'){ document.getElementById('goalName').value=''; document.getElementById('goalGoals').value=''; document.getElementById('goalIcon').value='ti-target'; }
   if(id==='nameModal'){ document.getElementById('nameInput').value=S.name; }
-  if(id==='bgModal'){ renderBgGrid(); }
   if(id==='compareModal'){ renderCompare(); }
   if(id==='plansModal'){ renderPlansModal(); syncBillingToggles(); }
   if(id==='connectModal'){ renderConnectList(); }
@@ -2028,8 +2006,9 @@ function deleteGoal(idx){
 
 function renderGoalsPage(){
   const el=document.getElementById('goalsList');
-  let html='<div style="padding:0 0 10px;"><button onclick="openModal(\'goalModal\')" class="btn-primary" style="margin:0 0 12px;width:100%;"><i class="ti ti-plus" style="margin-right:6px;" aria-hidden="true"></i>'+t('newGoal')+'</button></div>';
+  let html='<div style="padding:14px 14px 0;"><button onclick="openModal(\'goalModal\')" class="btn-primary" style="margin:0 0 12px;width:100%;"><i class="ti ti-plus" style="margin-right:6px;" aria-hidden="true"></i>'+t('newGoal')+'</button></div>';
   if(!S.goals.length){ el.innerHTML=html+'<div class="empty-state"><i class="ti ti-target-off"></i>'+t('noGoals')+'</div>'; return; }
+  html+='<div style="padding:0 14px 80px;">';
   html+=S.goals.map((g,i)=>{
     const pct=Math.round((g.saved/g.target)*100);
     return `<div class="goal-page-item">
@@ -2045,6 +2024,7 @@ function renderGoalsPage(){
       </div>
     </div>`;
   }).join('');
+  html+='</div>';
   el.innerHTML=html;
 }
 
@@ -2187,55 +2167,6 @@ function saveName(){
 // ══════════════════════════════════════════
 // BACKGROUND
 // ══════════════════════════════════════════
-const BG_PRESETS=[
-  {label:'No background',color:'#FBF5E8',img:null},
-  {label:'Sawah',color:'#d4e8c2',img:null,grad:'linear-gradient(135deg,#c8e6a0,#7ab648)'},
-  {label:'Senja',color:'#f5c6a0',img:null,grad:'linear-gradient(135deg,#f7b267,#e84393,#5b2d8e)'},
-  {label:'Laut',color:'#a0c8e8',img:null,grad:'linear-gradient(135deg,#2980b9,#6dd5fa,#fff)'},
-  {label:'Hutan',color:'#c2d8c2',img:null,grad:'linear-gradient(135deg,#134e5e,#71b280)'},
-  {label:'Malam',color:'#1a1a2e',img:null,grad:'linear-gradient(135deg,#0f0c29,#302b63,#24243e)'},
-];
-
-function renderBgGrid(){
-  const g=document.getElementById('bgGrid');
-  g.innerHTML=BG_PRESETS.map((b,i)=>`
-    <div class="bg-thumb ${!b.img&&!b.grad?'none-opt':''}" style="${b.grad?'background:'+b.grad+';':b.img?'':'background:'+b.color+';'}" onclick="setBg(${i})">
-      ${!b.img&&!b.grad?'<span>Default</span>':''}
-    </div>
-  `).join('');
-}
-
-function setBg(i){
-  const b=BG_PRESETS[i];
-  const bgLayer=document.getElementById('bgLayer');
-  const bgOverlay=document.getElementById('bgOverlay');
-  if(!b.img&&!b.grad){ bgLayer.style.background=b.color; bgLayer.style.backgroundImage=''; bgOverlay.style.background='rgba(251,245,232,0.88)'; S.bg=null; }
-  else{ bgLayer.style.background=b.grad||b.color; bgLayer.style.backgroundImage=''; bgOverlay.classList.add('dim'); S.bg={grad:b.grad,color:b.color}; }
-  save(); toast('Background changed!'); // save() -> Supabase
-}
-
-function handleBgUpload(e){
-  const f=e.target.files[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    const bgLayer=document.getElementById('bgLayer');
-    const bgOverlay=document.getElementById('bgOverlay');
-    bgLayer.style.backgroundImage=`url(${ev.target.result})`;
-    bgLayer.style.backgroundSize='cover';
-    bgOverlay.classList.add('dim');
-    S.bg={img:ev.target.result};
-    save(); toast('Background updated!'); // save() -> Supabase
-  };
-  r.readAsDataURL(f);
-}
-
-function applyBg(){
-  if(!S.bg) return;
-  const bgLayer=document.getElementById('bgLayer');
-  const bgOverlay=document.getElementById('bgOverlay');
-  if(S.bg.img){ bgLayer.style.backgroundImage=`url(${S.bg.img})`; bgLayer.style.backgroundSize='cover'; bgOverlay.classList.add('dim'); }
-  else if(S.bg.grad){ bgLayer.style.background=S.bg.grad; bgOverlay.classList.add('dim'); }
-}
 
 // ══════════════════════════════════════════
 // AI CHAT
@@ -3487,7 +3418,6 @@ document.getElementById('chatInput').addEventListener('input',function(){ this.s
 
 connectedAccounts = S.connectedAccounts || [];
 UI_LANG = localStorage.getItem('dluang_ui_lang') || 'id';
-applyBg();
 
 // Start with auth check — app only loads after successful session
 checkDailyRefill();

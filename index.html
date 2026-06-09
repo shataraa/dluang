@@ -67,6 +67,8 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
 .page.active{pointer-events:all;opacity:1;transform:translateX(0);}
 .page.exit-left{opacity:0;transform:translateX(-36px);pointer-events:none;}
 .page.exit-right{opacity:0;transform:translateX(36px);pointer-events:none;}
+/* AI chat page must not go under the fixed bottom nav */
+#page-ai{bottom:calc(60px + env(safe-area-inset-bottom,0px));}
 
 /* ── Header ── */
 .header{
@@ -709,12 +711,6 @@ body{font-family:'Poppins',sans-serif;background:#071f1d;display:flex;justify-co
   flex-shrink:0;
   background:var(--paper);
   border-top:1px solid var(--paper-dark);
-  position:sticky;
-  bottom:0;
-  z-index:5;
-}
-.chat-input-row{
-  padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px)) !important;
 }
 
 /* ── DARK MODE ── */
@@ -1009,7 +1005,7 @@ body.dark-mode #authScreen{ background:#0e1312; }
   </div>
 
   <!-- ════════════════ PAGE: AI CHAT ════════════════ -->
-  <div class="page pages" id="page-ai" style="background:var(--paper);overflow-y:auto;">
+  <div class="page pages" id="page-ai" style="background:var(--paper);">
     <div class="chat-header">
       <div class="chat-title" data-t="aiCoachTitle">Dluang AI Coach</div>
       <div style="display:flex;justify-content:space-between;align-items:center;">
